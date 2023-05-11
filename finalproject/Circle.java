@@ -14,13 +14,18 @@ public class Circle {
       y = 20;
       c = Color.BLACK;
    }
-/*    public Circle(Square s) {
-      r = s.getSide() / 2;
-      x = s.getX() + r;
-      y = s.getY() + r;
-      c = s.getColor().darker();
-   } */
-   
+    public Circle(Color c) {
+      r = 10;
+      x = 200;
+      y = 20;
+      this.c = c;
+   }
+   public Circle(int r, Color c) {
+    this.r = r;
+    x = 200;
+    y = 20;
+    this.c = c;
+ }
    public Circle(int rValue, int xValue, int yValue, Color cValue) {
       r = rValue;
       x = xValue;

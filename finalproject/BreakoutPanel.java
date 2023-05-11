@@ -20,15 +20,9 @@ class BreakoutPanel extends JPanel {
    
    ////////////////// Gui Stuff
 
-   private JLabel title = new JLabel("ColorChange Squares + GUI");
-   private JLabel r = new JLabel("Red: ");
-   private JLabel g = new JLabel("Green: ");
-   private JLabel b = new JLabel("Blue: ");
-   
-   private JSlider speedSlider, sizeSlider;
+   private JLabel title = new JLabel("Idle Breakout!");
 
-   private JTextField redBox, greenBox, blueBox;
-   private JButton resetButton, randomButton, givenButton, disableButton, enableButton;
+   private JButton pauseButton, upgradeMenuButton, basicButton, plasmaButton, sniperButton, scatterButton, cannonButton, poisonButton;
    
    //////////////////
    
@@ -45,55 +39,33 @@ class BreakoutPanel extends JPanel {
       allBalls = new ArrayList<BouncingCircle>();
       
       //////////////// GUI stuff
-   
-      JPanel panel = new JPanel();
-      panel.setLayout(new GridLayout(2, 1));
+      title.setText("Idle Breakout!");
+      title.setBounds(450, 5, 100, 10);
+      add(title, BorderLayout.NORTH);
 
-      JPanel north = new JPanel(new GridLayout(1, 1));
-      JPanel east = new JPanel(new GridLayout(3, 2));
-      JPanel south = new JPanel(new GridLayout(1, 5));
-      JPanel southeast = new JPanel(new GridLayout(2, 1));
-      
-      title.setText("Color Change Squares + GUI");
-      north.add(title);
-   
-      r.setText("Red: ");
-      g.setText("Green: ");
-      b.setText("Blue: ");
-      redBox = new JTextField(3);
-      greenBox = new JTextField(3);
-      blueBox = new JTextField(3);
-   
-      east.add(r);
-      east.add(redBox);
-      east.add(g);
-      east.add(greenBox);
-      east.add(b);
-      east.add(blueBox);
+      JPanel north = new JPanel(new GridLayout(1, 8));
 
-      southeast.add(speedSlider);
-      southeast.add(sizeSlider);
+      pauseButton = new JButton("Pause");
+      upgradeMenuButton = new JButton("Upgrades");
+      basicButton = new JButton("Basic Ball");
+      plasmaButton = new JButton("Plasma Ball");
+      sniperButton = new JButton("Sniper Ball");
+      scatterButton = new JButton("Scatter Ball");
+      cannonButton = new JButton("Cannon Ball");
+      poisonButton = new JButton("Poison Ball");
+   
+      north.add(basicButton);
+      north.add(plasmaButton);
+      north.add(sniperButton);
+      north.add(scatterButton);
+      north.add(cannonButton);
+      north.add(poisonButton);
+      north.add(upgradeMenuButton);
+      north.add(pauseButton);
+   
+      north.setBounds(0, 200, 1000, 50);
 
-      resetButton = new JButton("Reset");
-      randomButton = new JButton("Add Random");
-      givenButton = new JButton("Add Given Color");
-      disableButton = new JButton("Disable Color Change");
-      enableButton = new JButton("Enable Color Change");
-   
-      south.add(resetButton);
-      south.add(randomButton);
-      south.add(givenButton);
-      south.add(disableButton);
-      south.add(enableButton);
-   
-      enableButton.setEnabled(false);
-   
-      panel.add(east);
-      panel.add(southeast);
-
-      add(panel, BorderLayout.EAST);
-      add(north, BorderLayout.NORTH);
-      add(south, BorderLayout.SOUTH);
+      add(north, );
       ///////////////
       
       t = new Timer(5, new AnimationListener());
