@@ -40,6 +40,7 @@ class BreakoutPanel extends JPanel {
    private int poisonPrice = 75000;
 
    private int levelNumber = 0;
+   private int dollars = 0;
 
    public BreakoutPanel(JFrame f) {
       myOwner = f;
@@ -83,8 +84,7 @@ class BreakoutPanel extends JPanel {
      }
      
       // Create the button panel
-      JPanel buttonPanel = new JPanel(new GridLayout(2, 6));
-      JPanel pricePanel = new JPanel(new FlowLayout());
+      JPanel buttonPanel = new JPanel(new GridLayout(2, 7));
       //buttonPanel.add(pricePanel, BorderLayout.LINE_END);
       add(buttonPanel, BorderLayout.NORTH);
 
@@ -115,6 +115,9 @@ class BreakoutPanel extends JPanel {
       JLabel scPrice = new JLabel("$"+scatterPrice);
       JLabel cPrice = new JLabel("$"+cannonPrice);
       JLabel poPrice = new JLabel("$"+poisonPrice);
+
+      JLabel bank = new JLabel("$"+dollars);
+      buttonPanel.add(bank, BorderLayout.PAGE_END);
 
       buttonPanel.add(bPrice, BorderLayout.CENTER);
       buttonPanel.add(pPrice, BorderLayout.CENTER);
@@ -156,7 +159,9 @@ class BreakoutPanel extends JPanel {
       for(int i = 0; i < totalBalls; i++) {
          BouncingCircle currentBall = allBalls.get(i);
          currentBall.step();
-
+         
+         /*TODO  If ball/brick collide, add dollar amount */
+         
          // The collide method should not be a boolean, I had the idea to check collision here and then do a different "Collide" action depending on the ball.
          // There are a couple errors rn, I made BasicBall implement "Balls", but I am pretty sure I did it incorrecly.  Also "Collide" shouln't be a boolean method.
          // All Ball classes need thier "Collide" method to be fixed to represent thier action.
