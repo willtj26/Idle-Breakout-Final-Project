@@ -51,7 +51,7 @@ public class BouncingCircle extends Circle implements Animatable
          }
       }
       
-      if(getX() >= 375 - getRadius()*2)
+      if(getX() >= 1000 - getRadius()*2)
       {
          if(dX > 0)
          {
@@ -60,12 +60,12 @@ public class BouncingCircle extends Circle implements Animatable
       }
       setX(getX() + dX);  //Change the radius a bit - either out or in - for each animation step
 
-      if(getY() < 10) {
+      if(getY() < 110) {
         if(dY < 0) {
             dY *=-1;
         }
       }
-      if (getY() >= 480-getRadius()*2) {
+      if (getY() >= 910-getRadius()*2) {
         if(dY > 0) {
             dY*=-1;
         }

@@ -45,12 +45,11 @@ class BreakoutPanel extends JPanel {
          sniperIcon = new ImageIcon(this.getClass().getResource("/finalproject/imagefiles/sniperball.png"));
          scatterIcon = new ImageIcon(this.getClass().getResource("/finalproject/imagefiles/scatterball.png"));
          cannonIcon = new ImageIcon(this.getClass().getResource("/finalproject/imagefiles/cannonball.png"));
-         poisonIcon = new ImageIcon(this.getClass().getResource("/finalproject/imagefiles/poisonball.png"));
-     } catch(Exception e) {
-         System.out.println("Failed to load image icons: " + e.getMessage());
-         e.printStackTrace();
-     }
-     
+         poisonIcon = new ImageIcon(this.getClass().getResource("/finalproject/imagefiles/basicball.png"));
+      }
+      catch(Exception e) {
+         System.out.println("Icons suck");
+      }
       // Create the button panel
       JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
       add(buttonPanel, BorderLayout.NORTH);

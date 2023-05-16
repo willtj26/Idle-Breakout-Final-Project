@@ -22,9 +22,6 @@ class BreakoutPanel extends JPanel {
    // Gui components
    private JButton pauseButton, upgradeMenuButton, basicButton, plasmaButton, sniperButton, scatterButton, cannonButton, poisonButton;
 
-      
-   private ImageIcon basicIcon, plasmaIcon, sniperIcon, scatterIcon, cannonIcon, poisonIcon;
-
    private int basicNum = 0;
    private int plasmaNum = 0;
    private int sniperNum = 0;
@@ -39,29 +36,17 @@ class BreakoutPanel extends JPanel {
       setPreferredSize(new Dimension(1000, 1000));
       setLayout(new BorderLayout());
 
-      try {
-         basicIcon = new ImageIcon(this.getClass().getResource("/finalproject/imagefiles/basicball.png"));
-         plasmaIcon = new ImageIcon(this.getClass().getResource("/finalproject/imagefiles/plasmaball.png"));
-         sniperIcon = new ImageIcon(this.getClass().getResource("/finalproject/imagefiles/sniperball.png"));
-         scatterIcon = new ImageIcon(this.getClass().getResource("/finalproject/imagefiles/scatterball.png"));
-         cannonIcon = new ImageIcon(this.getClass().getResource("/finalproject/imagefiles/cannonball.png"));
-         poisonIcon = new ImageIcon(this.getClass().getResource("/finalproject/imagefiles/poisonball.png"));
-     } catch(Exception e) {
-         System.out.println("Failed to load image icons: " + e.getMessage());
-         e.printStackTrace();
-     }
-     
       // Create the button panel
       JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
       add(buttonPanel, BorderLayout.NORTH);
 
       // Add the buttons
-      basicButton = new JButton(basicIcon);
-      plasmaButton = new JButton(plasmaIcon);
-      sniperButton = new JButton(sniperIcon);
-      scatterButton = new JButton(scatterIcon);
-      cannonButton = new JButton(cannonIcon);
-      poisonButton = new JButton(poisonIcon);
+      basicButton = new JButton("Basic Ball");
+      plasmaButton = new JButton("Plasma Ball");
+      sniperButton = new JButton("Sniper Ball");
+      scatterButton = new JButton("Scatter Ball");
+      cannonButton = new JButton("Cannon Ball");
+      poisonButton = new JButton("Poison Ball");
       upgradeMenuButton = new JButton("Upgrades");
       pauseButton = new JButton("Pause");
 
@@ -195,17 +180,8 @@ class BreakoutPanel extends JPanel {
    private class Listener_pause implements ActionListener {
       public void actionPerformed(ActionEvent e) {
          t.stop();
-         pauseButton.setText("Unpause");
-         // pauseButton.removeActionListener(Listener_pause());
-         // pauseButton.addActionListener(Listener_unpause());
-      }
-   }
-   private class Listener_unpause implements ActionListener {
-      public void actionPerformed(ActionEvent e) {
-         t.start();
-         pauseButton.setText("Pause");
-         // pauseButton.removeActionListener(Listener_unpause());
-         // pauseButton.addActionListener(Listener_pause());
+         pauseButton.setEnabled(false);
+         System.out.println("Pause");
       }
    }
 }

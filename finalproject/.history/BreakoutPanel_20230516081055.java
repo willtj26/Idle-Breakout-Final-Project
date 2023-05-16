@@ -40,17 +40,16 @@ class BreakoutPanel extends JPanel {
       setLayout(new BorderLayout());
 
       try {
-         basicIcon = new ImageIcon(this.getClass().getResource("/finalproject/imagefiles/basicball.png"));
-         plasmaIcon = new ImageIcon(this.getClass().getResource("/finalproject/imagefiles/plasmaball.png"));
-         sniperIcon = new ImageIcon(this.getClass().getResource("/finalproject/imagefiles/sniperball.png"));
-         scatterIcon = new ImageIcon(this.getClass().getResource("/finalproject/imagefiles/scatterball.png"));
-         cannonIcon = new ImageIcon(this.getClass().getResource("/finalproject/imagefiles/cannonball.png"));
-         poisonIcon = new ImageIcon(this.getClass().getResource("/finalproject/imagefiles/poisonball.png"));
-     } catch(Exception e) {
-         System.out.println("Failed to load image icons: " + e.getMessage());
-         e.printStackTrace();
-     }
-     
+         basicIcon = new ImageIcon(this.getClass().getResource("/finalproject/imagefiles/basicball.jpeg"));
+         plasmaIcon = new ImageIcon(this.getClass().getResource("/finalproject/imagefiles/plasmaball.jpeg"));
+         sniperIcon = new ImageIcon(this.getClass().getResource("/finalproject/imagefiles/sniperball.jpeg"));
+         scatterIcon = new ImageIcon(this.getClass().getResource("/finalproject/imagefiles/scatterball.jpeg"));
+         cannonIcon = new ImageIcon(this.getClass().getResource("/finalproject/imagefiles/cannonball.jpeg"));
+         poisonIcon = new ImageIcon(this.getClass().getResource("/finalproject/imagefiles/basicball.jpeg"));
+      }
+      catch(Exception e) {
+         System.out.println("Icons suck");
+      }
       // Create the button panel
       JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
       add(buttonPanel, BorderLayout.NORTH);
@@ -195,17 +194,9 @@ class BreakoutPanel extends JPanel {
    private class Listener_pause implements ActionListener {
       public void actionPerformed(ActionEvent e) {
          t.stop();
-         pauseButton.setText("Unpause");
-         // pauseButton.removeActionListener(Listener_pause());
-         // pauseButton.addActionListener(Listener_unpause());
-      }
-   }
-   private class Listener_unpause implements ActionListener {
-      public void actionPerformed(ActionEvent e) {
-         t.start();
-         pauseButton.setText("Pause");
-         // pauseButton.removeActionListener(Listener_unpause());
-         // pauseButton.addActionListener(Listener_pause());
+         pauseButton.setEnabled(false);
+         JButton unpause = new JButton();
+         System.out.println("Pause");
       }
    }
 }
