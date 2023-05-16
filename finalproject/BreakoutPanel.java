@@ -40,19 +40,43 @@ class BreakoutPanel extends JPanel {
       setLayout(new BorderLayout());
 
       try {
-         basicIcon = new ImageIcon(this.getClass().getResource("/finalproject/imagefiles/basicball.png"));
-         plasmaIcon = new ImageIcon(this.getClass().getResource("/finalproject/imagefiles/plasmaball.png"));
-         sniperIcon = new ImageIcon(this.getClass().getResource("/finalproject/imagefiles/sniperball.png"));
-         scatterIcon = new ImageIcon(this.getClass().getResource("/finalproject/imagefiles/scatterball.png"));
-         cannonIcon = new ImageIcon(this.getClass().getResource("/finalproject/imagefiles/cannonball.png"));
-         poisonIcon = new ImageIcon(this.getClass().getResource("/finalproject/imagefiles/poisonball.png"));
-     } catch(Exception e) {
+         basicIcon = new ImageIcon(this.getClass().getResource("imagefiles/basicball.png"));
+         Image image = basicIcon.getImage();
+         Image newimage = image.getScaledInstance(75, 50, java.awt.Image.SCALE_SMOOTH);
+         basicIcon = new ImageIcon(newimage);
+         
+         plasmaIcon = new ImageIcon(this.getClass().getResource("imagefiles/plasmaball.png"));
+         image = plasmaIcon.getImage();
+         newimage = image.getScaledInstance(75, 50, java.awt.Image.SCALE_SMOOTH);
+         plasmaIcon = new ImageIcon(newimage);
+         
+         sniperIcon = new ImageIcon(this.getClass().getResource("imagefiles/sniperball.png"));
+         image = sniperIcon.getImage();
+         newimage = image.getScaledInstance(75, 50, java.awt.Image.SCALE_SMOOTH);
+         sniperIcon = new ImageIcon(newimage);
+
+         scatterIcon = new ImageIcon(this.getClass().getResource("imagefiles/scatterball.png"));
+         image = scatterIcon.getImage();
+         newimage = image.getScaledInstance(75, 50, java.awt.Image.SCALE_SMOOTH);
+         scatterIcon = new ImageIcon(newimage);
+
+         cannonIcon = new ImageIcon(this.getClass().getResource("imagefiles/cannonball.png"));
+         image = cannonIcon.getImage();
+         newimage = image.getScaledInstance(75, 50, java.awt.Image.SCALE_SMOOTH);
+         cannonIcon = new ImageIcon(newimage);
+
+         poisonIcon = new ImageIcon(this.getClass().getResource("imagefiles/poisonball.png"));
+         image = poisonIcon.getImage();
+         newimage = image.getScaledInstance(75, 50, java.awt.Image.SCALE_SMOOTH);
+         poisonIcon = new ImageIcon(newimage);
+
+      } catch(Exception e) {
          System.out.println("Failed to load image icons: " + e.getMessage());
          e.printStackTrace();
      }
      
       // Create the button panel
-      JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+      JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
       add(buttonPanel, BorderLayout.NORTH);
 
       // Add the buttons
