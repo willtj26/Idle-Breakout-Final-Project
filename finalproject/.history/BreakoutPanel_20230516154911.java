@@ -244,13 +244,20 @@ class BreakoutPanel extends JPanel {
    }
    private class Listener_pause implements ActionListener {
       public void actionPerformed(ActionEvent e) {
-         if (pauseButton.getText().equals("Pause")) {
+         pauseButton.setText("Pause");                                 
+         pauseButton.setEnabled(true);
+         if (pauseButton.getText().equals("Unpause")) {
+             pauseButton.setText("Pause");
+         } else {
              pauseButton.setText("Unpause");
              t.stop();
-         } else {
-             pauseButton.setText("Pause");
-             t.start();
          }
      } 
+   }
+   private class Listener_unpause implements ActionListener {
+      public void actionPerformed(ActionEvent e) {
+         t.start();
+         pauseButton.setText("Pause");
+      }
    }
 }

@@ -1,0 +1,14 @@
+Github Cheat Codes
+
+Push - Upload Code to Github
+3 steps: 
+    1. Add (to let github know there's files to upload)
+        git add <file/folder names>
+    2. Commit (confirm that these files are to be upload)
+        git commit -m "<information about upload>"
+    3. Push (to actually upload)
+        git push origin main
+
+Pull - Download Code from Github
+    1.Download
+        git pull origin main

@@ -32,13 +32,6 @@ class BreakoutPanel extends JPanel {
    private int cannonNum = 0;
    private int poisonNum = 0;
 
-   private int basicPrice = 25;
-   private int plasmaPrice = 200;
-   private int sniperPrice = 1500;
-   private int scatterPrice = 10000;
-   private int cannonPrice = 75000;
-   private int poisonPrice = 75000;
-
    private int levelNumber = 0;
 
    public BreakoutPanel(JFrame f) {
@@ -49,32 +42,32 @@ class BreakoutPanel extends JPanel {
       try {
          basicIcon = new ImageIcon(this.getClass().getResource("imagefiles/basicball.png"));
          Image image = basicIcon.getImage();
-         Image newimage = image.getScaledInstance(75, 50, java.awt.Image.SCALE_SMOOTH);
+         Image newimage = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
          basicIcon = new ImageIcon(newimage);
          
          plasmaIcon = new ImageIcon(this.getClass().getResource("imagefiles/plasmaball.png"));
          image = plasmaIcon.getImage();
-         newimage = image.getScaledInstance(75, 50, java.awt.Image.SCALE_SMOOTH);
+         newimage = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
          plasmaIcon = new ImageIcon(newimage);
          
          sniperIcon = new ImageIcon(this.getClass().getResource("imagefiles/sniperball.png"));
          image = sniperIcon.getImage();
-         newimage = image.getScaledInstance(75, 50, java.awt.Image.SCALE_SMOOTH);
+         newimage = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
          sniperIcon = new ImageIcon(newimage);
 
          scatterIcon = new ImageIcon(this.getClass().getResource("imagefiles/scatterball.png"));
          image = scatterIcon.getImage();
-         newimage = image.getScaledInstance(75, 50, java.awt.Image.SCALE_SMOOTH);
+         newimage = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
          scatterIcon = new ImageIcon(newimage);
 
          cannonIcon = new ImageIcon(this.getClass().getResource("imagefiles/cannonball.png"));
          image = cannonIcon.getImage();
-         newimage = image.getScaledInstance(75, 50, java.awt.Image.SCALE_SMOOTH);
+         newimage = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
          cannonIcon = new ImageIcon(newimage);
 
          poisonIcon = new ImageIcon(this.getClass().getResource("imagefiles/poisonball.png"));
          image = poisonIcon.getImage();
-         newimage = image.getScaledInstance(75, 50, java.awt.Image.SCALE_SMOOTH);
+         newimage = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
          poisonIcon = new ImageIcon(newimage);
 
       } catch(Exception e) {
@@ -83,11 +76,8 @@ class BreakoutPanel extends JPanel {
      }
      
       // Create the button panel
-      JPanel buttonPanel = new JPanel(new GridLayout(2, 6));
-      JPanel pricePanel = new JPanel(new FlowLayout());
-      //buttonPanel.add(pricePanel, BorderLayout.LINE_END);
+      JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
       add(buttonPanel, BorderLayout.NORTH);
-
 
       // Add the buttons
       basicButton = new JButton(basicIcon);
@@ -106,22 +96,6 @@ class BreakoutPanel extends JPanel {
       buttonPanel.add(cannonButton);
       buttonPanel.add(poisonButton);
       buttonPanel.add(upgradeMenuButton);
-      
-
-      // Add Prices
-      JLabel bPrice = new JLabel("$"+basicPrice);
-      JLabel pPrice = new JLabel("$"+plasmaPrice);
-      JLabel sPrice = new JLabel("$"+sniperPrice);
-      JLabel scPrice = new JLabel("$"+scatterPrice);
-      JLabel cPrice = new JLabel("$"+cannonPrice);
-      JLabel poPrice = new JLabel("$"+poisonPrice);
-
-      buttonPanel.add(bPrice, BorderLayout.CENTER);
-      buttonPanel.add(pPrice, BorderLayout.CENTER);
-      buttonPanel.add(sPrice, BorderLayout.CENTER);
-      buttonPanel.add(scPrice, BorderLayout.CENTER);
-      buttonPanel.add(cPrice, BorderLayout.CENTER);
-      buttonPanel.add(poPrice, BorderLayout.CENTER);
       buttonPanel.add(pauseButton);
 
       // Add action listeners
@@ -244,13 +218,18 @@ class BreakoutPanel extends JPanel {
    }
    private class Listener_pause implements ActionListener {
       public void actionPerformed(ActionEvent e) {
-         if (pauseButton.getText().equals("Pause")) {
-             pauseButton.setText("Unpause");
-             t.stop();
-         } else {
-             pauseButton.setText("Pause");
-             t.start();
-         }
-     } 
+         t.stop();
+         pauseButton.setText("Unpause");
+         // pauseButton.removeActionListener(Listener_pause());
+         // pauseButton.addActionListener(Listener_unpause());
+      }
+   }
+   private class Listener_unpause implements ActionListener {
+      public void actionPerformed(ActionEvent e) {
+         t.start();
+         pauseButton.setText("Pause");
+         // pauseButton.removeActionListener(Listener_unpause());
+         // pauseButton.addActionListener(Listener_pause());
+      }
    }
 }

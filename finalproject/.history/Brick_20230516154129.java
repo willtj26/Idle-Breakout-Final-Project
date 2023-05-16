@@ -29,8 +29,4 @@ public class Brick extends Rectangle {
         g.fillRect(x, y, topSide, leftSide);
         g.drawString(""+brickvalue, topSide, leftSide);
     }
-
-    public void changeValue(int hitValue){
-        brickvalue -= hitValue;
-    }
 }

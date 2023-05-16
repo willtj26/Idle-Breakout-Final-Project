@@ -83,11 +83,9 @@ class BreakoutPanel extends JPanel {
      }
      
       // Create the button panel
-      JPanel buttonPanel = new JPanel(new GridLayout(2, 6));
-      JPanel pricePanel = new JPanel(new FlowLayout());
-      //buttonPanel.add(pricePanel, BorderLayout.LINE_END);
+      JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+      JPanel pricePanel = new JPanel(new FlowLayout(FlowLayout.TRAILING));
       add(buttonPanel, BorderLayout.NORTH);
-
 
       // Add the buttons
       basicButton = new JButton(basicIcon);
@@ -106,23 +104,15 @@ class BreakoutPanel extends JPanel {
       buttonPanel.add(cannonButton);
       buttonPanel.add(poisonButton);
       buttonPanel.add(upgradeMenuButton);
-      
+      buttonPanel.add(pauseButton);
 
       // Add Prices
-      JLabel bPrice = new JLabel("$"+basicPrice);
-      JLabel pPrice = new JLabel("$"+plasmaPrice);
-      JLabel sPrice = new JLabel("$"+sniperPrice);
-      JLabel scPrice = new JLabel("$"+scatterPrice);
-      JLabel cPrice = new JLabel("$"+cannonPrice);
-      JLabel poPrice = new JLabel("$"+poisonPrice);
-
-      buttonPanel.add(bPrice, BorderLayout.CENTER);
-      buttonPanel.add(pPrice, BorderLayout.CENTER);
-      buttonPanel.add(sPrice, BorderLayout.CENTER);
-      buttonPanel.add(scPrice, BorderLayout.CENTER);
-      buttonPanel.add(cPrice, BorderLayout.CENTER);
-      buttonPanel.add(poPrice, BorderLayout.CENTER);
-      buttonPanel.add(pauseButton);
+      JLabel bPrice = new JLabel(Integer.toString(basicPrice));
+      JLabel pPrice = new JLabel(Integer.toString(plasmaPrice));
+      JLabel sPrice = new JLabel(Integer.toString(sniperPrice));
+      JLabel scPrice = new JLabel(Integer.toString(scatterPrice));
+      JLabel cPrice = new JLabel(Integer.toString(cannonPrice));
+      JLabel poPrice = new JLabel(Integer.toString(poisonPrice));
 
       // Add action listeners
       basicButton.addActionListener(new Listener_basic());
@@ -244,13 +234,18 @@ class BreakoutPanel extends JPanel {
    }
    private class Listener_pause implements ActionListener {
       public void actionPerformed(ActionEvent e) {
-         if (pauseButton.getText().equals("Pause")) {
-             pauseButton.setText("Unpause");
-             t.stop();
-         } else {
-             pauseButton.setText("Pause");
-             t.start();
-         }
-     } 
+         t.stop();
+         pauseButton.setText("Unpause");
+         // pauseButton.removeActionListener(Listener_pause());
+         // pauseButton.addActionListener(Listener_unpause());
+      }
+   }
+   private class Listener_unpause implements ActionListener {
+      public void actionPerformed(ActionEvent e) {
+         t.start();
+         pauseButton.setText("Pause");
+         // pauseButton.removeActionListener(Listener_unpause());
+         // pauseButton.addActionListener(Listener_pause());
+      }
    }
 }
