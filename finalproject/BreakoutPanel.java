@@ -160,8 +160,8 @@ class BreakoutPanel extends JPanel {
          BouncingCircle currentBall = allBalls.get(i);
          currentBall.step();
          
-         /*TODO  If ball/brick collide, add dollar amount */
-         
+         /*TODO  If ball/brick collide, add dollar amount to bank */
+
          // The collide method should not be a boolean, I had the idea to check collision here and then do a different "Collide" action depending on the ball.
          // There are a couple errors rn, I made BasicBall implement "Balls", but I am pretty sure I did it incorrecly.  Also "Collide" shouln't be a boolean method.
          // All Ball classes need thier "Collide" method to be fixed to represent thier action.
