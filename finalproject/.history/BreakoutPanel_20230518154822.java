@@ -9,7 +9,7 @@ class BreakoutPanel extends JPanel {
    private JFrame myOwner;
 
    public static final int FRAMEx = 1200;
-   public static final int FRAMEy = 900;
+   public static final int FRAMEy = 850;
    private static final Color BACKGROUND = Color.WHITE.darker();
 
    private BufferedImage myImage;

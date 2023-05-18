@@ -1,8 +1,11 @@
 import java.awt.*;
-public abstract class Balls extends BouncingCircle{
+public abstract class Balls extends BouncingCircle {
    public Balls(int side, int x, int y, Color c, int dXval, int dYval) {
       super(side, x, y, c, dXval, dYval);
    }
+
+   public abstract void collide(BasicBall b, Brick r);
+
    public boolean isColliding(BasicBall b, Brick r) {
       int bX = b.getX();
       int bY = b.getY();
@@ -15,5 +18,4 @@ public abstract class Balls extends BouncingCircle{
          return false; // no collision
       }
    }
-   abstract void collide();
 }

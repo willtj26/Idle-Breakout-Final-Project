@@ -4,7 +4,7 @@ public class ScatterBall extends BouncingCircle {
    private int damage;
    public ScatterBall() {
       super(12, 400, 400, Color.ORANGE, 3, 3);
-      damage = 20;
+      damage = 10;
    }
    
    public void collide(BasicBall b, Brick r) {
