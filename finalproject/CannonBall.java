@@ -1,9 +1,10 @@
 import java.awt.*;
 
 public class CannonBall extends BouncingCircle {
-   
+   private int damage;
    public CannonBall() {
       super(15, 400, 400, Color.BLACK, 3, 3);
+      damage = 50;
    }
    
    public void collide(BasicBall b, Brick r) {
@@ -13,8 +14,13 @@ public class CannonBall extends BouncingCircle {
       int rY = r.getY();
       int s = b.getRadius() * 2;
       if (rX < bX + s && rX + s > bX && rY < bY + s && rY + s > bY) {
-         b.setDY(getDY() * -1);
-         b.setdX(getdX() * -1);
+         if(r.getBrickValue()-damage <= 0) {
+            r.setBrickValue(r.getBrickValue()-damage);
+         }
+         else{
+            b.setDY(getDY() * -1);
+            b.setdX(getdX() * -1);
+         }
       }
    }
 }
