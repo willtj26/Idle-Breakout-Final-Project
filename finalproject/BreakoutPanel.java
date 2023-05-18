@@ -22,6 +22,7 @@ class BreakoutPanel extends JPanel {
    // Gui components
    private JButton pauseButton, upgradeMenuButton, basicButton, plasmaButton, sniperButton, scatterButton, cannonButton, poisonButton;
 
+   private JLabel bank, bPrice, pPrice, sPrice, scPrice, cPrice, poPrice;
       
    private ImageIcon basicIcon, plasmaIcon, sniperIcon, scatterIcon, cannonIcon, poisonIcon;
 
@@ -40,7 +41,7 @@ class BreakoutPanel extends JPanel {
    private int poisonPrice = 75000;
 
    private int levelNumber = 0;
-   private int dollars = 0;
+   private int dollars = 999999999;
 
    public BreakoutPanel(JFrame f) {
       myOwner = f;
@@ -109,14 +110,14 @@ class BreakoutPanel extends JPanel {
       
 
       // Add Prices
-      JLabel bPrice = new JLabel("$"+basicPrice);
-      JLabel pPrice = new JLabel("$"+plasmaPrice);
-      JLabel sPrice = new JLabel("$"+sniperPrice);
-      JLabel scPrice = new JLabel("$"+scatterPrice);
-      JLabel cPrice = new JLabel("$"+cannonPrice);
-      JLabel poPrice = new JLabel("$"+poisonPrice);
+      bPrice = new JLabel("$"+basicPrice);
+      pPrice = new JLabel("$"+plasmaPrice);
+      sPrice = new JLabel("$"+sniperPrice);
+      scPrice = new JLabel("$"+scatterPrice);
+      cPrice = new JLabel("$"+cannonPrice);
+      poPrice = new JLabel("$"+poisonPrice);
 
-      JLabel bank = new JLabel("$"+dollars);
+      bank = new JLabel("$"+dollars);
       buttonPanel.add(bank, BorderLayout.PAGE_END);
 
       buttonPanel.add(bPrice, BorderLayout.CENTER);
@@ -154,6 +155,15 @@ class BreakoutPanel extends JPanel {
 
    public void animate() {
       int totalBalls = basicNum + plasmaNum + sniperNum + scatterNum + cannonNum + poisonNum;
+      bank.setText("$"+dollars);
+      bPrice.setText("$"+basicPrice);
+      pPrice.setText("$"+plasmaPrice);
+      sPrice.setText("$"+sniperPrice);
+      scPrice.setText("$"+scatterPrice);
+      cPrice.setText("$"+cannonPrice);
+      poPrice.setText("$"+poisonPrice);
+
+
       myBuffer.setColor(BACKGROUND);
       myBuffer.fillRect(0,0,FRAME,FRAME);
       for(int i = 0; i < totalBalls; i++) {
@@ -183,6 +193,7 @@ class BreakoutPanel extends JPanel {
          c.drawMe(myBuffer);
       }
       repaint();
+      
    }     
    private class AnimationListener implements ActionListener {
       public void actionPerformed(ActionEvent e) {
@@ -191,55 +202,79 @@ class BreakoutPanel extends JPanel {
    }
    private class Listener_basic implements ActionListener {
       public void actionPerformed(ActionEvent e) {
-         plasmaButton.setEnabled(true);
-         BasicBall ccr = new BasicBall();
-         animationObjects.add(ccr);
-         allBalls.add(ccr);
-         basicNum++;
+         if(dollars - basicPrice > 0) {
+            plasmaButton.setEnabled(true);
+            BasicBall ccr = new BasicBall();
+            animationObjects.add(ccr);
+            allBalls.add(ccr);
+            basicNum++;
+            dollars-=basicPrice;
+            basicPrice += (int)basicPrice/2;
+         }
       }
    }
    private class Listener_plasma implements ActionListener {
       public void actionPerformed(ActionEvent e) {
-         sniperButton.setEnabled(true);
-         PlasmaBall ccr = new PlasmaBall();
-         animationObjects.add(ccr);
-         allBalls.add(ccr);
-         plasmaNum++;
+         if(dollars - plasmaPrice > 0) {
+            sniperButton.setEnabled(true);
+            PlasmaBall ccr = new PlasmaBall();
+            animationObjects.add(ccr);
+            allBalls.add(ccr);
+            plasmaNum++;
+            dollars-=plasmaPrice;
+            plasmaPrice += (int)((plasmaPrice * 4)/10);
+         }
       }
    }
    private class Listener_sniper implements ActionListener {
       public void actionPerformed(ActionEvent e) {
-         scatterButton.setEnabled(true);
-         SniperBall ccr = new SniperBall();
-         animationObjects.add(ccr);
-         allBalls.add(ccr);
-         sniperNum++;
+         if(dollars - sniperPrice > 0) {
+            scatterButton.setEnabled(true);
+            SniperBall ccr = new SniperBall();
+            animationObjects.add(ccr);
+            allBalls.add(ccr);
+            sniperNum++;
+            dollars-=sniperPrice;
+            sniperPrice += (int)((sniperPrice*35)/100);
+         }
       }
    }
    private class Listener_scatter implements ActionListener {
       public void actionPerformed(ActionEvent e) {
-         cannonButton.setEnabled(true);
-         ScatterBall ccr = new ScatterBall();
-         animationObjects.add(ccr);
-         allBalls.add(ccr);
-         scatterNum++;
+         if(dollars - scatterPrice > 0) {
+            cannonButton.setEnabled(true);
+            ScatterBall ccr = new ScatterBall();
+            animationObjects.add(ccr);
+            allBalls.add(ccr);
+            scatterNum++;
+            dollars-=scatterPrice;
+            scatterPrice+= (int)((scatterPrice*35)/100);
+         }
       }
    }
    private class Listener_cannon implements ActionListener {
       public void actionPerformed(ActionEvent e) {
-         poisonButton.setEnabled(true);
-         CannonBall ccr = new CannonBall();
-         animationObjects.add(ccr);
-         allBalls.add(ccr);
-         cannonNum++;
+         if(dollars - cannonPrice > 0) {
+            poisonButton.setEnabled(true);
+            CannonBall ccr = new CannonBall();
+            animationObjects.add(ccr);
+            allBalls.add(ccr);
+            cannonNum++;
+            dollars-=cannonPrice;
+            cannonPrice+=(int)((cannonPrice *3)/10);
+         }
       }
    }
    private class Listener_poison implements ActionListener {
       public void actionPerformed(ActionEvent e) {
-         PoisonBall ccr = new PoisonBall();
-         animationObjects.add(ccr);
-         allBalls.add(ccr);
-         poisonNum++;
+         if(dollars - poisonPrice > 0) {
+            PoisonBall ccr = new PoisonBall();
+            animationObjects.add(ccr);
+            allBalls.add(ccr);
+            poisonNum++;
+            dollars-=poisonPrice;
+            poisonPrice += (int)((poisonPrice *3)/10);
+         }
       }
    }
    private class Listener_upgrade implements ActionListener {
