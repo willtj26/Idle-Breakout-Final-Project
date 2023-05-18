@@ -43,7 +43,7 @@ public class BouncingCircle extends Circle implements Animatable
    {
       //Check to see if our circle is too small
       //If so, make sure dX is positive (radius is increasing)
-      if(getX() <= 0)
+      if(getX() <= 0+getRadius())
       {
          if(dX < 0)
          {
@@ -60,12 +60,12 @@ public class BouncingCircle extends Circle implements Animatable
       }
       setX(getX() + dX);  //Change the radius a bit - either out or in - for each animation step
 
-      if(getY() < 75+getRadius()) {
+      if(getY() < 0) {
         if(dY < 0) {
             dY *=-1;
         }
       }
-      if (getY() >= 800-getRadius()*2) {
+      if (getY() >= 850-getRadius()) {
         if(dY > 0) {
             dY*=-1;
         }

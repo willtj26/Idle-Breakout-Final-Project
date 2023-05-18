@@ -8,7 +8,8 @@ class BreakoutPanel extends JPanel {
 
    private JFrame myOwner;
 
-   public static final int FRAME = 1000;
+   public static final int FRAMEx = 1200;
+   public static final int FRAMEy = 850;
    private static final Color BACKGROUND = Color.WHITE.darker();
 
    private BufferedImage myImage;
@@ -41,11 +42,11 @@ class BreakoutPanel extends JPanel {
    private int poisonPrice = 75000;
 
    private int levelNumber = 0;
-   private int dollars = 99999999;
+   private int dollars = 999999999;
 
    public BreakoutPanel(JFrame f) {
       myOwner = f;
-      setPreferredSize(new Dimension(1000, 1000));
+      setPreferredSize(new Dimension(FRAMEx, FRAMEy));
       setLayout(new BorderLayout());
 
       try {
@@ -141,10 +142,10 @@ class BreakoutPanel extends JPanel {
       // Create the ball bouncing area
       animationObjects = new ArrayList<Animatable>();
       allBalls = new ArrayList<BouncingCircle>();
-      myImage = new BufferedImage(FRAME, FRAME, BufferedImage.TYPE_INT_RGB);
+      myImage = new BufferedImage(FRAMEx, FRAMEy, BufferedImage.TYPE_INT_RGB);
       myBuffer = myImage.getGraphics();
       myBuffer.setColor(BACKGROUND);
-      myBuffer.fillRect(0,0,FRAME,FRAME);
+      myBuffer.fillRect(0,0,FRAMEx,FRAMEy);
 
       // Add the ball bouncing area
       add(new JLabel(new ImageIcon(myImage)), BorderLayout.CENTER);
@@ -165,7 +166,7 @@ class BreakoutPanel extends JPanel {
 
 
       myBuffer.setColor(BACKGROUND);
-      myBuffer.fillRect(0,0,FRAME,FRAME);
+      myBuffer.fillRect(0,0,FRAMEx,FRAMEy);
       for(int i = 0; i < totalBalls; i++) {
          BouncingCircle currentBall = allBalls.get(i);
          currentBall.step();

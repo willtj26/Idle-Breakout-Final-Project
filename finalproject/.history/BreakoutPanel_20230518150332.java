@@ -8,7 +8,8 @@ class BreakoutPanel extends JPanel {
 
    private JFrame myOwner;
 
-   public static final int FRAME = 1000;
+   public static final int FRAMEx = 1200;
+   public static final int FRAMEy = 900;
    private static final Color BACKGROUND = Color.WHITE.darker();
 
    private BufferedImage myImage;
@@ -22,7 +23,7 @@ class BreakoutPanel extends JPanel {
    // Gui components
    private JButton pauseButton, upgradeMenuButton, basicButton, plasmaButton, sniperButton, scatterButton, cannonButton, poisonButton;
 
-   private JLabel bank;
+   private JLabel bank, bPrice, pPrice, sPrice, scPrice, cPrice, poPrice;
       
    private ImageIcon basicIcon, plasmaIcon, sniperIcon, scatterIcon, cannonIcon, poisonIcon;
 
@@ -41,11 +42,11 @@ class BreakoutPanel extends JPanel {
    private int poisonPrice = 75000;
 
    private int levelNumber = 0;
-   private int dollars = 99999999;
+   private int dollars = 999999999;
 
    public BreakoutPanel(JFrame f) {
       myOwner = f;
-      setPreferredSize(new Dimension(1000, 1000));
+      setPreferredSize(new Dimension(FRAMEx, FRAMEy));
       setLayout(new BorderLayout());
 
       try {
@@ -110,12 +111,12 @@ class BreakoutPanel extends JPanel {
       
 
       // Add Prices
-      JLabel bPrice = new JLabel("$"+basicPrice);
-      JLabel pPrice = new JLabel("$"+plasmaPrice);
-      JLabel sPrice = new JLabel("$"+sniperPrice);
-      JLabel scPrice = new JLabel("$"+scatterPrice);
-      JLabel cPrice = new JLabel("$"+cannonPrice);
-      JLabel poPrice = new JLabel("$"+poisonPrice);
+      bPrice = new JLabel("$"+basicPrice);
+      pPrice = new JLabel("$"+plasmaPrice);
+      sPrice = new JLabel("$"+sniperPrice);
+      scPrice = new JLabel("$"+scatterPrice);
+      cPrice = new JLabel("$"+cannonPrice);
+      poPrice = new JLabel("$"+poisonPrice);
 
       bank = new JLabel("$"+dollars);
       buttonPanel.add(bank, BorderLayout.PAGE_END);
@@ -141,10 +142,10 @@ class BreakoutPanel extends JPanel {
       // Create the ball bouncing area
       animationObjects = new ArrayList<Animatable>();
       allBalls = new ArrayList<BouncingCircle>();
-      myImage = new BufferedImage(FRAME, FRAME, BufferedImage.TYPE_INT_RGB);
+      myImage = new BufferedImage(FRAMEx, FRAMEy, BufferedImage.TYPE_INT_RGB);
       myBuffer = myImage.getGraphics();
       myBuffer.setColor(BACKGROUND);
-      myBuffer.fillRect(0,0,FRAME,FRAME);
+      myBuffer.fillRect(0,0,FRAMEx,FRAMEy);
 
       // Add the ball bouncing area
       add(new JLabel(new ImageIcon(myImage)), BorderLayout.CENTER);
@@ -156,8 +157,16 @@ class BreakoutPanel extends JPanel {
    public void animate() {
       int totalBalls = basicNum + plasmaNum + sniperNum + scatterNum + cannonNum + poisonNum;
       bank.setText("$"+dollars);
+      bPrice.setText("$"+basicPrice);
+      pPrice.setText("$"+plasmaPrice);
+      sPrice.setText("$"+sniperPrice);
+      scPrice.setText("$"+scatterPrice);
+      cPrice.setText("$"+cannonPrice);
+      poPrice.setText("$"+poisonPrice);
+
+
       myBuffer.setColor(BACKGROUND);
-      myBuffer.fillRect(0,0,FRAME,FRAME);
+      myBuffer.fillRect(0,0,FRAMEx,FRAMEy);
       for(int i = 0; i < totalBalls; i++) {
          BouncingCircle currentBall = allBalls.get(i);
          currentBall.step();
@@ -201,6 +210,7 @@ class BreakoutPanel extends JPanel {
             allBalls.add(ccr);
             basicNum++;
             dollars-=basicPrice;
+            basicPrice += (int)basicPrice/2;
          }
       }
    }
@@ -213,6 +223,7 @@ class BreakoutPanel extends JPanel {
             allBalls.add(ccr);
             plasmaNum++;
             dollars-=plasmaPrice;
+            plasmaPrice += (int)((plasmaPrice * 4)/10);
          }
       }
    }
@@ -225,6 +236,7 @@ class BreakoutPanel extends JPanel {
             allBalls.add(ccr);
             sniperNum++;
             dollars-=sniperPrice;
+            sniperPrice += (int)((sniperPrice*35)/100);
          }
       }
    }
@@ -237,7 +249,7 @@ class BreakoutPanel extends JPanel {
             allBalls.add(ccr);
             scatterNum++;
             dollars-=scatterPrice;
-            scatterPrice*= (int)(35/100);
+            scatterPrice+= (int)((scatterPrice*35)/100);
          }
       }
    }
@@ -250,6 +262,7 @@ class BreakoutPanel extends JPanel {
             allBalls.add(ccr);
             cannonNum++;
             dollars-=cannonPrice;
+            cannonPrice+=(int)((cannonPrice *3)/10);
          }
       }
    }
@@ -261,6 +274,7 @@ class BreakoutPanel extends JPanel {
             allBalls.add(ccr);
             poisonNum++;
             dollars-=poisonPrice;
+            poisonPrice += (int)((poisonPrice *3)/10);
          }
       }
    }

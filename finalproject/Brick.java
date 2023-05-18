@@ -25,9 +25,9 @@ public class Brick extends Rectangle {
     }
 
     public void drawMe(Graphics g){
-        g.setColor(c);
-        g.fillRect(x, y, topSide, leftSide);
-        g.drawString(""+brickvalue, topSide, leftSide);
+        // g.setColor(c);
+        // g.fillRect(x, y, topSide, leftSide);
+        // g.drawString(""+brickvalue, topSide, leftSide);
     }
 
     public void changeValue(int hitValue){
