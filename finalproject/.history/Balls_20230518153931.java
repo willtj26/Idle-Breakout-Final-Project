@@ -4,14 +4,14 @@ public abstract class Balls extends BouncingCircle {
       super(side, x, y, c, dXval, dYval);
    }
 
-   public abstract void collide(Brick r);
+   public abstract void collide(BasicBall b, Brick r);
 
-   public boolean isColliding(Brick r) {
-      int bX = getX();
-      int bY = getY();
+   public boolean isColliding(BasicBall b, Brick r) {
+      int bX = b.getX();
+      int bY = b.getY();
       int rX = r.getX();
       int rY = r.getY();
-      int s = getRadius() * 2;
+      int s = b.getRadius() * 2;
       if (rX < bX + s && rX + s > bX && rY < bY + s && rY + s > bY) {
          return true; // collision detected
       } else {

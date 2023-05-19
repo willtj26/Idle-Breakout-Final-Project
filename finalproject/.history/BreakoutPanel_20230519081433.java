@@ -209,7 +209,6 @@ class BreakoutPanel extends JPanel {
             BasicBall ccr = new BasicBall();
             animationObjects.add(ccr);
             allBalls.add(ccr);
-            allBasicBalls.add(ccr);
             basicNum++;
             dollars-=basicPrice;
             basicPrice += (int)basicPrice/2;
@@ -223,7 +222,6 @@ class BreakoutPanel extends JPanel {
             PlasmaBall ccr = new PlasmaBall();
             animationObjects.add(ccr);
             allBalls.add(ccr);
-            allPlasmaBalls.add(ccr);
             plasmaNum++;
             dollars-=plasmaPrice;
             plasmaPrice += (int)((plasmaPrice * 4)/10);
@@ -237,7 +235,6 @@ class BreakoutPanel extends JPanel {
             SniperBall ccr = new SniperBall();
             animationObjects.add(ccr);
             allBalls.add(ccr);
-            allSniperBalls.add(ccr);
             sniperNum++;
             dollars-=sniperPrice;
             sniperPrice += (int)((sniperPrice*35)/100);
@@ -251,7 +248,6 @@ class BreakoutPanel extends JPanel {
             ScatterBall ccr = new ScatterBall();
             animationObjects.add(ccr);
             allBalls.add(ccr);
-            allScatterBalls.add(ccr);
             scatterNum++;
             dollars-=scatterPrice;
             scatterPrice+= (int)((scatterPrice*35)/100);
@@ -265,7 +261,6 @@ class BreakoutPanel extends JPanel {
             CannonBall ccr = new CannonBall();
             animationObjects.add(ccr);
             allBalls.add(ccr);
-            allCannonBalls.add(ccr);
             cannonNum++;
             dollars-=cannonPrice;
             cannonPrice+=(int)((cannonPrice *3)/10);
@@ -278,7 +273,6 @@ class BreakoutPanel extends JPanel {
             PoisonBall ccr = new PoisonBall();
             animationObjects.add(ccr);
             allBalls.add(ccr);
-            allPoisonBalls.add(ccr);
             poisonNum++;
             dollars-=poisonPrice;
             poisonPrice += (int)((poisonPrice *3)/10);

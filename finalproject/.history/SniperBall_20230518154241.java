@@ -1,18 +1,17 @@
 import java.awt.*;
 
-public class ScatterBall extends Balls {
+public class SniperBall extends BouncingCircle {
    private int damage;
-   public ScatterBall() {
-      super(12, 400, 400, Color.ORANGE, 3, 3);
-      damage = 20;
+   public SniperBall() {
+      super(10, 400, 400, Color.WHITE, 3, 3);
+      damage = 5;
    }
    
-   public void collide(Brick r) {
-      setDY(getDY() * -1);
-      setdX(getdX() * -1);
-      r.setBrickValue(r.getBrickValue()-damage);
+   public void collide(BasicBall b, Brick r) {
+      b.setDY(getDY() * -1);
+      b.setdX(getdX() * -1);
+      r.setBrickValue(r.getBrickValue() - damage);
    }
-   //override step method for wall hits
    @Override
    public void step()  //Implement Animatable's required step()
    {
@@ -48,5 +47,3 @@ public class ScatterBall extends Balls {
       setY(getY()+getDY());
    }
 }
-   
-
