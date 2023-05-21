@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class CannonBall extends BouncingCircle {
+class CannonBall extends BouncingCircle {
    private int damage;
    public CannonBall() {
       super(15, 400, 400, Color.BLACK, 3, 3);

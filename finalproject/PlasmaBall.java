@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class PlasmaBall extends BouncingCircle {
+class PlasmaBall extends BouncingCircle {
    private int damage;
    public PlasmaBall() {
       super(10, 400, 400, new Color(160, 50, 200), 3, 3);

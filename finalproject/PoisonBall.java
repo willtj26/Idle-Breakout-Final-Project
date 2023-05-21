@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class PoisonBall extends BouncingCircle {
+class PoisonBall extends BouncingCircle {
    private int damage;
    public PoisonBall() {
       super(12, 400, 400, new Color(255, 36, 0), 3, 3);

@@ -1,7 +1,10 @@
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
+import java.awt.image.*;
+import java.util.ArrayList;
 
-
-public class BouncingCircle extends Circle implements Animatable
+class BouncingCircle extends Circle implements Animatable
 {
    private int dX;  // how much it will move each step (speed)
    private int dY;
