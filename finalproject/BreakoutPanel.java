@@ -175,7 +175,7 @@ class BreakoutPanel extends JPanel {
       myBuffer.setColor(BACKGROUND);
       myBuffer.fillRect(0,0,FRAMEx,FRAMEy);
       for(int i = 0; i < totalBalls; i++) {
-         BouncingCircle currentBall = allBalls.get(i);
+         Balls currentBall = allBalls.get(i);
          // if(currentBall.isColliding()) {
          //    currentBall.collide();
          // }
@@ -189,7 +189,13 @@ class BreakoutPanel extends JPanel {
          // Also, I am pretty sure the step method needs to be updated, especially for sniper and scatter.
          // I believe we need to make another ball class for the little balls that come from the scatter ball.
       }
-   
+   /*   for(int a = 0; a < basicNum; a++) {
+         //for()                                       should loop through all bricks
+            BasicBall cur = allBasicBalls.get(a);
+            if(cur.isColliding()) {                  // Current brick as arg
+               cur.collide();
+            }
+      } */
       for(int k = 0; k < totalBalls; k++){
          BouncingCircle c = allBalls.get(k);
          c.drawMe(myBuffer);
