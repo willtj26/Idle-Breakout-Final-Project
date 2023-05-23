@@ -1,10 +1,6 @@
 import java.awt.*;
 
-<<<<<<< HEAD
-class ScatterBall extends BouncingCircle {
-=======
 public class ScatterBall extends Balls {
->>>>>>> 53de6b7c4d05d01875669117a629bd72f10921e1
    private int damage;
    public ScatterBall() {
       super(12, 400, 400, Color.ORANGE, 3, 3);
