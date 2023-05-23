@@ -18,14 +18,7 @@ class BreakoutPanel extends JPanel {
    private Timer t;
 
    private ArrayList<Animatable> animationObjects;
-   private ArrayList<Balls> allBalls = new ArrayList <Balls>();
-   private ArrayList<BasicBall> allBasicBalls = new ArrayList <BasicBall>();
-   private ArrayList<PlasmaBall> allPlasmaBalls = new ArrayList <PlasmaBall>();
-   private ArrayList<SniperBall> allSniperBalls = new ArrayList <SniperBall>();
-   private ArrayList<ScatterBall> allScatterBalls = new ArrayList <ScatterBall>();
-   private ArrayList<CannonBall> allCannonBalls = new ArrayList <CannonBall>();
-   private ArrayList<PoisonBall> allPoisonBalls = new ArrayList <PoisonBall>();
-
+   private ArrayList<BouncingCircle> allBalls = new ArrayList <BouncingCircle>();
 
    // Gui components
    private JButton pauseButton, upgradeMenuButton, basicButton, plasmaButton, sniperButton, scatterButton, cannonButton, poisonButton;
@@ -59,32 +52,32 @@ class BreakoutPanel extends JPanel {
       try {
          basicIcon = new ImageIcon(this.getClass().getResource("imagefiles/basicball.png"));
          Image image = basicIcon.getImage();
-         Image newimage = image.getScaledInstance(75, 50, Image.SCALE_SMOOTH);
+         Image newimage = image.getScaledInstance(75, 50, java.awt.Image.SCALE_SMOOTH);
          basicIcon = new ImageIcon(newimage);
          
          plasmaIcon = new ImageIcon(this.getClass().getResource("imagefiles/plasmaball.png"));
          image = plasmaIcon.getImage();
-         newimage = image.getScaledInstance(75, 50, Image.SCALE_SMOOTH);
+         newimage = image.getScaledInstance(75, 50, java.awt.Image.SCALE_SMOOTH);
          plasmaIcon = new ImageIcon(newimage);
          
          sniperIcon = new ImageIcon(this.getClass().getResource("imagefiles/sniperball.png"));
          image = sniperIcon.getImage();
-         newimage = image.getScaledInstance(75, 50, Image.SCALE_SMOOTH);
+         newimage = image.getScaledInstance(75, 50, java.awt.Image.SCALE_SMOOTH);
          sniperIcon = new ImageIcon(newimage);
 
          scatterIcon = new ImageIcon(this.getClass().getResource("imagefiles/scatterball.png"));
          image = scatterIcon.getImage();
-         newimage = image.getScaledInstance(75, 50, Image.SCALE_SMOOTH);
+         newimage = image.getScaledInstance(75, 50, java.awt.Image.SCALE_SMOOTH);
          scatterIcon = new ImageIcon(newimage);
 
          cannonIcon = new ImageIcon(this.getClass().getResource("imagefiles/cannonball.png"));
          image = cannonIcon.getImage();
-         newimage = image.getScaledInstance(75, 50, Image.SCALE_SMOOTH);
+         newimage = image.getScaledInstance(75, 50, java.awt.Image.SCALE_SMOOTH);
          cannonIcon = new ImageIcon(newimage);
 
          poisonIcon = new ImageIcon(this.getClass().getResource("imagefiles/poisonball.png"));
          image = poisonIcon.getImage();
-         newimage = image.getScaledInstance(75, 50, Image.SCALE_SMOOTH);
+         newimage = image.getScaledInstance(75, 50, java.awt.Image.SCALE_SMOOTH);
          poisonIcon = new ImageIcon(newimage);
 
       } catch(Exception e) {
@@ -148,7 +141,7 @@ class BreakoutPanel extends JPanel {
 
       // Create the ball bouncing area
       animationObjects = new ArrayList<Animatable>();
-      allBalls = new ArrayList<Balls>();
+      allBalls = new ArrayList<BouncingCircle>();
       myImage = new BufferedImage(FRAMEx, FRAMEy, BufferedImage.TYPE_INT_RGB);
       myBuffer = myImage.getGraphics();
       myBuffer.setColor(BACKGROUND);
@@ -175,10 +168,7 @@ class BreakoutPanel extends JPanel {
       myBuffer.setColor(BACKGROUND);
       myBuffer.fillRect(0,0,FRAMEx,FRAMEy);
       for(int i = 0; i < totalBalls; i++) {
-         Balls currentBall = allBalls.get(i);
-         // if(currentBall.isColliding()) {
-         //    currentBall.collide();
-         // }
+         BouncingCircle currentBall = allBalls.get(i);
          currentBall.step();
          
          /*TODO  If ball/brick collide, add dollar amount to bank */
@@ -188,14 +178,17 @@ class BreakoutPanel extends JPanel {
          // All Ball classes need thier "Collide" method to be fixed to represent thier action.
          // Also, I am pretty sure the step method needs to be updated, especially for sniper and scatter.
          // I believe we need to make another ball class for the little balls that come from the scatter ball.
+
+      /*   int newX = currentBall.getX();
+         int newY = currentBall.getY();
+         int mainX = getX();
+         int mainY = getY();
+         int s = currentBall.getRadius() * 2;
+         if (mainX < newX + s && mainX + s > newX && mainY < newY + s && mainY + s > newY) {
+            collide(currentBall);
+         } */
       }
-   /*   for(int a = 0; a < basicNum; a++) {
-         //for()                                       should loop through all bricks
-            BasicBall cur = allBasicBalls.get(a);
-            if(cur.isColliding()) {                  // Current brick as arg
-               cur.collide();
-            }
-      } */
+   
       for(int k = 0; k < totalBalls; k++){
          BouncingCircle c = allBalls.get(k);
          c.drawMe(myBuffer);
@@ -215,7 +208,6 @@ class BreakoutPanel extends JPanel {
             BasicBall ccr = new BasicBall();
             animationObjects.add(ccr);
             allBalls.add(ccr);
-            allBasicBalls.add(ccr);
             basicNum++;
             dollars-=basicPrice;
             basicPrice += (int)basicPrice/2;
@@ -229,7 +221,6 @@ class BreakoutPanel extends JPanel {
             PlasmaBall ccr = new PlasmaBall();
             animationObjects.add(ccr);
             allBalls.add(ccr);
-            allPlasmaBalls.add(ccr);
             plasmaNum++;
             dollars-=plasmaPrice;
             plasmaPrice += (int)((plasmaPrice * 4)/10);
@@ -243,7 +234,6 @@ class BreakoutPanel extends JPanel {
             SniperBall ccr = new SniperBall();
             animationObjects.add(ccr);
             allBalls.add(ccr);
-            allSniperBalls.add(ccr);
             sniperNum++;
             dollars-=sniperPrice;
             sniperPrice += (int)((sniperPrice*35)/100);
@@ -257,7 +247,6 @@ class BreakoutPanel extends JPanel {
             ScatterBall ccr = new ScatterBall();
             animationObjects.add(ccr);
             allBalls.add(ccr);
-            allScatterBalls.add(ccr);
             scatterNum++;
             dollars-=scatterPrice;
             scatterPrice+= (int)((scatterPrice*35)/100);
@@ -271,7 +260,6 @@ class BreakoutPanel extends JPanel {
             CannonBall ccr = new CannonBall();
             animationObjects.add(ccr);
             allBalls.add(ccr);
-            allCannonBalls.add(ccr);
             cannonNum++;
             dollars-=cannonPrice;
             cannonPrice+=(int)((cannonPrice *3)/10);
@@ -284,7 +272,6 @@ class BreakoutPanel extends JPanel {
             PoisonBall ccr = new PoisonBall();
             animationObjects.add(ccr);
             allBalls.add(ccr);
-            allPoisonBalls.add(ccr);
             poisonNum++;
             dollars-=poisonPrice;
             poisonPrice += (int)((poisonPrice *3)/10);

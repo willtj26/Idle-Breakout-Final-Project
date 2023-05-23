@@ -1,19 +1,15 @@
 import java.awt.*;
 
-<<<<<<< HEAD
-class ScatterBall extends BouncingCircle {
-=======
-public class ScatterBall extends Balls {
->>>>>>> 53de6b7c4d05d01875669117a629bd72f10921e1
+public class ScatterBall extends BouncingCircle {
    private int damage;
    public ScatterBall() {
       super(12, 400, 400, Color.ORANGE, 3, 3);
       damage = 20;
    }
    
-   public void collide(Brick r) {
-      setDY(getDY() * -1);
-      setdX(getdX() * -1);
+   public void collide(BasicBall b, Brick r) {
+      b.setDY(getDY() * -1);
+      b.setdX(getdX() * -1);
       r.setBrickValue(r.getBrickValue()-damage);
    }
    //override step method for wall hits

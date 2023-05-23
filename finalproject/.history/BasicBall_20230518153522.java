@@ -7,9 +7,9 @@ public class BasicBall extends Balls {
       damage = 1;
    }
    
-   public void collide(Brick r) {
-      setDY(getDY() * -1);
-      setdX(getdX() * -1);
+   public void collide(BasicBall b, Brick r) {
+      b.setDY(getDY() * -1);
+      b.setdX(getdX() * -1);
       r.setBrickValue(r.getBrickValue() - damage);
    }
 }

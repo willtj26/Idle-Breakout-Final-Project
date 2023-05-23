@@ -19,13 +19,6 @@ class BreakoutPanel extends JPanel {
 
    private ArrayList<Animatable> animationObjects;
    private ArrayList<Balls> allBalls = new ArrayList <Balls>();
-   private ArrayList<BasicBall> allBasicBalls = new ArrayList <BasicBall>();
-   private ArrayList<PlasmaBall> allPlasmaBalls = new ArrayList <PlasmaBall>();
-   private ArrayList<SniperBall> allSniperBalls = new ArrayList <SniperBall>();
-   private ArrayList<ScatterBall> allScatterBalls = new ArrayList <ScatterBall>();
-   private ArrayList<CannonBall> allCannonBalls = new ArrayList <CannonBall>();
-   private ArrayList<PoisonBall> allPoisonBalls = new ArrayList <PoisonBall>();
-
 
    // Gui components
    private JButton pauseButton, upgradeMenuButton, basicButton, plasmaButton, sniperButton, scatterButton, cannonButton, poisonButton;
@@ -175,7 +168,7 @@ class BreakoutPanel extends JPanel {
       myBuffer.setColor(BACKGROUND);
       myBuffer.fillRect(0,0,FRAMEx,FRAMEy);
       for(int i = 0; i < totalBalls; i++) {
-         Balls currentBall = allBalls.get(i);
+         BouncingCircle currentBall = allBalls.get(i);
          // if(currentBall.isColliding()) {
          //    currentBall.collide();
          // }
@@ -189,13 +182,7 @@ class BreakoutPanel extends JPanel {
          // Also, I am pretty sure the step method needs to be updated, especially for sniper and scatter.
          // I believe we need to make another ball class for the little balls that come from the scatter ball.
       }
-   /*   for(int a = 0; a < basicNum; a++) {
-         //for()                                       should loop through all bricks
-            BasicBall cur = allBasicBalls.get(a);
-            if(cur.isColliding()) {                  // Current brick as arg
-               cur.collide();
-            }
-      } */
+   
       for(int k = 0; k < totalBalls; k++){
          BouncingCircle c = allBalls.get(k);
          c.drawMe(myBuffer);
@@ -215,7 +202,6 @@ class BreakoutPanel extends JPanel {
             BasicBall ccr = new BasicBall();
             animationObjects.add(ccr);
             allBalls.add(ccr);
-            allBasicBalls.add(ccr);
             basicNum++;
             dollars-=basicPrice;
             basicPrice += (int)basicPrice/2;
@@ -229,7 +215,6 @@ class BreakoutPanel extends JPanel {
             PlasmaBall ccr = new PlasmaBall();
             animationObjects.add(ccr);
             allBalls.add(ccr);
-            allPlasmaBalls.add(ccr);
             plasmaNum++;
             dollars-=plasmaPrice;
             plasmaPrice += (int)((plasmaPrice * 4)/10);
@@ -243,7 +228,6 @@ class BreakoutPanel extends JPanel {
             SniperBall ccr = new SniperBall();
             animationObjects.add(ccr);
             allBalls.add(ccr);
-            allSniperBalls.add(ccr);
             sniperNum++;
             dollars-=sniperPrice;
             sniperPrice += (int)((sniperPrice*35)/100);
@@ -257,7 +241,6 @@ class BreakoutPanel extends JPanel {
             ScatterBall ccr = new ScatterBall();
             animationObjects.add(ccr);
             allBalls.add(ccr);
-            allScatterBalls.add(ccr);
             scatterNum++;
             dollars-=scatterPrice;
             scatterPrice+= (int)((scatterPrice*35)/100);
@@ -271,7 +254,6 @@ class BreakoutPanel extends JPanel {
             CannonBall ccr = new CannonBall();
             animationObjects.add(ccr);
             allBalls.add(ccr);
-            allCannonBalls.add(ccr);
             cannonNum++;
             dollars-=cannonPrice;
             cannonPrice+=(int)((cannonPrice *3)/10);
@@ -284,7 +266,6 @@ class BreakoutPanel extends JPanel {
             PoisonBall ccr = new PoisonBall();
             animationObjects.add(ccr);
             allBalls.add(ccr);
-            allPoisonBalls.add(ccr);
             poisonNum++;
             dollars-=poisonPrice;
             poisonPrice += (int)((poisonPrice *3)/10);
