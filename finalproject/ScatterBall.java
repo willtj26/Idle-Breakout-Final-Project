@@ -12,6 +12,19 @@ public class ScatterBall extends Balls {
       setdX(getdX() * -1);
       r.setBrickValue(r.getBrickValue()-damage);
    }
+   public void increaseDamage() {
+      damage += 10;
+   }
+   public int getDamage() {
+      return damage;
+   }
+   public int getSpeed() {
+      return getdX();
+   }
+   public int getBabies() {
+      //return 
+      return 99999;
+   }
    //override step method for wall hits
    @Override
    public void step()  //Implement Animatable's required step()

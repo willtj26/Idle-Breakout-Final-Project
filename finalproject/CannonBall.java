@@ -16,5 +16,14 @@ public class CannonBall extends Balls {
          setdX(getdX() * -1);
       }
    }
+   public void increaseDamage() {
+      damage += 25;
+   }
+   public int getDamage() {
+      return damage;
+   }
+   public int getSpeed() {
+      return getdX();
+   }
 }
 

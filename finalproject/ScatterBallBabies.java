@@ -9,7 +9,15 @@ public class ScatterBallBabies extends Balls {
    
     public void collide(Brick r) {
         r.setBrickValue(r.getBrickValue() - damage);
-        System.gc();
     }
+    public void increaseDamage() {
+        damage += 1;
+     }
+     public int getDamage() {
+        return damage;
+     }
+     public int getSpeed() {
+        return getdX();
+     }
 }
 

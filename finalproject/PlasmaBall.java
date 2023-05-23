@@ -13,5 +13,14 @@ public class PlasmaBall extends Balls {
       //area of effect 
       r.setBrickValue(r.getBrickValue() - damage);
    }
+   public void increaseDamage() {
+      damage += 5;
+   }
+   public int getDamage() {
+      return damage;
+   }
+   public int getSpeed() {
+      return getdX();
+   }
 }
 

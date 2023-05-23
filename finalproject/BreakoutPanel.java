@@ -294,6 +294,13 @@ class BreakoutPanel extends JPanel {
    private class Listener_upgrade implements ActionListener {
       public void actionPerformed(ActionEvent e) {
          System.out.println("Upgrade Menu Open");
+         JFrame frame = new JFrame("Upgrades");
+         frame.setSize(800, 600);
+         frame.setLocation(150, 150);
+         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+         frame.setContentPane(new UpgradePanel(frame));
+         frame.pack();
+         frame.setVisible(true);
       }
    }
    private class Listener_pause implements ActionListener {
