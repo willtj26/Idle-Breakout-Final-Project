@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.ArrayList;
 
 public class SniperBall extends Balls {
    private int damage;
@@ -7,11 +8,16 @@ public class SniperBall extends Balls {
       damage = 5;
    }
    
-   public void collide(Brick r) {
-      setDY(getDY() * -1);
-      setdX(getdX() * -1);
-      r.setBrickValue(r.getBrickValue() - damage);
+   public void collide(ArrayList<Brick> allBricks) {
+      for (Brick r: allBricks)
+      {
+         setDY(getDY() * -1);
+         setdX(getdX() * -1);
+         //Add poison and area of effect
+         r.setBrickValue(r.getBrickValue()-damage);
+      }
    }
+
    @Override
    public void step()  //Implement Animatable's required step()
    {

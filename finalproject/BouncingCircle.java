@@ -42,10 +42,8 @@ class BouncingCircle extends Circle implements Animatable
    }
       
    //instance methods
-   public void step()  //Implement Animatable's required step()
+   public void step()
    {
-      //Check to see if our circle is too small
-      //If so, make sure dX is positive (radius is increasing)
       if(getX() <= 0)
       {
          if(dX < 0)
@@ -61,7 +59,7 @@ class BouncingCircle extends Circle implements Animatable
             dX *= -1;
          }
       }
-      setX(getX() + dX);  //Change the radius a bit - either out or in - for each animation step
+      setX(getX() + dX);
 
       if(getY() < 80) {
         if(dY < 0) {

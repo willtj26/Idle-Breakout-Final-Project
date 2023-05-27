@@ -4,7 +4,7 @@ import java.awt.event.*;
 import java.awt.image.*;
 import java.util.ArrayList;
 
-class BreakoutPanel extends JPanel {
+class TempPanel extends JPanel {
 
    private JFrame myOwner;
 
@@ -19,14 +19,15 @@ class BreakoutPanel extends JPanel {
 
    private ArrayList<Animatable> animationObjects;
    private ArrayList<Balls> allBalls = new ArrayList <Balls>();
+   private ArrayList<Brick> allBricks = new ArrayList <Brick>();
+   private ArrayList<BlueBrick> allBlueBricks = new ArrayList <BlueBrick>();
    private ArrayList<BasicBall> allBasicBalls = new ArrayList <BasicBall>();
    private ArrayList<PlasmaBall> allPlasmaBalls = new ArrayList <PlasmaBall>();
    private ArrayList<SniperBall> allSniperBalls = new ArrayList <SniperBall>();
    private ArrayList<ScatterBall> allScatterBalls = new ArrayList <ScatterBall>();
    private ArrayList<CannonBall> allCannonBalls = new ArrayList <CannonBall>();
    private ArrayList<PoisonBall> allPoisonBalls = new ArrayList <PoisonBall>();
-   private FourBrickWall four;
-
+   
 
    // Gui components
    private JButton pauseButton, upgradeMenuButton, basicButton, plasmaButton, sniperButton, scatterButton, cannonButton, poisonButton;
@@ -41,6 +42,7 @@ class BreakoutPanel extends JPanel {
    private int scatterNum = 0;
    private int cannonNum = 0;
    private int poisonNum = 0;
+   private int brickNum = 0;
 
    private int basicPrice = 25;
    private int plasmaPrice = 200;
@@ -52,7 +54,7 @@ class BreakoutPanel extends JPanel {
    private int levelNumber = 0;
    private int dollars = 999999999;
 
-   public BreakoutPanel(JFrame f) {
+   public TempPanel(JFrame f) {
       myOwner = f;
       setPreferredSize(new Dimension(FRAMEx, FRAMEy));
       setLayout(new BorderLayout());
@@ -150,24 +152,34 @@ class BreakoutPanel extends JPanel {
       // Create the ball bouncing area
       animationObjects = new ArrayList<Animatable>();
       allBalls = new ArrayList<Balls>();
+      allBricks = new ArrayList<Brick>();
       myImage = new BufferedImage(FRAMEx, FRAMEy, BufferedImage.TYPE_INT_RGB);
       myBuffer = myImage.getGraphics();
       myBuffer.setColor(BACKGROUND);
       myBuffer.fillRect(0,0,FRAMEx,FRAMEy);
-      four = new FourBrickWall();
-      JPanel tempfour = four.drawMe();
-      //add(tempfour);
-
+      
+      //Create brick wall
+      int xcoord = 150;
+      int ycoord = 150;
+      for (int i = 0; i < 5; i++){
+         BlueBrick b1 = new BlueBrick(xcoord+50, ycoord+25, 1);//Color.BLUE, 80, 30, "1");
+         animationObjects.add(b1);
+         allBricks.add(b1);
+         brickNum++;
+         xcoord+=50;
+         ycoord+=25;
+      }
+      
       // Add the ball bouncing area
       add(new JLabel(new ImageIcon(myImage)), BorderLayout.CENTER);
-      add(tempfour);
-
+      
       t = new Timer(5, new AnimationListener());
       t.start();
    }
 
    public void animate() {
       int totalBalls = basicNum + plasmaNum + sniperNum + scatterNum + cannonNum + poisonNum;
+      int totalBricks = brickNum;
       bank.setText("$"+dollars);
       bPrice.setText("$"+basicPrice);
       pPrice.setText("$"+plasmaPrice);
@@ -181,9 +193,9 @@ class BreakoutPanel extends JPanel {
       myBuffer.fillRect(0,0,FRAMEx,FRAMEy);
       for(int i = 0; i < totalBalls; i++) {
          Balls currentBall = allBalls.get(i);
-         // if(currentBall.isColliding()) {
-         //    currentBall.collide();
-         // }
+         if(currentBall.isColliding(allBricks)) {
+            currentBall.collide(allBricks);
+         }
          currentBall.step();
          
          /*TODO  If ball/brick collide, add dollar amount to bank */
@@ -193,6 +205,12 @@ class BreakoutPanel extends JPanel {
          // All Ball classes need thier "Collide" method to be fixed to represent thier action.
          // Also, I am pretty sure the step method needs to be updated, especially for sniper and scatter.
          // I believe we need to make another ball class for the little balls that come from the scatter ball.
+      }
+      
+      for (int x = 0; x < totalBricks; x++){
+         Brick currentBrick = allBricks.get(x);
+         
+         currentBrick.step();
       }
    /*   for(int a = 0; a < basicNum; a++) {
          //for()                                       should loop through all bricks
@@ -204,6 +222,11 @@ class BreakoutPanel extends JPanel {
       for(int k = 0; k < totalBalls; k++){
          BouncingCircle c = allBalls.get(k);
          c.drawMe(myBuffer);
+      }
+      
+      for (int w = 0; w < totalBricks; w++){
+         Rectangle r = allBricks.get(w);
+         r.drawMe(myBuffer);
       }
       repaint();
       

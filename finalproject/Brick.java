@@ -1,34 +1,31 @@
 import java.awt.*;
+public abstract class Brick extends Rectangle {
+   private int brickvalue;
+   public Brick(int topside, int leftside, int x, int y, Color c, int brickval) {
+      super(x, y, topside, leftside,c);
+      brickvalue = brickval;
+   }
 
-public class Brick extends Rectangle {
-    private int topSide;
-    private int leftSide;
-    private int brickvalue;
-    private Color c;
-    private int x;
-    private int y;
+   public abstract void collide(Balls r);
 
-    public Brick(Color c1, int level) {
-        super(40, 10, x1, y1, c1);
-        c = c1;
-        brickvalue = level;
-    }
+   public int getBrickValue(){
+      return brickvalue;
+   }
+   
+   public void setBrickValue(int brickval){
+      brickvalue = brickval;
+   }
 
-    public int getBrickValue(){
-        return brickvalue;
-    }
-
-    public void setBrickValue(int level){
-        brickvalue = level;
-    }
-
-    public void drawMe(Graphics g){
-        g.setColor(c);
-        g.fillRect(x, y, topSide, leftSide);
-        g.drawString(""+brickvalue, topSide, leftSide);
-    }
-
-    public void changeValue(int hitValue){
-        brickvalue -= hitValue;
-    }
+   public boolean isColliding(Balls r) {
+      int bX = getX();
+      int bY = getY();
+      int rX = r.getX();
+      int rY = r.getY();
+      int s = getTopSide() * 2;
+      if (rX < bX + s && rX + s > bX && rY < bY + s && rY + s > bY) {
+         return true; // collision detected
+      } else {
+         return false; // no collision
+      }
+   }
 }

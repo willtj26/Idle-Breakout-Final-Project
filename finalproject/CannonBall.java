@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.ArrayList;
 
 public class CannonBall extends Balls {
    private int damage;
@@ -7,14 +8,14 @@ public class CannonBall extends Balls {
       damage = 50;
    }
    
-   public void collide(Brick r) {
-      if(r.getBrickValue()-damage <= 0) {
-         r.setBrickValue(r.getBrickValue()-damage);
-      }
-      else{
+   public void collide(ArrayList<Brick> allBricks) {
+      for (Brick r: allBricks){
          setDY(getDY() * -1);
          setdX(getdX() * -1);
+         //Add poison and area of effect
+         r.setBrickValue(r.getBrickValue()-damage);
       }
    }
+
 }
 

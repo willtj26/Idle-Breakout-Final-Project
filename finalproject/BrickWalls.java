@@ -1,8 +1,13 @@
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
+import java.awt.image.*;
+import java.util.ArrayList;
+
 
 public interface BrickWalls{
-   public void drawMe();
-   public void getBrickArray();
+   public void drawMe(Graphics g);
+   public Brick[][] getBrickArray();
 }
         
         

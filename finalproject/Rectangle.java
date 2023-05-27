@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Rectangle
+public class Rectangle implements Animatable
 {
    //fields
    private int topSide;
@@ -69,10 +69,19 @@ public class Rectangle
       c = cValue;
    }
    
+   public void step(){
+      setX(getX());
+      setY(getY());
+   }
+   
    //instance methods
    public void drawMe(Graphics g)
    {
       g.setColor(c);
+      //g.drawLine(x, y, x+40, y);
+      //g.drawLine(x, y, x, y+40);
+      //g.drawLine(x, y+40, x+40, y);
+      //g.drawLine(x+40, y, x, y+40);
       g.fillRect(x, y, topSide, leftSide);
    }
    
