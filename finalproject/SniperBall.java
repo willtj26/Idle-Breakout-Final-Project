@@ -17,7 +17,15 @@ public class SniperBall extends Balls {
          r.setBrickValue(r.getBrickValue()-damage);
       }
    }
-
+   public void increaseDamage() {
+      damage += 5;
+   }
+   public int getDamage() {
+      return damage;
+   }
+   public int getSpeed() {
+      return getdX();
+   }
    @Override
    public void step()  //Implement Animatable's required step()
    {

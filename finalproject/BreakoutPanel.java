@@ -12,6 +12,7 @@ class BreakoutPanel extends JPanel {
    public static final int FRAMEy = 850;
    private static final Color BACKGROUND = Color.WHITE.darker();
 
+   public Money money;
    private BufferedImage myImage;
    private Graphics myBuffer;
 
@@ -19,15 +20,16 @@ class BreakoutPanel extends JPanel {
 
    private ArrayList<Animatable> animationObjects;
    private ArrayList<Balls> allBalls = new ArrayList <Balls>();
-   private ArrayList<BasicBall> allBasicBalls = new ArrayList <BasicBall>();
-   private ArrayList<PlasmaBall> allPlasmaBalls = new ArrayList <PlasmaBall>();
-   private ArrayList<SniperBall> allSniperBalls = new ArrayList <SniperBall>();
-   private ArrayList<ScatterBall> allScatterBalls = new ArrayList <ScatterBall>();
-   private ArrayList<CannonBall> allCannonBalls = new ArrayList <CannonBall>();
-   private ArrayList<PoisonBall> allPoisonBalls = new ArrayList <PoisonBall>();
-   private FourBrickWall four;
+   private ArrayList<Brick> allBricks = new ArrayList <Brick>();
+   private ArrayList<BlueBrick> allBlueBricks = new ArrayList <BlueBrick>();
+   public ArrayList<BasicBall> allBasicBalls = new ArrayList <BasicBall>();
+   public ArrayList<PlasmaBall> allPlasmaBalls = new ArrayList <PlasmaBall>();
+   public ArrayList<SniperBall> allSniperBalls = new ArrayList <SniperBall>();
+   public ArrayList<ScatterBall> allScatterBalls = new ArrayList <ScatterBall>();
+   public ArrayList<CannonBall> allCannonBalls = new ArrayList <CannonBall>();
+   public ArrayList<PoisonBall> allPoisonBalls = new ArrayList <PoisonBall>();
 
-
+   private UpgradePanel upgradePanel;
    // Gui components
    private JButton pauseButton, upgradeMenuButton, basicButton, plasmaButton, sniperButton, scatterButton, cannonButton, poisonButton;
 
@@ -41,6 +43,7 @@ class BreakoutPanel extends JPanel {
    private int scatterNum = 0;
    private int cannonNum = 0;
    private int poisonNum = 0;
+   private int brickNum = 0;
 
    private int basicPrice = 25;
    private int plasmaPrice = 200;
@@ -52,10 +55,21 @@ class BreakoutPanel extends JPanel {
    private int levelNumber = 0;
    private int dollars = 999999999;
 
+   JFrame frame;
+
    public BreakoutPanel(JFrame f) {
       myOwner = f;
       setPreferredSize(new Dimension(FRAMEx, FRAMEy));
       setLayout(new BorderLayout());
+
+      frame = new JFrame("Upgrades");
+      frame.setSize(800, 600);
+      frame.setLocation(150, 150);
+      frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+      upgradePanel = new UpgradePanel(frame, money);
+      frame.setContentPane(upgradePanel);
+      frame.pack();
+      frame.setVisible(false);
 
       try {
          basicIcon = new ImageIcon(this.getClass().getResource("imagefiles/basicball.png"));
@@ -154,13 +168,20 @@ class BreakoutPanel extends JPanel {
       myBuffer = myImage.getGraphics();
       myBuffer.setColor(BACKGROUND);
       myBuffer.fillRect(0,0,FRAMEx,FRAMEy);
-      four = new FourBrickWall();
-      JPanel tempfour = four.drawMe();
-      //add(tempfour);
-
-      // Add the ball bouncing area
+      
+      int xcoord = 150;
+      int ycoord = 150;
+      for (int i = 0; i < 5; i++){
+         BlueBrick b1 = new BlueBrick(xcoord+50, ycoord+25, 1);//Color.BLUE, 80, 30, "1");
+         animationObjects.add(b1);
+         allBricks.add(b1);
+         brickNum++;
+         xcoord+=50;
+         ycoord+=25;
+      }
+      
       add(new JLabel(new ImageIcon(myImage)), BorderLayout.CENTER);
-      add(tempfour);
+      
 
       t = new Timer(5, new AnimationListener());
       t.start();
@@ -168,6 +189,7 @@ class BreakoutPanel extends JPanel {
 
    public void animate() {
       int totalBalls = basicNum + plasmaNum + sniperNum + scatterNum + cannonNum + poisonNum;
+      int totalBricks = brickNum;
       bank.setText("$"+dollars);
       bPrice.setText("$"+basicPrice);
       pPrice.setText("$"+plasmaPrice);
@@ -181,9 +203,9 @@ class BreakoutPanel extends JPanel {
       myBuffer.fillRect(0,0,FRAMEx,FRAMEy);
       for(int i = 0; i < totalBalls; i++) {
          Balls currentBall = allBalls.get(i);
-         // if(currentBall.isColliding()) {
-         //    currentBall.collide();
-         // }
+         if(currentBall.isColliding(allBricks)) {
+            currentBall.collide(allBricks);
+         }
          currentBall.step();
          
          /*TODO  If ball/brick collide, add dollar amount to bank */
@@ -193,6 +215,12 @@ class BreakoutPanel extends JPanel {
          // All Ball classes need thier "Collide" method to be fixed to represent thier action.
          // Also, I am pretty sure the step method needs to be updated, especially for sniper and scatter.
          // I believe we need to make another ball class for the little balls that come from the scatter ball.
+      }
+      
+      for (int x = 0; x < totalBricks; x++){
+         Brick currentBrick = allBricks.get(x);
+         
+         currentBrick.step();
       }
    /*   for(int a = 0; a < basicNum; a++) {
          //for()                                       should loop through all bricks
@@ -205,8 +233,12 @@ class BreakoutPanel extends JPanel {
          BouncingCircle c = allBalls.get(k);
          c.drawMe(myBuffer);
       }
-      repaint();
       
+      for (int w = 0; w < totalBricks; w++){
+         Rectangle r = allBricks.get(w);
+         r.drawMe(myBuffer);
+      }
+      repaint();      
    }
    
         
@@ -301,6 +333,16 @@ class BreakoutPanel extends JPanel {
    private class Listener_upgrade implements ActionListener {
       public void actionPerformed(ActionEvent e) {
          System.out.println("Upgrade Menu Open");
+   /*      money = new Money(dollars);
+         JFrame frame = new JFrame("Upgrades");
+         frame.setSize(800, 600);
+         frame.setLocation(150, 150);
+         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+         frame.setContentPane(new UpgradePanel(frame, money));
+         bank.setText(""+money.getAmount());
+         frame.pack();
+         frame.setVisible(true); */
+         frame.setVisible(true);
       }
    }
    private class Listener_pause implements ActionListener {

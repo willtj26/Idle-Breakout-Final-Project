@@ -7,6 +7,9 @@ public abstract class Balls extends BouncingCircle {
    }
 
    public abstract void collide(ArrayList<Brick> allBricks);
+   public abstract void increaseDamage();
+   public abstract int getDamage();
+   public abstract int getSpeed();
 
    public boolean isColliding(ArrayList<Brick> allBricks) {
       boolean current = false;
@@ -23,5 +26,9 @@ public abstract class Balls extends BouncingCircle {
          }
       }
       return current;
+   }
+   public void setSpeed() {
+      setdX(getdX() + 1);
+      setDY(getDY() + 1);
    }
 }

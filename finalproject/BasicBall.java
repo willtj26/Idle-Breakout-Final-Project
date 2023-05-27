@@ -17,6 +17,14 @@ public class BasicBall extends Balls {
          r.setBrickValue(r.getBrickValue()-damage);
       }
    }
-
+   public void increaseDamage() {
+      damage += 1;
+   }
+   public int getDamage() {
+      return damage;
+   }
+   public int getSpeed() {
+      return getdX();
+   }
 }
 
