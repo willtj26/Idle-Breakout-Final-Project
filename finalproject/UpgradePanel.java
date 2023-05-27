@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
@@ -13,8 +15,7 @@ class UpgradePanel extends JPanel {
 
     private Timer t;
 
-    private ArrayList<Animatable> animationObjects;
-
+    private Money money;
     private JButton exitButton, basicSpeedButton, basicDamageButton, plasmaSpeedButton, plasmaDamageButton, sniperSpeedButton,  sniperDamageButton, scatterDamageButton, scatterBabiesButton, cannonSpeedButton,  cannonDamageButton, poisonSpeedButton, poisonDamageButton;
     private ImageIcon basicIcon, plasmaIcon, sniperIcon, scatterIcon, cannonIcon, poisonIcon;
 
@@ -34,10 +35,10 @@ class UpgradePanel extends JPanel {
     private int poisonDamagePrice = 100000;
     public boolean windowIsOpen;
 
-    public UpgradePanel(JFrame f) {
+    public UpgradePanel(JFrame f, Money m) {
         setPreferredSize(new Dimension(FRAMEx, FRAMEy));
         setLayout(new BorderLayout());
-  
+        money = m;
         try {
            basicIcon = new ImageIcon(this.getClass().getResource("imagefiles/basicball.png"));
            Image image = basicIcon.getImage();
@@ -76,6 +77,7 @@ class UpgradePanel extends JPanel {
        
         // Create the button panel
         JPanel buttonPanel = new JPanel(new GridLayout(5, 6));
+        buttonPanel.setBorder(new EmptyBorder(0, 30, 150, 30));
         //buttonPanel.add(pricePanel, BorderLayout.LINE_END);
   
   
@@ -98,12 +100,12 @@ class UpgradePanel extends JPanel {
 
         exitButton = new JButton("Exit");
         
-        basicSpeedLabel = new JLabel(""+basicSpeedPrice);
-        plasmaSpeedLabel = new JLabel(""+plasmaSpeedPrice);
-        sniperSpeedLabel = new JLabel(""+sniperSpeedPrice);
-        scatterBabiesLabel = new JLabel(""+scatterBabiesPrice);
-        cannonSpeedLabel = new JLabel(""+cannonSpeedPrice);
-        poisonSpeedLabel = new JLabel(""+poisonSpeedPrice);
+        basicSpeedLabel = new JLabel(""+basicSpeedPrice + "\n \n");
+        plasmaSpeedLabel = new JLabel(""+plasmaSpeedPrice + "\n \n");
+        sniperSpeedLabel = new JLabel(""+sniperSpeedPrice + "\n \n");
+        scatterBabiesLabel = new JLabel(""+scatterBabiesPrice + "\n \n");
+        cannonSpeedLabel = new JLabel(""+cannonSpeedPrice + "\n \n");
+        poisonSpeedLabel = new JLabel(""+poisonSpeedPrice + "\n \n");
 
 
   /*
@@ -133,20 +135,27 @@ class UpgradePanel extends JPanel {
         scatterBabiesButton.addActionListener(new Listener_scatterBaby());
         cannonSpeedButton.addActionListener(new Listener_cannonSpeed());
         poisonSpeedButton.addActionListener(new Listener_poisonSpeed());
-
+/*
+        basicDamageButton.addActionListener(new Listener_basicDamage());
+        plasmaDamageButton.addActionListener(new Listener_plasmaDamage());
+        sniperDamageButton.addActionListener(new Listener_sniperDamage());
+        scatterDamageButton.addActionListener(new Listener_scatterDamage());
+        cannonDamageButton.addActionListener(new Listener_cannonDamage());
+        poisonDamageButton.addActionListener(new Listener_poisonDamage());
+*/
         exitButton.addActionListener(new Listener_exit());
 
-        JLabel label = new JLabel(basicIcon, JLabel.CENTER);
+        JLabel label = new JLabel(basicIcon);
         buttonPanel.add(label);
-        JLabel label1 = new JLabel(plasmaIcon, JLabel.CENTER);
+        JLabel label1 = new JLabel(plasmaIcon);
         buttonPanel.add(label1);
-        JLabel label2 = new JLabel(sniperIcon, JLabel.CENTER);
+        JLabel label2 = new JLabel(sniperIcon);
         buttonPanel.add(label2);
-        JLabel label3 = new JLabel(scatterIcon, JLabel.CENTER);
+        JLabel label3 = new JLabel(scatterIcon);
         buttonPanel.add(label3);
-        JLabel label4 = new JLabel(cannonIcon, JLabel.CENTER);
+        JLabel label4 = new JLabel(cannonIcon);
         buttonPanel.add(label4);
-        JLabel label5 = new JLabel(poisonIcon, JLabel.CENTER);
+        JLabel label5 = new JLabel(poisonIcon);
         buttonPanel.add(label5);
 
         buttonPanel.add(basicSpeedButton);
@@ -156,12 +165,12 @@ class UpgradePanel extends JPanel {
         buttonPanel.add(cannonSpeedButton);
         buttonPanel.add(poisonSpeedButton);
 
-        buttonPanel.add(basicSpeedLabel);
-        buttonPanel.add(plasmaSpeedLabel);
-        buttonPanel.add(sniperSpeedLabel);
-        buttonPanel.add(scatterBabiesLabel);
-        buttonPanel.add(cannonSpeedLabel);
-        buttonPanel.add(poisonSpeedLabel);
+        buttonPanel.add(basicSpeedLabel, BorderLayout.NORTH);
+        buttonPanel.add(plasmaSpeedLabel, BorderLayout.NORTH);
+        buttonPanel.add(sniperSpeedLabel, BorderLayout.NORTH);
+        buttonPanel.add(scatterBabiesLabel, BorderLayout.NORTH);
+        buttonPanel.add(cannonSpeedLabel, BorderLayout.NORTH);
+        buttonPanel.add(poisonSpeedLabel, BorderLayout.NORTH);
         
         basicDamageButton = new JButton("Basic Damage +1");
         plasmaDamageButton = new JButton("Plasma Damage +5");
@@ -170,12 +179,19 @@ class UpgradePanel extends JPanel {
         cannonDamageButton = new JButton("Cannon Damage +25");
         poisonDamageButton = new JButton("Poison Damage +25");
 
-        basicDamageLabel = new JLabel("" + basicDamagePrice);
-        plasmaDamageLabel = new JLabel("" + plasmaDamagePrice);
-        sniperDamageLabel = new JLabel("" + sniperDamagePrice);
-        scatterDamageLabel = new JLabel("" + scatterDamagePrice);
-        cannonDamageLabel = new JLabel("" + cannonDamagePrice);
-        poisonDamageLabel = new JLabel("" + poisonDamagePrice);
+        basicDamageButton.addActionListener(new Listener_basicDamage());
+        plasmaDamageButton.addActionListener(new Listener_plasmaDamage());
+        sniperDamageButton.addActionListener(new Listener_sniperDamage());
+        scatterDamageButton.addActionListener(new Listener_scatterDamage());
+        cannonDamageButton.addActionListener(new Listener_cannonDamage());
+        poisonDamageButton.addActionListener(new Listener_poisonDamage());
+
+        basicDamageLabel = new JLabel("" + basicDamagePrice + "\n \n");
+        plasmaDamageLabel = new JLabel("" + plasmaDamagePrice + "\n \n");
+        sniperDamageLabel = new JLabel("" + sniperDamagePrice + "\n \n");
+        scatterDamageLabel = new JLabel("" + scatterDamagePrice + "\n \n");
+        cannonDamageLabel = new JLabel("" + cannonDamagePrice + "\n \n");
+        poisonDamageLabel = new JLabel("" + poisonDamagePrice + "\n \n");
 
         buttonPanel.add(basicDamageButton);
         buttonPanel.add(plasmaDamageButton);
@@ -184,12 +200,12 @@ class UpgradePanel extends JPanel {
         buttonPanel.add(cannonDamageButton);
         buttonPanel.add(poisonDamageButton);
 
-        buttonPanel.add(basicDamageLabel);
-        buttonPanel.add(plasmaDamageLabel);
-        buttonPanel.add(sniperDamageLabel);
-        buttonPanel.add(scatterDamageLabel);
-        buttonPanel.add(cannonDamageLabel);
-        buttonPanel.add(poisonDamageLabel);
+        buttonPanel.add(basicDamageLabel, BorderLayout.NORTH);
+        buttonPanel.add(plasmaDamageLabel, BorderLayout.NORTH);
+        buttonPanel.add(sniperDamageLabel, BorderLayout.NORTH);
+        buttonPanel.add(scatterDamageLabel, BorderLayout.NORTH);
+        buttonPanel.add(cannonDamageLabel, BorderLayout.NORTH);
+        buttonPanel.add(poisonDamageLabel, BorderLayout.NORTH);
 
 
 
@@ -210,7 +226,6 @@ class UpgradePanel extends JPanel {
   */
         t = new Timer(5, new AnimationListener());
         t.start(); 
-        animationObjects = new ArrayList<Animatable>();
      }
      public void animate() {
         repaint();
@@ -226,7 +241,7 @@ class UpgradePanel extends JPanel {
             Window window = SwingUtilities.windowForComponent(UpgradePanel.this);
             if (window instanceof JFrame) {
                 JFrame frame = (JFrame) window;
-                frame.dispose();
+                frame.setVisible(false);
             }
         }
     }
@@ -234,45 +249,126 @@ class UpgradePanel extends JPanel {
     
      private class Listener_basicSpeed implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-        //    if(dollars - basicPrice > 0) {
-        //       dollars -= 
-        //    }
+            if(money.getAmount() - basicSpeedPrice > 0) {
+                money.decreaseAmount(basicSpeedPrice);
+                basicSpeedPrice += (int)(basicSpeedPrice *2);
+                basicSpeedLabel.setText(""+basicSpeedPrice);
+                
+            }
         }
-     }
+    }
+     
      private class Listener_plasmaSpeed implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-        //    if(dollars - basicPrice > 0) {
-        //       dollars -= 
-        //    }
+            if(money.getAmount() - plasmaSpeedPrice > 0) {
+                money.decreaseAmount(plasmaSpeedPrice);
+                plasmaSpeedPrice += (int)(plasmaSpeedPrice *2);
+                plasmaSpeedLabel.setText(""+plasmaSpeedPrice);
+                
+            }
         }
      }
      private class Listener_sniperSpeed implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-        //    if(dollars - basicPrice > 0) {
-        //       dollars -= 
-        //    }
+            if(money.getAmount() - sniperSpeedPrice > 0) {
+                money.decreaseAmount(sniperSpeedPrice);
+                sniperSpeedPrice += (int)(sniperSpeedPrice *2);
+                sniperSpeedLabel.setText(""+sniperSpeedPrice);
+                
+            }
         }
      }
      private class Listener_scatterBaby implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-        //    if(dollars - basicPrice > 0) {
-        //       dollars -= 
-        //    }
+            if(money.getAmount() - scatterBabiesPrice > 0) {
+                money.decreaseAmount(scatterBabiesPrice);
+                scatterBabiesPrice += (int)(scatterBabiesPrice *2);
+                scatterBabiesLabel.setText(""+scatterBabiesPrice);
+                
+            }
         }
      }
      private class Listener_cannonSpeed implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-        //    if(dollars - basicPrice > 0) {
-        //       dollars -= 
-        //    }
+            if(money.getAmount() - cannonSpeedPrice > 0) {
+                money.decreaseAmount(cannonSpeedPrice);
+                cannonSpeedPrice += (int)(cannonSpeedPrice *2);
+                cannonSpeedLabel.setText(""+cannonSpeedPrice);
+                
+            }
         }
      }
      private class Listener_poisonSpeed implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-        //    if(dollars - basicPrice > 0) {
-        //       dollars -= 
-        //    }
+            if(money.getAmount() - poisonSpeedPrice > 0) {
+                money.decreaseAmount(poisonSpeedPrice);
+                poisonSpeedPrice += (int)(poisonSpeedPrice *2);
+                poisonSpeedLabel.setText(""+poisonSpeedPrice);
+                
+            }
         }
      }
 
+
+     private class Listener_basicDamage implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            if(money.getAmount() - basicDamagePrice > 0) {
+                money.decreaseAmount(basicDamagePrice);
+                basicDamagePrice += (int)(basicDamagePrice *2);
+                basicDamageLabel.setText(""+basicDamagePrice);
+                
+            }
+        }
+     }
+     private class Listener_plasmaDamage implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            if(money.getAmount() - plasmaDamagePrice > 0) {
+                money.decreaseAmount(plasmaDamagePrice);
+                plasmaDamagePrice += (int)(basicDamagePrice *2);
+                plasmaDamageLabel.setText(""+plasmaDamagePrice);
+                
+            }
+        }
+     }
+     private class Listener_sniperDamage implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            if(money.getAmount() - sniperDamagePrice > 0) {
+                money.decreaseAmount(sniperDamagePrice);
+                sniperDamagePrice += (int)(basicDamagePrice *2);
+                sniperDamageLabel.setText(""+sniperDamagePrice);
+                
+            }
+        }
+     }
+     private class Listener_scatterDamage implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            if(money.getAmount() - scatterDamagePrice > 0) {
+                money.decreaseAmount(scatterDamagePrice);
+                scatterDamagePrice += (int)(basicDamagePrice *2);
+                scatterDamageLabel.setText(""+scatterDamagePrice);
+                
+            }
+        }
+     }
+     private class Listener_cannonDamage implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            if(money.getAmount() - cannonDamagePrice > 0) {
+                money.decreaseAmount(cannonDamagePrice);
+                cannonDamagePrice += (int)(cannonDamagePrice *2);
+                cannonDamageLabel.setText(""+cannonDamagePrice);
+                
+            }
+        }
+     }
+     private class Listener_poisonDamage implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            if(money.getAmount() - poisonDamagePrice > 0) {
+                money.decreaseAmount(poisonDamagePrice);
+                poisonDamagePrice += (int)(poisonDamagePrice *2);
+                poisonDamageLabel.setText(""+poisonDamagePrice);
+                
+            }
+        }
+     }
+     
 }

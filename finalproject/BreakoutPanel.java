@@ -12,6 +12,7 @@ class BreakoutPanel extends JPanel {
    public static final int FRAMEy = 850;
    private static final Color BACKGROUND = Color.WHITE.darker();
 
+   public Money money;
    private BufferedImage myImage;
    private Graphics myBuffer;
 
@@ -19,14 +20,14 @@ class BreakoutPanel extends JPanel {
 
    private ArrayList<Animatable> animationObjects;
    private ArrayList<Balls> allBalls = new ArrayList <Balls>();
-   private ArrayList<BasicBall> allBasicBalls = new ArrayList <BasicBall>();
-   private ArrayList<PlasmaBall> allPlasmaBalls = new ArrayList <PlasmaBall>();
-   private ArrayList<SniperBall> allSniperBalls = new ArrayList <SniperBall>();
-   private ArrayList<ScatterBall> allScatterBalls = new ArrayList <ScatterBall>();
-   private ArrayList<CannonBall> allCannonBalls = new ArrayList <CannonBall>();
-   private ArrayList<PoisonBall> allPoisonBalls = new ArrayList <PoisonBall>();
+   public ArrayList<BasicBall> allBasicBalls = new ArrayList <BasicBall>();
+   public ArrayList<PlasmaBall> allPlasmaBalls = new ArrayList <PlasmaBall>();
+   public ArrayList<SniperBall> allSniperBalls = new ArrayList <SniperBall>();
+   public ArrayList<ScatterBall> allScatterBalls = new ArrayList <ScatterBall>();
+   public ArrayList<CannonBall> allCannonBalls = new ArrayList <CannonBall>();
+   public ArrayList<PoisonBall> allPoisonBalls = new ArrayList <PoisonBall>();
 
-
+   private UpgradePanel upgradePanel;
    // Gui components
    private JButton pauseButton, upgradeMenuButton, basicButton, plasmaButton, sniperButton, scatterButton, cannonButton, poisonButton;
 
@@ -51,10 +52,21 @@ class BreakoutPanel extends JPanel {
    private int levelNumber = 0;
    private int dollars = 999999999;
 
+   JFrame frame;
+
    public BreakoutPanel(JFrame f) {
       myOwner = f;
       setPreferredSize(new Dimension(FRAMEx, FRAMEy));
       setLayout(new BorderLayout());
+
+      frame = new JFrame("Upgrades");
+      frame.setSize(800, 600);
+      frame.setLocation(150, 150);
+      frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+      upgradePanel = new UpgradePanel(frame, money);
+      frame.setContentPane(upgradePanel);
+      frame.pack();
+      frame.setVisible(false);
 
       try {
          basicIcon = new ImageIcon(this.getClass().getResource("imagefiles/basicball.png"));
@@ -294,12 +306,15 @@ class BreakoutPanel extends JPanel {
    private class Listener_upgrade implements ActionListener {
       public void actionPerformed(ActionEvent e) {
          System.out.println("Upgrade Menu Open");
+   /*      money = new Money(dollars);
          JFrame frame = new JFrame("Upgrades");
          frame.setSize(800, 600);
          frame.setLocation(150, 150);
-         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-         frame.setContentPane(new UpgradePanel(frame));
+         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+         frame.setContentPane(new UpgradePanel(frame, money));
+         bank.setText(""+money.getAmount());
          frame.pack();
+         frame.setVisible(true); */
          frame.setVisible(true);
       }
    }
