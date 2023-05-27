@@ -9,12 +9,18 @@ public class BasicBall extends Balls {
    }
    
    public void collide(ArrayList<Brick> allBricks) {
+      int counter = 0;
       for (Brick r: allBricks)
       {
          setDY(getDY() * -1);
          setdX(getdX() * -1);
          //Add poison and area of effect
          r.setBrickValue(r.getBrickValue()-damage);
+         System.out.println(r.getBrickValue());
+         //if (r.getBrickValue() < 1){
+         //   allBricks.remove(counter);
+         //}
+         //counter++;
       }
    }
    public void increaseDamage() {

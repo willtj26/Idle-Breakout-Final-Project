@@ -207,14 +207,6 @@ class BreakoutPanel extends JPanel {
             currentBall.collide(allBricks);
          }
          currentBall.step();
-         
-         /*TODO  If ball/brick collide, add dollar amount to bank */
-
-         // The collide method should not be a boolean, I had the idea to check collision here and then do a different "Collide" action depending on the ball.
-         // There are a couple errors rn, I made BasicBall implement "Balls", but I am pretty sure I did it incorrecly.  Also "Collide" shouln't be a boolean method.
-         // All Ball classes need thier "Collide" method to be fixed to represent thier action.
-         // Also, I am pretty sure the step method needs to be updated, especially for sniper and scatter.
-         // I believe we need to make another ball class for the little balls that come from the scatter ball.
       }
       
       for (int x = 0; x < totalBricks; x++){
@@ -222,13 +214,7 @@ class BreakoutPanel extends JPanel {
          
          currentBrick.step();
       }
-   /*   for(int a = 0; a < basicNum; a++) {
-         //for()                                       should loop through all bricks
-            BasicBall cur = allBasicBalls.get(a);
-            if(cur.isColliding()) {                  // Current brick as arg
-               cur.collide();
-            }
-      } */
+
       for(int k = 0; k < totalBalls; k++){
          BouncingCircle c = allBalls.get(k);
          c.drawMe(myBuffer);
