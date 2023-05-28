@@ -8,20 +8,26 @@ public class BasicBall extends Balls {
       damage = 1;
    }
    
-   public void collide(ArrayList<Brick> allBricks) {
+   public void collide(Brick r) {
       int counter = 0;
-      for (Brick r: allBricks)
-      {
+      int bX = getX();
+      int bY = getY();
+      int rX = r.getX();
+      int rTopSide = r.getTopSide();
+      int rLeftSide = r.getLeftSide();
+      int rY = r.getY();
+      int s = getRadius();
+      if (rX < bX){
          setDY(getDY() * -1);
-         setdX(getdX() * -1);
-         //Add poison and area of effect
-         r.setBrickValue(r.getBrickValue()-damage);
-         System.out.println(r.getBrickValue());
-         //if (r.getBrickValue() < 1){
-         //   allBricks.remove(counter);
-         //}
-         //counter++;
+         
       }
+      else if (rY < bY){
+         //setDY(getDY() * -1);
+         setdX(getdX() * -1);   
+      }
+      //Add poison and area of effect
+      r.setBrickValue(r.getBrickValue()-damage);
+      //System.out.println(r.getBrickValue());
    }
    public void increaseDamage() {
       damage += 1;

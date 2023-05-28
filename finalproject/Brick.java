@@ -2,19 +2,19 @@ import java.awt.*;
 public abstract class Brick extends Rectangle {
    private int brickvalue;
    public Brick(int topside, int leftside, int x, int y, Color c, int brickval) {
-      super(x, y, topside, leftside,c);
+      super(x, y, topside, leftside,c, brickval);
       brickvalue = brickval;
    }
 
    public abstract void collide(Balls r);
 
-   public int getBrickValue(){
-      return brickvalue;
-   }
+   //public int getBrickValue(){
+   //   return brickvalue;
+   //}
    
-   public void setBrickValue(int brickval){
-      brickvalue = brickval;
-   }
+   //public void setBrickValue(int brickval){
+   //   brickvalue = brickval;
+   //}
 
    public boolean isColliding(Balls r) {
       int bX = getX();

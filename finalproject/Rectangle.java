@@ -8,6 +8,7 @@ public class Rectangle implements Animatable
    private int x;  //x coordinate of top left corner
    private int y;  //y coordinate of top left corner
    private Color c;
+   private int brickvalue;
    
    //constructors
    public Rectangle()
@@ -18,13 +19,14 @@ public class Rectangle implements Animatable
       y = 10;
       c = Color.WHITE;
    }
-   public Rectangle(int topSideValue, int leftSideValue, int xValue, int yValue, Color cValue)
+   public Rectangle(int topSideValue, int leftSideValue, int xValue, int yValue, Color cValue, int brickval)
    {
       topSide = topSideValue;
       leftSide = leftSideValue;
       x = xValue;
       y = yValue;
       c = cValue;
+      brickvalue = brickval;
    }
    
    //accessors
@@ -47,6 +49,9 @@ public class Rectangle implements Animatable
    {
       return c;
    }
+   public int getBrickValue(){
+      return brickvalue;
+   }
    
    //modifiers
    public void setTopSide(int sideValue)
@@ -68,8 +73,12 @@ public class Rectangle implements Animatable
    {
       c = cValue;
    }
+   public void setBrickValue(int brickval){
+      brickvalue = brickval;
+   }
    
    public void step(){
+      setBrickValue(getBrickValue());
       setX(getX());
       setY(getY());
    }
@@ -77,12 +86,17 @@ public class Rectangle implements Animatable
    //instance methods
    public void drawMe(Graphics g)
    {
+      
       g.setColor(c);
       //g.drawLine(x, y, x+40, y);
       //g.drawLine(x, y, x, y+40);
       //g.drawLine(x, y+40, x+40, y);
       //g.drawLine(x+40, y, x, y+40);
       g.fillRect(x, y, topSide, leftSide);
+      g.setFont(new Font("Serif", Font.BOLD, 25));
+      g.setColor(Color.BLACK);
+      g.drawString(""+brickvalue, x+10, y+leftSide-3);
+      g.drawRect(x,y,topSide,leftSide);
    }
    
    //other useful Java methods

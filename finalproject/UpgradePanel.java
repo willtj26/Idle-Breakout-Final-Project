@@ -227,6 +227,7 @@ class UpgradePanel extends JPanel {
         t = new Timer(5, new AnimationListener());
         t.start(); 
      }
+     
      public void animate() {
         repaint();
         

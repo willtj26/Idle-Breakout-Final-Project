@@ -21,7 +21,7 @@ class BreakoutPanel extends JPanel {
    private ArrayList<Animatable> animationObjects;
    private ArrayList<Balls> allBalls = new ArrayList <Balls>();
    private ArrayList<Brick> allBricks = new ArrayList <Brick>();
-   private ArrayList<BlueBrick> allBlueBricks = new ArrayList <BlueBrick>();
+   private ArrayList<BrickClass> allBrickClasses = new ArrayList <BrickClass>();
    public ArrayList<BasicBall> allBasicBalls = new ArrayList <BasicBall>();
    public ArrayList<PlasmaBall> allPlasmaBalls = new ArrayList <PlasmaBall>();
    public ArrayList<SniperBall> allSniperBalls = new ArrayList <SniperBall>();
@@ -52,7 +52,7 @@ class BreakoutPanel extends JPanel {
    private int cannonPrice = 75000;
    private int poisonPrice = 75000;
 
-   private int levelNumber = 0;
+   private int levelNumber = 1;
    private int dollars = 999999999;
 
    JFrame frame;
@@ -61,7 +61,7 @@ class BreakoutPanel extends JPanel {
       myOwner = f;
       setPreferredSize(new Dimension(FRAMEx, FRAMEy));
       setLayout(new BorderLayout());
-
+   
       frame = new JFrame("Upgrades");
       frame.setSize(800, 600);
       frame.setLocation(150, 150);
@@ -70,7 +70,7 @@ class BreakoutPanel extends JPanel {
       frame.setContentPane(upgradePanel);
       frame.pack();
       frame.setVisible(false);
-
+   
       try {
          basicIcon = new ImageIcon(this.getClass().getResource("imagefiles/basicball.png"));
          Image image = basicIcon.getImage();
@@ -86,33 +86,33 @@ class BreakoutPanel extends JPanel {
          image = sniperIcon.getImage();
          newimage = image.getScaledInstance(75, 50, Image.SCALE_SMOOTH);
          sniperIcon = new ImageIcon(newimage);
-
+      
          scatterIcon = new ImageIcon(this.getClass().getResource("imagefiles/scatterball.png"));
          image = scatterIcon.getImage();
          newimage = image.getScaledInstance(75, 50, Image.SCALE_SMOOTH);
          scatterIcon = new ImageIcon(newimage);
-
+      
          cannonIcon = new ImageIcon(this.getClass().getResource("imagefiles/cannonball.png"));
          image = cannonIcon.getImage();
          newimage = image.getScaledInstance(75, 50, Image.SCALE_SMOOTH);
          cannonIcon = new ImageIcon(newimage);
-
+      
          poisonIcon = new ImageIcon(this.getClass().getResource("imagefiles/poisonball.png"));
          image = poisonIcon.getImage();
          newimage = image.getScaledInstance(75, 50, Image.SCALE_SMOOTH);
          poisonIcon = new ImageIcon(newimage);
-
+      
       } catch(Exception e) {
          System.out.println("Failed to load image icons: " + e.getMessage());
          e.printStackTrace();
-     }
+      }
      
       // Create the button panel
       JPanel buttonPanel = new JPanel(new GridLayout(2, 7));
       //buttonPanel.add(pricePanel, BorderLayout.LINE_END);
       add(buttonPanel, BorderLayout.NORTH);
-
-
+   
+   
       // Add the buttons
       basicButton = new JButton(basicIcon);
       plasmaButton = new JButton(plasmaIcon);
@@ -122,7 +122,7 @@ class BreakoutPanel extends JPanel {
       poisonButton = new JButton(poisonIcon);
       upgradeMenuButton = new JButton("Upgrades");
       pauseButton = new JButton("Pause");
-
+   
       buttonPanel.add(basicButton);
       buttonPanel.add(plasmaButton);
       buttonPanel.add(sniperButton);
@@ -131,7 +131,7 @@ class BreakoutPanel extends JPanel {
       buttonPanel.add(poisonButton);
       buttonPanel.add(upgradeMenuButton);
       
-
+   
       // Add Prices
       bPrice = new JLabel("$"+basicPrice);
       pPrice = new JLabel("$"+plasmaPrice);
@@ -139,10 +139,10 @@ class BreakoutPanel extends JPanel {
       scPrice = new JLabel("$"+scatterPrice);
       cPrice = new JLabel("$"+cannonPrice);
       poPrice = new JLabel("$"+poisonPrice);
-
+   
       bank = new JLabel("$"+dollars);
       buttonPanel.add(bank, BorderLayout.PAGE_END);
-
+   
       buttonPanel.add(bPrice, BorderLayout.CENTER);
       buttonPanel.add(pPrice, BorderLayout.CENTER);
       buttonPanel.add(sPrice, BorderLayout.CENTER);
@@ -150,7 +150,7 @@ class BreakoutPanel extends JPanel {
       buttonPanel.add(cPrice, BorderLayout.CENTER);
       buttonPanel.add(poPrice, BorderLayout.CENTER);
       buttonPanel.add(pauseButton);
-
+   
       // Add action listeners
       basicButton.addActionListener(new Listener_basic());
       plasmaButton.addActionListener(new Listener_plasma());
@@ -160,7 +160,7 @@ class BreakoutPanel extends JPanel {
       poisonButton.addActionListener(new Listener_poison());
       upgradeMenuButton.addActionListener(new Listener_upgrade());
       pauseButton.addActionListener(new Listener_pause());
-
+   
       // Create the ball bouncing area
       animationObjects = new ArrayList<Animatable>();
       allBalls = new ArrayList<Balls>();
@@ -168,23 +168,48 @@ class BreakoutPanel extends JPanel {
       myBuffer = myImage.getGraphics();
       myBuffer.setColor(BACKGROUND);
       myBuffer.fillRect(0,0,FRAMEx,FRAMEy);
-      
-      int xcoord = 150;
-      int ycoord = 150;
-      for (int i = 0; i < 5; i++){
-         BlueBrick b1 = new BlueBrick(xcoord+50, ycoord+25, 1);//Color.BLUE, 80, 30, "1");
-         animationObjects.add(b1);
-         allBricks.add(b1);
-         brickNum++;
-         xcoord+=50;
-         ycoord+=25;
-      }
-      
+      bluewall();
       add(new JLabel(new ImageIcon(myImage)), BorderLayout.CENTER);
-      
-
+   
       t = new Timer(5, new AnimationListener());
       t.start();
+   }
+   
+   public void bluewall(){
+      int xcoord = 200;
+      int ycoord = 150;
+      int lockedycoord = 150;
+      for (int w = 0; w < 2; w++){
+         for (int i = 0; i < 5; i++){
+            for (int x = 0; x < 5; x++){
+               BrickClass b1 = new BrickClass(xcoord+50, ycoord+25, Color.BLUE, levelNumber);//Color.BLUE, 80, 30, "1");
+               animationObjects.add(b1);
+               allBricks.add(b1);
+               brickNum++;
+               ycoord+=25;
+            }
+            xcoord+=50;
+            ycoord=lockedycoord;
+         }
+      
+         xcoord+=150;
+         ycoord = lockedycoord;
+         for (int i = 0; i < 5; i++){
+            for (int x = 0; x < 5; x++){
+               BrickClass b1 = new BrickClass(xcoord+50, ycoord+25, Color.BLUE, levelNumber);//Color.BLUE, 80, 30, "1");
+               animationObjects.add(b1);
+               allBricks.add(b1);
+               brickNum++;
+               ycoord+=25;
+            }
+            xcoord+=50;
+            ycoord=lockedycoord;
+         }
+         xcoord = 200;
+         lockedycoord = 425;
+         ycoord = 425;
+      }
+      
    }
 
    public void animate() {
@@ -197,31 +222,61 @@ class BreakoutPanel extends JPanel {
       scPrice.setText("$"+scatterPrice);
       cPrice.setText("$"+cannonPrice);
       poPrice.setText("$"+poisonPrice);
-
-
+   
+   
       myBuffer.setColor(BACKGROUND);
       myBuffer.fillRect(0,0,FRAMEx,FRAMEy);
       for(int i = 0; i < totalBalls; i++) {
          Balls currentBall = allBalls.get(i);
-         if(currentBall.isColliding(allBricks)) {
-            currentBall.collide(allBricks);
+         Brick checkBrick = currentBall.isColliding(allBricks);
+         if(checkBrick.getBrickValue() != -10) {
+            currentBall.collide(checkBrick);
+            if (currentBall.getDamage() < checkBrick.getBrickValue()){
+               dollars += currentBall.getDamage();
+            }
+            else if (currentBall.getDamage() > checkBrick.getBrickValue()){
+               dollars += checkBrick.getBrickValue();
+            }
          }
          currentBall.step();
+         bank.setText(""+dollars);
+      }
+      int counter = -1;
+      ArrayList<Brick> tempBrickArray = new ArrayList<Brick>();
+      for (Brick currentBrick: allBricks){
+         tempBrickArray.add(currentBrick);
+      }
+      for (Brick currentBrick: tempBrickArray){
+         counter++;
+         //System.out.println("counter: "+counter);
+         if (currentBrick.getBrickValue() < 1){
+            totalBricks--;
+            brickNum--;
+            //allBricks.remove(counter);
+            //counter--;
+            //System.out.println("new counter: "+counter);
+            System.out.println("totalBricks"+totalBricks);
+            allBricks.remove(counter);
+            counter--;
+         }
+         else{
+            currentBrick.step();
+         }
+         
       }
       
-      for (int x = 0; x < totalBricks; x++){
-         Brick currentBrick = allBricks.get(x);
-         
-         currentBrick.step();
+      if (totalBricks == 0){
+         System.out.println("here");
+         levelNumber++;
+         bluewall();
       }
-
+      
       for(int k = 0; k < totalBalls; k++){
          BouncingCircle c = allBalls.get(k);
          c.drawMe(myBuffer);
       }
       
-      for (int w = 0; w < totalBricks; w++){
-         Rectangle r = allBricks.get(w);
+      for (Brick r: allBricks){
          r.drawMe(myBuffer);
       }
       repaint();      
@@ -319,7 +374,7 @@ class BreakoutPanel extends JPanel {
    private class Listener_upgrade implements ActionListener {
       public void actionPerformed(ActionEvent e) {
          System.out.println("Upgrade Menu Open");
-   /*      money = new Money(dollars);
+      /*      money = new Money(dollars);
          JFrame frame = new JFrame("Upgrades");
          frame.setSize(800, 600);
          frame.setLocation(150, 150);
@@ -334,12 +389,12 @@ class BreakoutPanel extends JPanel {
    private class Listener_pause implements ActionListener {
       public void actionPerformed(ActionEvent e) {
          if (pauseButton.getText().equals("Pause")) {
-             pauseButton.setText("Unpause");
-             t.stop();
+            pauseButton.setText("Unpause");
+            t.stop();
          } else {
-             pauseButton.setText("Pause");
-             t.start();
+            pauseButton.setText("Pause");
+            t.start();
          }
-     } 
+      } 
    }
 }

@@ -8,14 +8,26 @@ public class SniperBall extends Balls {
       damage = 5;
    }
    
-   public void collide(ArrayList<Brick> allBricks) {
-      for (Brick r: allBricks)
-      {
+   public void collide(Brick r) {
+      int counter = 0;
+      int bX = getX();
+      int bY = getY();
+      int rX = r.getX();
+      int rTopSide = r.getTopSide();
+      int rLeftSide = r.getLeftSide();
+      int rY = r.getY();
+      int s = getRadius();
+      if (rX < bX){
          setDY(getDY() * -1);
-         setdX(getdX() * -1);
-         //Add poison and area of effect
-         r.setBrickValue(r.getBrickValue()-damage);
+         
       }
+      else if (rY < bY){
+         //setDY(getDY() * -1);
+         setdX(getdX() * -1);   
+      }
+      //Add poison and area of effect
+      r.setBrickValue(r.getBrickValue()-damage);
+      //System.out.println(r.getBrickValue());
    }
    public void increaseDamage() {
       damage += 5;
@@ -45,18 +57,18 @@ public class SniperBall extends Balls {
          }
       }
       setX(getX() + getdX());  //Change the radius a bit - either out or in - for each animation step
-
+   
       if(getY() < 80) {
-        if(getDY() < 0) {
+         if(getDY() < 0) {
          // Targeting Feature
-         setDY(getDY()*-1);
-        }
+            setDY(getDY()*-1);
+         }
       }
       if (getY() >= 800-getRadius()*2) {
-        if(getDY() > 0) {
+         if(getDY() > 0) {
          // Targeting Feature
-         setDY(getDY()*-1);
-        }
+            setDY(getDY()*-1);
+         }
       }
       setY(getY()+getDY());
    }

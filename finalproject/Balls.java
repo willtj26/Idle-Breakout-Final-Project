@@ -6,13 +6,13 @@ public abstract class Balls extends BouncingCircle {
       super(side, x, y, c, dXval, dYval);
    }
 
-   public abstract void collide(ArrayList<Brick> allBricks);
+   public abstract void collide(Brick r);
    public abstract void increaseDamage();
    public abstract int getDamage();
    public abstract int getSpeed();
 
-   public boolean isColliding(ArrayList<Brick> allBricks) {
-      boolean current = false;
+   public Brick isColliding(ArrayList<Brick> allBricks) {
+      Brick current = new BrickClass(3, 3, Color.BLACK, -10);
       for (Brick r: allBricks){
          int bX = getX();
          int bY = getY();
@@ -21,10 +21,10 @@ public abstract class Balls extends BouncingCircle {
          int rLeftSide = r.getLeftSide();
          int rY = r.getY();
          int s = getRadius();
-         if (rX < bX + s && rX + s > bX && rY < bY + s && rY + s > bY) {
-            return true; // collision detected
+         if (rX < bX + s && rX + rTopSide > bX && rY < bY + s && rY + rLeftSide > bY) {
+            return r; // collision detected
          } else {
-            current = false; // no collision
+            current = current; // no collision
          }
       }
       return current;
