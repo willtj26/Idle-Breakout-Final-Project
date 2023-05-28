@@ -232,14 +232,14 @@ class BreakoutPanel extends JPanel {
          if(checkBrick.getBrickValue() != -10) {
             currentBall.collide(checkBrick);
             if (currentBall.getDamage() < checkBrick.getBrickValue()){
-               dollars += currentBall.getDamage();
+               dollars -= currentBall.getDamage();
             }
             else if (currentBall.getDamage() > checkBrick.getBrickValue()){
-               dollars += checkBrick.getBrickValue();
+               dollars -= checkBrick.getBrickValue();
             }
          }
          currentBall.step();
-         bank.setText(""+dollars);
+         bank.setText("$"+dollars);
       }
       int counter = -1;
       ArrayList<Brick> tempBrickArray = new ArrayList<Brick>();
@@ -248,6 +248,21 @@ class BreakoutPanel extends JPanel {
       }
       for (Brick currentBrick: tempBrickArray){
          counter++;
+         if (currentBrick.getBrickValue() % 5 == 0) {
+            currentBrick.setColor(Color.BLUE);
+         }
+         if (currentBrick.getBrickValue() % 5 == 1) {
+            currentBrick.setColor(Color.RED);
+         }
+         if (currentBrick.getBrickValue() % 5 == 2) {
+            currentBrick.setColor(Color.GREEN);
+         }
+         if (currentBrick.getBrickValue() % 5 == 3) {
+            currentBrick.setColor(Color.PINK);
+         }
+         if (currentBrick.getBrickValue() % 5 == 4) {
+            currentBrick.setColor(Color.YELLOW);
+         }
          //System.out.println("counter: "+counter);
          if (currentBrick.getBrickValue() < 1){
             totalBricks--;
