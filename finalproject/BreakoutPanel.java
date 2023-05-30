@@ -34,7 +34,7 @@ class BreakoutPanel extends JPanel {
    // Gui components
    private JButton pauseButton, upgradeMenuButton, basicButton, plasmaButton, sniperButton, scatterButton, cannonButton, poisonButton;
 
-   private JLabel bank, bPrice, pPrice, sPrice, scPrice, cPrice, poPrice;
+   private JLabel bank, bPrice, pPrice, sPrice, scPrice, cPrice, poPrice, level;
       
    private ImageIcon basicIcon, plasmaIcon, sniperIcon, scatterIcon, cannonIcon, poisonIcon;
 
@@ -151,6 +151,9 @@ class BreakoutPanel extends JPanel {
       buttonPanel.add(cPrice, BorderLayout.CENTER);
       buttonPanel.add(poPrice, BorderLayout.CENTER);
       buttonPanel.add(pauseButton);
+      
+      level = new JLabel("Lvl: "+levelNumber);
+      buttonPanel.add(level, BorderLayout.PAGE_END);
    
       // Add action listeners
       basicButton.addActionListener(new Listener_basic());
@@ -175,6 +178,11 @@ class BreakoutPanel extends JPanel {
       t = new Timer(5, new AnimationListener());
       t.start();
    }
+   
+   
+   //public void redwall(){
+      
+   //}
    
    public void bluewall(){
       int xcoord = 200;
@@ -239,6 +247,12 @@ class BreakoutPanel extends JPanel {
                dollars -= checkBrick.getBrickValue();
             }
          }
+         //try{
+         //   currentBall.setArrayList(allBricks);
+         //}
+         //catch (Exception er){
+         //   System.out.println("Not a sniper ball.");
+         //}
          currentBall.step();
          bank.setText("$"+dollars);
       }
@@ -249,20 +263,35 @@ class BreakoutPanel extends JPanel {
       }
       for (Brick currentBrick: tempBrickArray){
          counter++;
-         if (currentBrick.getBrickValue() % 5 == 0) {
+         if (currentBrick.getBrickValue() % 10 == 0) {
             currentBrick.setColor(Color.BLUE);
          }
-         if (currentBrick.getBrickValue() % 5 == 1) {
+         if (currentBrick.getBrickValue() % 10 == 1) {
             currentBrick.setColor(Color.RED);
          }
-         if (currentBrick.getBrickValue() % 5 == 2) {
+         if (currentBrick.getBrickValue() % 10 == 2) {
             currentBrick.setColor(Color.GREEN);
          }
-         if (currentBrick.getBrickValue() % 5 == 3) {
+         if (currentBrick.getBrickValue() % 10 == 3) {
             currentBrick.setColor(Color.PINK);
          }
-         if (currentBrick.getBrickValue() % 5 == 4) {
+         if (currentBrick.getBrickValue() % 10 == 4) {
             currentBrick.setColor(Color.YELLOW);
+         }
+         if (currentBrick.getBrickValue() % 10 == 5) {
+            currentBrick.setColor(Color.ORANGE);
+         }
+         if (currentBrick.getBrickValue() % 10 == 6) {
+            currentBrick.setColor(Color.BLUE.brighter().brighter());
+         }
+         if (currentBrick.getBrickValue() % 10 == 7) {
+            currentBrick.setColor(new Color(160, 32, 240));
+         }
+         if (currentBrick.getBrickValue() % 10 == 8) {
+            currentBrick.setColor(Color.RED.darker());
+         }
+         if (currentBrick.getBrickValue() % 10 == 9) {
+            currentBrick.setColor(Color.GREEN.brighter());
          }
          //System.out.println("counter: "+counter);
          if (currentBrick.getBrickValue() < 1){
@@ -285,6 +314,7 @@ class BreakoutPanel extends JPanel {
          System.out.println("here");
          levelNumber++;
          bluewall();
+         level.setText("Lvl: "+levelNumber);
       }
       
       for(int k = 0; k < totalBalls; k++){

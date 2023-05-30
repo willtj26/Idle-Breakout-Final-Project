@@ -1,4 +1,5 @@
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
@@ -12,7 +13,7 @@ class BreakoutPanel extends JPanel {
    public static final int FRAMEy = 850;
    private static final Color BACKGROUND = Color.WHITE.darker();
 
-   public Money money;
+   private Money money;
    private BufferedImage myImage;
    private Graphics myBuffer;
 
@@ -22,18 +23,18 @@ class BreakoutPanel extends JPanel {
    private ArrayList<Balls> allBalls = new ArrayList <Balls>();
    private ArrayList<Brick> allBricks = new ArrayList <Brick>();
    private ArrayList<BrickClass> allBrickClasses = new ArrayList <BrickClass>();
-   public ArrayList<BasicBall> allBasicBalls = new ArrayList <BasicBall>();
-   public ArrayList<PlasmaBall> allPlasmaBalls = new ArrayList <PlasmaBall>();
-   public ArrayList<SniperBall> allSniperBalls = new ArrayList <SniperBall>();
-   public ArrayList<ScatterBall> allScatterBalls = new ArrayList <ScatterBall>();
-   public ArrayList<CannonBall> allCannonBalls = new ArrayList <CannonBall>();
-   public ArrayList<PoisonBall> allPoisonBalls = new ArrayList <PoisonBall>();
+   private ArrayList<BasicBall> allBasicBalls = new ArrayList <BasicBall>();
+   private ArrayList<PlasmaBall> allPlasmaBalls = new ArrayList <PlasmaBall>();
+   private ArrayList<SniperBall> allSniperBalls = new ArrayList <SniperBall>();
+   private ArrayList<ScatterBall> allScatterBalls = new ArrayList <ScatterBall>();
+   private ArrayList<CannonBall> allCannonBalls = new ArrayList <CannonBall>();
+   private ArrayList<PoisonBall> allPoisonBalls = new ArrayList <PoisonBall>();
 
    private UpgradePanel upgradePanel;
    // Gui components
    private JButton pauseButton, upgradeMenuButton, basicButton, plasmaButton, sniperButton, scatterButton, cannonButton, poisonButton;
 
-   private JLabel bank, bPrice, pPrice, sPrice, scPrice, cPrice, poPrice;
+   private JLabel bank, bPrice, pPrice, sPrice, scPrice, cPrice, poPrice, level;
       
    private ImageIcon basicIcon, plasmaIcon, sniperIcon, scatterIcon, cannonIcon, poisonIcon;
 
@@ -66,7 +67,7 @@ class BreakoutPanel extends JPanel {
       frame.setSize(800, 600);
       frame.setLocation(150, 150);
       frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-      upgradePanel = new UpgradePanel(frame, money);
+      upgradePanel = new UpgradePanel(frame, this, money);
       frame.setContentPane(upgradePanel);
       frame.pack();
       frame.setVisible(false);
@@ -150,6 +151,9 @@ class BreakoutPanel extends JPanel {
       buttonPanel.add(cPrice, BorderLayout.CENTER);
       buttonPanel.add(poPrice, BorderLayout.CENTER);
       buttonPanel.add(pauseButton);
+      
+      level = new JLabel("Lvl: "+levelNumber);
+      buttonPanel.add(level, BorderLayout.PAGE_END);
    
       // Add action listeners
       basicButton.addActionListener(new Listener_basic());
@@ -174,6 +178,11 @@ class BreakoutPanel extends JPanel {
       t = new Timer(5, new AnimationListener());
       t.start();
    }
+   
+   
+   //public void redwall(){
+      
+   //}
    
    public void bluewall(){
       int xcoord = 200;
@@ -238,6 +247,12 @@ class BreakoutPanel extends JPanel {
                dollars -= checkBrick.getBrickValue();
             }
          }
+         //try{
+         //   currentBall.setArrayList(allBricks);
+         //}
+         //catch (Exception er){
+         //   System.out.println("Not a sniper ball.");
+         //}
          currentBall.step();
          bank.setText("$"+dollars);
       }
@@ -248,20 +263,35 @@ class BreakoutPanel extends JPanel {
       }
       for (Brick currentBrick: tempBrickArray){
          counter++;
-         if (currentBrick.getBrickValue() % 5 == 0) {
+         if (currentBrick.getBrickValue() % 10 == 0) {
             currentBrick.setColor(Color.BLUE);
          }
-         if (currentBrick.getBrickValue() % 5 == 1) {
+         if (currentBrick.getBrickValue() % 10 == 1) {
             currentBrick.setColor(Color.RED);
          }
-         if (currentBrick.getBrickValue() % 5 == 2) {
+         if (currentBrick.getBrickValue() % 10 == 2) {
             currentBrick.setColor(Color.GREEN);
          }
-         if (currentBrick.getBrickValue() % 5 == 3) {
+         if (currentBrick.getBrickValue() % 10 == 3) {
             currentBrick.setColor(Color.PINK);
          }
-         if (currentBrick.getBrickValue() % 5 == 4) {
+         if (currentBrick.getBrickValue() % 10 == 4) {
             currentBrick.setColor(Color.YELLOW);
+         }
+         if (currentBrick.getBrickValue() % 10 == 5) {
+            currentBrick.setColor(Color.ORANGE);
+         }
+         if (currentBrick.getBrickValue() % 10 == 6) {
+            currentBrick.setColor(Color.BLUE.brighter().brighter());
+         }
+         if (currentBrick.getBrickValue() % 10 == 7) {
+            currentBrick.setColor(new Color(160, 32, 240));
+         }
+         if (currentBrick.getBrickValue() % 10 == 8) {
+            currentBrick.setColor(Color.RED.darker());
+         }
+         if (currentBrick.getBrickValue() % 10 == 9) {
+            currentBrick.setColor(Color.GREEN.brighter());
          }
          //System.out.println("counter: "+counter);
          if (currentBrick.getBrickValue() < 1){
@@ -284,6 +314,7 @@ class BreakoutPanel extends JPanel {
          System.out.println("here");
          levelNumber++;
          bluewall();
+         level.setText("Lvl: "+levelNumber);
       }
       
       for(int k = 0; k < totalBalls; k++){
@@ -296,7 +327,48 @@ class BreakoutPanel extends JPanel {
       }
       repaint();      
    }
-   
+   public BasicBall[] getAllBasicBalls() {
+      BasicBall[] b = new BasicBall[allBasicBalls.size()];
+      for(int i = 0; i < allBasicBalls.size(); i++) {
+         b[i] = allBasicBalls.get(i);
+      }
+      return b;
+   }
+   public PlasmaBall[] getAllPlasmaBalls() {
+      PlasmaBall[] b = new PlasmaBall[allPlasmaBalls.size()];
+      for(int i = 0; i < allPlasmaBalls.size(); i++) {
+         b[i] = allPlasmaBalls.get(i);
+      }
+      return b;
+   }
+   public SniperBall[] getAllSniperBalls() {
+      SniperBall[] b = new SniperBall[allSniperBalls.size()];
+      for(int i = 0; i < allSniperBalls.size(); i++) {
+         b[i] = allSniperBalls.get(i);
+      }
+      return b;
+   }
+   public ScatterBall[] getAllScatterBalls() {
+      ScatterBall[] b = new ScatterBall[allScatterBalls.size()];
+      for(int i = 0; i < allScatterBalls.size(); i++) {
+         b[i] = allScatterBalls.get(i);
+      }
+      return b;
+   }
+   public CannonBall[] getAllCannonBalls() {
+      CannonBall[] b = new CannonBall[allCannonBalls.size()];
+      for(int i = 0; i < allCannonBalls.size(); i++) {
+         b[i] = allCannonBalls.get(i);
+      }
+      return b;
+   }
+   public PoisonBall[] getAllPoisonBalls() {
+      PoisonBall[] b = new PoisonBall[allPoisonBalls.size()];
+      for(int i = 0; i < allPoisonBalls.size(); i++) {
+         b[i] = allPoisonBalls.get(i);
+      }
+      return b;
+   }
         
    private class AnimationListener implements ActionListener {
       public void actionPerformed(ActionEvent e) {
