@@ -18,14 +18,10 @@ public class CannonBall extends Balls {
       int rY = r.getY();
       int s = getRadius();
       if (rX < bX){
-         setDY(getDY() * -1);
-         
+         if(r.getBrickValue()-damage > 0) {
+            setDY(getDY() * -1);
+         }
       }
-      else if (rY < bY){
-         //setDY(getDY() * -1);
-         setdX(getdX() * -1);   
-      }
-      //Add poison and area of effect
       r.setBrickValue(r.getBrickValue()-damage);
       //System.out.println(r.getBrickValue());
    }

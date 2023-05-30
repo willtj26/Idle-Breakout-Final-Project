@@ -1,5 +1,4 @@
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
@@ -13,7 +12,7 @@ class BreakoutPanel extends JPanel {
    public static final int FRAMEy = 850;
    private static final Color BACKGROUND = Color.WHITE.darker();
 
-   private Money money;
+   public Money money;
    private BufferedImage myImage;
    private Graphics myBuffer;
 
@@ -23,12 +22,12 @@ class BreakoutPanel extends JPanel {
    private ArrayList<Balls> allBalls = new ArrayList <Balls>();
    private ArrayList<Brick> allBricks = new ArrayList <Brick>();
    private ArrayList<BrickClass> allBrickClasses = new ArrayList <BrickClass>();
-   private ArrayList<BasicBall> allBasicBalls = new ArrayList <BasicBall>();
-   private ArrayList<PlasmaBall> allPlasmaBalls = new ArrayList <PlasmaBall>();
-   private ArrayList<SniperBall> allSniperBalls = new ArrayList <SniperBall>();
-   private ArrayList<ScatterBall> allScatterBalls = new ArrayList <ScatterBall>();
-   private ArrayList<CannonBall> allCannonBalls = new ArrayList <CannonBall>();
-   private ArrayList<PoisonBall> allPoisonBalls = new ArrayList <PoisonBall>();
+   public ArrayList<BasicBall> allBasicBalls = new ArrayList <BasicBall>();
+   public ArrayList<PlasmaBall> allPlasmaBalls = new ArrayList <PlasmaBall>();
+   public ArrayList<SniperBall> allSniperBalls = new ArrayList <SniperBall>();
+   public ArrayList<ScatterBall> allScatterBalls = new ArrayList <ScatterBall>();
+   public ArrayList<CannonBall> allCannonBalls = new ArrayList <CannonBall>();
+   public ArrayList<PoisonBall> allPoisonBalls = new ArrayList <PoisonBall>();
 
    private UpgradePanel upgradePanel;
    // Gui components
@@ -67,7 +66,7 @@ class BreakoutPanel extends JPanel {
       frame.setSize(800, 600);
       frame.setLocation(150, 150);
       frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-      upgradePanel = new UpgradePanel(frame, this, money);
+      upgradePanel = new UpgradePanel(frame, money);
       frame.setContentPane(upgradePanel);
       frame.pack();
       frame.setVisible(false);
@@ -297,48 +296,7 @@ class BreakoutPanel extends JPanel {
       }
       repaint();      
    }
-   public BasicBall[] getAllBasicBalls() {
-      BasicBall[] b = new BasicBall[allBasicBalls.size()];
-      for(int i = 0; i < allBasicBalls.size(); i++) {
-         b[i] = allBasicBalls.get(i);
-      }
-      return b;
-   }
-   public PlasmaBall[] getAllPlasmaBalls() {
-      PlasmaBall[] b = new PlasmaBall[allPlasmaBalls.size()];
-      for(int i = 0; i < allPlasmaBalls.size(); i++) {
-         b[i] = allPlasmaBalls.get(i);
-      }
-      return b;
-   }
-   public SniperBall[] getAllSniperBalls() {
-      SniperBall[] b = new SniperBall[allSniperBalls.size()];
-      for(int i = 0; i < allSniperBalls.size(); i++) {
-         b[i] = allSniperBalls.get(i);
-      }
-      return b;
-   }
-   public ScatterBall[] getAllScatterBalls() {
-      ScatterBall[] b = new ScatterBall[allScatterBalls.size()];
-      for(int i = 0; i < allScatterBalls.size(); i++) {
-         b[i] = allScatterBalls.get(i);
-      }
-      return b;
-   }
-   public CannonBall[] getAllCannonBalls() {
-      CannonBall[] b = new CannonBall[allCannonBalls.size()];
-      for(int i = 0; i < allCannonBalls.size(); i++) {
-         b[i] = allCannonBalls.get(i);
-      }
-      return b;
-   }
-   public PoisonBall[] getAllPoisonBalls() {
-      PoisonBall[] b = new PoisonBall[allPoisonBalls.size()];
-      for(int i = 0; i < allPoisonBalls.size(); i++) {
-         b[i] = allPoisonBalls.get(i);
-      }
-      return b;
-   }
+   
         
    private class AnimationListener implements ActionListener {
       public void actionPerformed(ActionEvent e) {
@@ -431,6 +389,15 @@ class BreakoutPanel extends JPanel {
    private class Listener_upgrade implements ActionListener {
       public void actionPerformed(ActionEvent e) {
          System.out.println("Upgrade Menu Open");
+      /*      money = new Money(dollars);
+         JFrame frame = new JFrame("Upgrades");
+         frame.setSize(800, 600);
+         frame.setLocation(150, 150);
+         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+         frame.setContentPane(new UpgradePanel(frame, money));
+         bank.setText(""+money.getAmount());
+         frame.pack();
+         frame.setVisible(true); */
          frame.setVisible(true);
       }
    }
@@ -445,24 +412,4 @@ class BreakoutPanel extends JPanel {
          }
       } 
    }
-   ////////////  Mouse Input Stuff /////////////
-   /*
-   private class Mouse extends MouseAdapter
-   {
-      public void mouseClicked(MouseEvent e)
-      {
-         update( e.getX() , e.getY() );
-      }
-   }   
-   private void update(int x, int y)
-   {
-
-   //
-      display.update(x,y);
-      scoreboard.update(display.getCol(),display.getRow(),rgb);
-   //
-      display.repaint();
-   //
-      display.requestFocus();
-   } */
 }

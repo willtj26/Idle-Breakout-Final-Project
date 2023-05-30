@@ -23,8 +23,6 @@ public abstract class Balls extends BouncingCircle {
          int s = getRadius();
          if (rX < bX + s && rX + rTopSide > bX && rY < bY + s && rY + rLeftSide > bY) {
             return r; // collision detected
-         } else {
-            current = current; // no collision
          }
       }
       return current;

@@ -67,7 +67,7 @@ class BreakoutPanel extends JPanel {
       frame.setSize(800, 600);
       frame.setLocation(150, 150);
       frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-      upgradePanel = new UpgradePanel(frame, this, money);
+      upgradePanel = new UpgradePanel(frame, money);
       frame.setContentPane(upgradePanel);
       frame.pack();
       frame.setVisible(false);
@@ -297,42 +297,42 @@ class BreakoutPanel extends JPanel {
       }
       repaint();      
    }
-   public BasicBall[] getAllBasicBalls() {
+   private BasicBall[] getAllBasicBalls() {
       BasicBall[] b = new BasicBall[allBasicBalls.size()];
       for(int i = 0; i < allBasicBalls.size(); i++) {
          b[i] = allBasicBalls.get(i);
       }
       return b;
    }
-   public PlasmaBall[] getAllPlasmaBalls() {
+   private PlasmaBall[] getAllPlasmaBalls() {
       PlasmaBall[] b = new PlasmaBall[allPlasmaBalls.size()];
       for(int i = 0; i < allPlasmaBalls.size(); i++) {
          b[i] = allPlasmaBalls.get(i);
       }
       return b;
    }
-   public SniperBall[] getAllSniperBalls() {
+   private SniperBall[] getAllSniperBalls() {
       SniperBall[] b = new SniperBall[allSniperBalls.size()];
       for(int i = 0; i < allSniperBalls.size(); i++) {
          b[i] = allSniperBalls.get(i);
       }
       return b;
    }
-   public ScatterBall[] getAllScatterBalls() {
+   private ScatterBall[] getAllScatterBalls() {
       ScatterBall[] b = new ScatterBall[allScatterBalls.size()];
       for(int i = 0; i < allScatterBalls.size(); i++) {
          b[i] = allScatterBalls.get(i);
       }
       return b;
    }
-   public CannonBall[] getAllCannonBalls() {
+   private CannonBall[] getAllCannonBalls() {
       CannonBall[] b = new CannonBall[allCannonBalls.size()];
       for(int i = 0; i < allCannonBalls.size(); i++) {
          b[i] = allCannonBalls.get(i);
       }
       return b;
    }
-   public PoisonBall[] getAllPoisonBalls() {
+   private PoisonBall[] getAllPoisonBalls() {
       PoisonBall[] b = new PoisonBall[allPoisonBalls.size()];
       for(int i = 0; i < allPoisonBalls.size(); i++) {
          b[i] = allPoisonBalls.get(i);
