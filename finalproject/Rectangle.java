@@ -95,7 +95,7 @@ public class Rectangle implements Animatable
       g.fillRect(x, y, topSide, leftSide);
       g.setFont(new Font("Serif", Font.BOLD, 25));
       g.setColor(Color.BLACK);
-      g.drawString(""+brickvalue, x+10, y+leftSide-3);
+      g.drawString(""+brickvalue, x, y+leftSide-3);
       g.drawRect(x,y,topSide,leftSide);
    }
    

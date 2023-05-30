@@ -54,7 +54,7 @@ class BreakoutPanel extends JPanel {
    private int poisonPrice = 75000;
 
    private int levelNumber = 1;
-   private int dollars = 999999999;
+   private int dollars = 26;
 
    JFrame frame;
 
@@ -239,13 +239,14 @@ class BreakoutPanel extends JPanel {
          Balls currentBall = allBalls.get(i);
          Brick checkBrick = currentBall.isColliding(allBricks);
          if(checkBrick.getBrickValue() != -10) {
-            currentBall.collide(checkBrick);
-            if (currentBall.getDamage() < checkBrick.getBrickValue()){
-               dollars -= currentBall.getDamage();
+            if (currentBall.getDamage() <= checkBrick.getBrickValue()){
+               dollars += Math.abs(currentBall.getDamage());
             }
             else if (currentBall.getDamage() > checkBrick.getBrickValue()){
-               dollars -= checkBrick.getBrickValue();
+               System.out.println("here");
+               dollars += Math.abs(checkBrick.getBrickValue());
             }
+            currentBall.collide(checkBrick);
          }
          //try{
          //   currentBall.setArrayList(allBricks);
@@ -300,7 +301,7 @@ class BreakoutPanel extends JPanel {
             //allBricks.remove(counter);
             //counter--;
             //System.out.println("new counter: "+counter);
-            System.out.println("totalBricks"+totalBricks);
+            //System.out.println("totalBricks"+totalBricks);
             allBricks.remove(counter);
             counter--;
          }
@@ -311,7 +312,7 @@ class BreakoutPanel extends JPanel {
       }
       
       if (totalBricks == 0){
-         System.out.println("here");
+         //System.out.println("here");
          levelNumber++;
          bluewall();
          level.setText("Lvl: "+levelNumber);
