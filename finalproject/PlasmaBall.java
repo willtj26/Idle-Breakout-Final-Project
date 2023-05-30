@@ -28,8 +28,13 @@ public class PlasmaBall extends Balls {
       //Add poison and area of effect
       r.setBrickValue(r.getBrickValue()-damage);
       //System.out.println(r.getBrickValue());
+   //}
    }
+   
+   public void increaseDamage() {
+      damage += 25;
    }
+   
    public int getDamage() {
       return damage;
    }

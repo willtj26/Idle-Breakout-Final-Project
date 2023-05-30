@@ -33,7 +33,7 @@ class BreakoutPanel extends JPanel {
    // Gui components
    private JButton pauseButton, upgradeMenuButton, basicButton, plasmaButton, sniperButton, scatterButton, cannonButton, poisonButton;
 
-   private JLabel bank, bPrice, pPrice, sPrice, scPrice, cPrice, poPrice;
+   private JLabel bank, bPrice, pPrice, sPrice, scPrice, cPrice, poPrice, level;
       
    private ImageIcon basicIcon, plasmaIcon, sniperIcon, scatterIcon, cannonIcon, poisonIcon;
 
@@ -150,6 +150,9 @@ class BreakoutPanel extends JPanel {
       buttonPanel.add(cPrice, BorderLayout.CENTER);
       buttonPanel.add(poPrice, BorderLayout.CENTER);
       buttonPanel.add(pauseButton);
+      
+      level = new JLabel("Lvl: "+levelNumber);
+      buttonPanel.add(level, BorderLayout.PAGE_END);
    
       // Add action listeners
       basicButton.addActionListener(new Listener_basic());
@@ -174,6 +177,11 @@ class BreakoutPanel extends JPanel {
       t = new Timer(5, new AnimationListener());
       t.start();
    }
+   
+   
+   //public void redwall(){
+      
+   //}
    
    public void bluewall(){
       int xcoord = 200;
@@ -238,6 +246,12 @@ class BreakoutPanel extends JPanel {
                dollars -= checkBrick.getBrickValue();
             }
          }
+         //try{
+         //   currentBall.setArrayList(allBricks);
+         //}
+         //catch (Exception er){
+         //   System.out.println("Not a sniper ball.");
+         //}
          currentBall.step();
          bank.setText("$"+dollars);
       }
@@ -284,6 +298,7 @@ class BreakoutPanel extends JPanel {
          System.out.println("here");
          levelNumber++;
          bluewall();
+         level.setText("Lvl: "+levelNumber);
       }
       
       for(int k = 0; k < totalBalls; k++){
