@@ -264,20 +264,35 @@ class BreakoutPanel extends JPanel {
       }
       for (Brick currentBrick: tempBrickArray){
          counter++;
-         if (currentBrick.getBrickValue() % 5 == 0) {
+         if (currentBrick.getBrickValue() % 10 == 0) {
             currentBrick.setColor(Color.BLUE);
          }
-         if (currentBrick.getBrickValue() % 5 == 1) {
+         if (currentBrick.getBrickValue() % 10 == 1) {
             currentBrick.setColor(Color.RED);
          }
-         if (currentBrick.getBrickValue() % 5 == 2) {
+         if (currentBrick.getBrickValue() % 10 == 2) {
             currentBrick.setColor(Color.GREEN);
          }
-         if (currentBrick.getBrickValue() % 5 == 3) {
+         if (currentBrick.getBrickValue() % 10 == 3) {
             currentBrick.setColor(Color.PINK);
          }
-         if (currentBrick.getBrickValue() % 5 == 4) {
+         if (currentBrick.getBrickValue() % 10 == 4) {
             currentBrick.setColor(Color.YELLOW);
+         }
+         if (currentBrick.getBrickValue() % 10 == 5) {
+            currentBrick.setColor(Color.ORANGE);
+         }
+         if (currentBrick.getBrickValue() % 10 == 6) {
+            currentBrick.setColor(Color.BLUE.brighter().brighter());
+         }
+         if (currentBrick.getBrickValue() % 10 == 7) {
+            currentBrick.setColor(new Color(160, 32, 240));
+         }
+         if (currentBrick.getBrickValue() % 10 == 8) {
+            currentBrick.setColor(Color.RED.darker());
+         }
+         if (currentBrick.getBrickValue() % 10 == 9) {
+            currentBrick.setColor(Color.GREEN.brighter());
          }
          //System.out.println("counter: "+counter);
          if (currentBrick.getBrickValue() < 1){
