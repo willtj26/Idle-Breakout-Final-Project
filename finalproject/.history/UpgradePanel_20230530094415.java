@@ -272,14 +272,8 @@ class UpgradePanel extends JPanel {
                 basicSpeedLabel.setText(""+basicSpeedPrice);
                 for(int i = 0; i < allBasicBalls.length ; i++) {
                     BasicBall curBall = allBasicBalls[i];
-                    if(curBall.getDY() > 0) {
-                        curBall.setDY(curBall.getDY() + 1);
-                        curBall.setdX(curBall.getdX() + 1);
-                    }
-                    else {
-                        curBall.setDY(curBall.getDY() - 1);
-                        curBall.setdX(curBall.getdX() - 1);
-                    }
+                    curBall.setDY(curBall.getDY() + 1);
+                    curBall.setdX(curBall.getdX() + 1);
                 }
             }
         }
@@ -293,14 +287,8 @@ class UpgradePanel extends JPanel {
                 plasmaSpeedLabel.setText(""+plasmaSpeedPrice);
                 for(int i = 0; i < allPlasmaBalls.length ; i++) {
                     PlasmaBall curBall = allPlasmaBalls[i];
-                    if(curBall.getDY() > 0) {
-                        curBall.setDY(curBall.getDY() + 1);
-                        curBall.setdX(curBall.getdX() + 1);
-                    }
-                    else {
-                        curBall.setDY(curBall.getDY() - 1);
-                        curBall.setdX(curBall.getdX() - 1);
-                    }
+                    curBall.setDY(curBall.getDY() + 1);
+                    curBall.setdX(curBall.getdX() + 1);
                 }
             }
         }
@@ -313,14 +301,8 @@ class UpgradePanel extends JPanel {
                 sniperSpeedLabel.setText(""+sniperSpeedPrice);
                 for(int i = 0; i < allBasicBalls.length ; i++) {
                     BasicBall curBall = allBasicBalls[i];
-                    if(curBall.getDY() > 0) {
-                        curBall.setDY(curBall.getDY() + 1);
-                        curBall.setdX(curBall.getdX() + 1);
-                    }
-                    else {
-                        curBall.setDY(curBall.getDY() - 1);
-                        curBall.setdX(curBall.getdX() - 1);
-                    }
+                    curBall.setDY(curBall.getDY() + 1);
+                    curBall.setdX(curBall.getdX() + 1);
                 }
             }
         }
@@ -346,14 +328,8 @@ class UpgradePanel extends JPanel {
                 cannonSpeedLabel.setText(""+cannonSpeedPrice);
                 for(int i = 0; i < allCannonBalls.length ; i++) {
                     CannonBall curBall = allCannonBalls[i];
-                    if(curBall.getDY() > 0) {
-                        curBall.setDY(curBall.getDY() + 1);
-                        curBall.setdX(curBall.getdX() + 1);
-                    }
-                    else {
-                        curBall.setDY(curBall.getDY() - 1);
-                        curBall.setdX(curBall.getdX() - 1);
-                    }
+                    curBall.setDY(curBall.getDY() + 1);
+                    curBall.setdX(curBall.getdX() + 1);
                 }
             }
         }
@@ -366,14 +342,8 @@ class UpgradePanel extends JPanel {
                 poisonSpeedLabel.setText(""+poisonSpeedPrice);
                 for(int i = 0; i < allPoisonBalls.length ; i++) {
                     PoisonBall curBall = allPoisonBalls[i];
-                    if(curBall.getDY() > 0) {
-                        curBall.setDY(curBall.getDY() + 1);
-                        curBall.setdX(curBall.getdX() + 1);
-                    }
-                    else {
-                        curBall.setDY(curBall.getDY() - 1);
-                        curBall.setdX(curBall.getdX() - 1);
-                    }
+                    curBall.setDY(curBall.getDY() + 1);
+                    curBall.setdX(curBall.getdX() + 1);
                 }
             }
         }

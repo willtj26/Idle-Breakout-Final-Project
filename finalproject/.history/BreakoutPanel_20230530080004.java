@@ -34,7 +34,7 @@ class BreakoutPanel extends JPanel {
    // Gui components
    private JButton pauseButton, upgradeMenuButton, basicButton, plasmaButton, sniperButton, scatterButton, cannonButton, poisonButton;
 
-   private JLabel bank, bPrice, pPrice, sPrice, scPrice, cPrice, poPrice, level;
+   private JLabel bank, bPrice, pPrice, sPrice, scPrice, cPrice, poPrice;
       
    private ImageIcon basicIcon, plasmaIcon, sniperIcon, scatterIcon, cannonIcon, poisonIcon;
 
@@ -67,7 +67,7 @@ class BreakoutPanel extends JPanel {
       frame.setSize(800, 600);
       frame.setLocation(150, 150);
       frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-      upgradePanel = new UpgradePanel(frame, this, money);
+      upgradePanel = new UpgradePanel(frame, money);
       frame.setContentPane(upgradePanel);
       frame.pack();
       frame.setVisible(false);
@@ -151,9 +151,6 @@ class BreakoutPanel extends JPanel {
       buttonPanel.add(cPrice, BorderLayout.CENTER);
       buttonPanel.add(poPrice, BorderLayout.CENTER);
       buttonPanel.add(pauseButton);
-      
-      level = new JLabel("Lvl: "+levelNumber);
-      buttonPanel.add(level, BorderLayout.PAGE_END);
    
       // Add action listeners
       basicButton.addActionListener(new Listener_basic());
@@ -178,11 +175,6 @@ class BreakoutPanel extends JPanel {
       t = new Timer(5, new AnimationListener());
       t.start();
    }
-   
-   
-   //public void redwall(){
-      
-   //}
    
    public void bluewall(){
       int xcoord = 200;
@@ -247,12 +239,6 @@ class BreakoutPanel extends JPanel {
                dollars -= checkBrick.getBrickValue();
             }
          }
-         //try{
-         //   currentBall.setArrayList(allBricks);
-         //}
-         //catch (Exception er){
-         //   System.out.println("Not a sniper ball.");
-         //}
          currentBall.step();
          bank.setText("$"+dollars);
       }
@@ -299,7 +285,6 @@ class BreakoutPanel extends JPanel {
          System.out.println("here");
          levelNumber++;
          bluewall();
-         level.setText("Lvl: "+levelNumber);
       }
       
       for(int k = 0; k < totalBalls; k++){
@@ -312,42 +297,42 @@ class BreakoutPanel extends JPanel {
       }
       repaint();      
    }
-   public BasicBall[] getAllBasicBalls() {
+   private BasicBall[] getAllBasicBalls() {
       BasicBall[] b = new BasicBall[allBasicBalls.size()];
       for(int i = 0; i < allBasicBalls.size(); i++) {
          b[i] = allBasicBalls.get(i);
       }
       return b;
    }
-   public PlasmaBall[] getAllPlasmaBalls() {
+   private PlasmaBall[] getAllPlasmaBalls() {
       PlasmaBall[] b = new PlasmaBall[allPlasmaBalls.size()];
       for(int i = 0; i < allPlasmaBalls.size(); i++) {
          b[i] = allPlasmaBalls.get(i);
       }
       return b;
    }
-   public SniperBall[] getAllSniperBalls() {
+   private SniperBall[] getAllSniperBalls() {
       SniperBall[] b = new SniperBall[allSniperBalls.size()];
       for(int i = 0; i < allSniperBalls.size(); i++) {
          b[i] = allSniperBalls.get(i);
       }
       return b;
    }
-   public ScatterBall[] getAllScatterBalls() {
+   private ScatterBall[] getAllScatterBalls() {
       ScatterBall[] b = new ScatterBall[allScatterBalls.size()];
       for(int i = 0; i < allScatterBalls.size(); i++) {
          b[i] = allScatterBalls.get(i);
       }
       return b;
    }
-   public CannonBall[] getAllCannonBalls() {
+   private CannonBall[] getAllCannonBalls() {
       CannonBall[] b = new CannonBall[allCannonBalls.size()];
       for(int i = 0; i < allCannonBalls.size(); i++) {
          b[i] = allCannonBalls.get(i);
       }
       return b;
    }
-   public PoisonBall[] getAllPoisonBalls() {
+   private PoisonBall[] getAllPoisonBalls() {
       PoisonBall[] b = new PoisonBall[allPoisonBalls.size()];
       for(int i = 0; i < allPoisonBalls.size(); i++) {
          b[i] = allPoisonBalls.get(i);

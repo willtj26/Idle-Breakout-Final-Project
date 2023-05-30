@@ -28,4 +28,7 @@ public abstract class Brick extends Rectangle {
          return false; // no collision
       }
    }
+   public int getLevel() {
+      return brickvalue;
+   }
 }

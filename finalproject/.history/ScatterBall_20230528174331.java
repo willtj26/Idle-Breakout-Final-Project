@@ -3,7 +3,6 @@ import java.util.ArrayList;
 
 public class ScatterBall extends Balls {
    private int damage;
-   private int babies;
    public ScatterBall() {
       super(12, 400, 400, Color.ORANGE, 3, 3);
       damage = 20;
@@ -42,10 +41,7 @@ public class ScatterBall extends Balls {
    }
    public int getBabies() {
       //return 
-      return babies;
-   }
-   public void setBabies(int b) {
-      babies = b;
+      return 99999;
    }
    //override step method for wall hits
    @Override
