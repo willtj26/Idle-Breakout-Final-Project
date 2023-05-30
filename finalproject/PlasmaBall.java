@@ -30,14 +30,6 @@ public class PlasmaBall extends Balls {
       //System.out.println(r.getBrickValue());
    //}
    }
-<<<<<<< HEAD
-   
-   public void increaseDamage() {
-      damage += 25;
-   }
-   
-=======
->>>>>>> 51f731c0be47d54766accf8509c42f40a3da822f
    public int getDamage() {
       return damage;
    }
