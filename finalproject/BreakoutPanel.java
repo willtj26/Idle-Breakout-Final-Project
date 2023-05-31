@@ -5,7 +5,7 @@ import java.awt.event.*;
 import java.awt.image.*;
 import java.util.ArrayList;
 
-class BreakoutPanel extends JPanel {
+class BreakoutPanel extends JPanel{
 
    private JFrame myOwner;
 
@@ -38,6 +38,8 @@ class BreakoutPanel extends JPanel {
       
    private ImageIcon basicIcon, plasmaIcon, sniperIcon, scatterIcon, cannonIcon, poisonIcon;
 
+   static JLabel label1, label2, label3;
+
    private int basicNum = 0;
    private int plasmaNum = 0;
    private int sniperNum = 0;
@@ -62,6 +64,11 @@ class BreakoutPanel extends JPanel {
       myOwner = f;
       setPreferredSize(new Dimension(FRAMEx, FRAMEy));
       setLayout(new BorderLayout());
+      
+      label1 = new JLabel("");
+      label2 = new JLabel("");
+      label3 = new JLabel("");
+      
    
       frame = new JFrame("Upgrades");
       frame.setSize(800, 600);
@@ -70,6 +77,7 @@ class BreakoutPanel extends JPanel {
       upgradePanel = new UpgradePanel(frame, this, money);
       frame.setContentPane(upgradePanel);
       frame.pack();
+      //frame.addMouseListener(f);
       frame.setVisible(false);
    
       try {
@@ -173,12 +181,29 @@ class BreakoutPanel extends JPanel {
       myBuffer.setColor(BACKGROUND);
       myBuffer.fillRect(0,0,FRAMEx,FRAMEy);
       bluewall();
-      add(new JLabel(new ImageIcon(myImage)), BorderLayout.CENTER);
+      JLabel ballplayground = new JLabel(new ImageIcon(myImage));
+      ballplayground.addMouseListener(new MouseAdapter() {
+         public void mouseClicked(MouseEvent e) {
+            mouseClickedFunction(e);
+            //System.out.println(e.getPoint().getX());
+            //System.out.println(e.getPoint().getY());
+         }
+     });
+      add(ballplayground, BorderLayout.CENTER);
    
       t = new Timer(5, new AnimationListener());
       t.start();
    }
    
+   public void mouseClickedFunction(MouseEvent e){
+      double xcoord = e.getPoint().getX();
+      double ycoord = e.getPoint().getY();
+      for (Brick currentBrick: allBricks){
+         if ((int)xcoord > currentBrick.getX() && (int)xcoord < currentBrick.getX()+50 && (int)ycoord+50 > currentBrick.getY() && (int)ycoord+50 < currentBrick.getY()+25){
+            currentBrick.setBrickValue(currentBrick.getBrickValue()-1);
+         }
+      }
+   }
    
    //public void redwall(){
       
@@ -193,6 +218,11 @@ class BreakoutPanel extends JPanel {
             for (int x = 0; x < 5; x++){
                BrickClass b1 = new BrickClass(xcoord+50, ycoord+25, Color.BLUE, levelNumber);//Color.BLUE, 80, 30, "1");
                animationObjects.add(b1);
+               //b1.addMouseListener(new MouseAdapter(){
+               //   public void mouseClicked(MouseEvent e) {
+               //      System.out.println("Clicked!");
+               //   }
+               //});
                allBricks.add(b1);
                brickNum++;
                ycoord+=25;
@@ -461,24 +491,4 @@ class BreakoutPanel extends JPanel {
          }
       } 
    }
-   ////////////  Mouse Input Stuff /////////////
-   /*
-   private class Mouse extends MouseAdapter
-   {
-      public void mouseClicked(MouseEvent e)
-      {
-         update( e.getX() , e.getY() );
-      }
-   }   
-   private void update(int x, int y)
-   {
-
-   //
-      display.update(x,y);
-      scoreboard.update(display.getCol(),display.getRow(),rgb);
-   //
-      display.repaint();
-   //
-      display.requestFocus();
-   } */
 }
