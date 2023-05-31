@@ -3,9 +3,18 @@ import java.util.ArrayList;
 
 public class SniperBall extends Balls {
    private int damage;
+   private ArrayList<Brick> allBricks = new ArrayList<Brick>();
    public SniperBall() {
       super(10, 400, 400, Color.WHITE, 3, 3);
       damage = 5;
+   }
+   
+   public void setArrayBricks(ArrayList<Brick> allbrick){
+      allBricks = allbrick;
+   }
+   
+   public ArrayList<Brick> getArrayBricks(){
+      return allBricks;
    }
    
    public void collide(Brick r) {
@@ -43,6 +52,23 @@ public class SniperBall extends Balls {
    {
       //Check to see if our circle is too small
       //If so, make sure dX is positive (radius is increasing)
+      int currentX = getdX();
+      int currentY = getDY();
+      double smallest = 10000000;
+      Brick smallestBrick = allBricks.get(0);
+      
+      for (Brick currentBrick: allBricks){
+         double distance = ((currentX-currentBrick.getX())*(currentX-currentBrick.getX()))+((currentY-currentBrick.getY())*(currentY-currentBrick.getY()));
+         if (distance < smallest){
+            smallest = distance;
+            smallestBrick = currentBrick;
+         }
+      }
+      
+      setdX(smallestBrick.getX()-currentX);
+      setDY(smallestBrick.getY()-currentY);
+      
+      /*
       if(getX() <= 0) {
          if(getdX() < 0) {
             // Targeting Feature
@@ -71,5 +97,6 @@ public class SniperBall extends Balls {
          }
       }
       setY(getY()+getDY());
+      */
    }
 }

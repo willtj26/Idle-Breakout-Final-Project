@@ -12,4 +12,7 @@ public class Money {
     public void decreaseAmount(int value) {
         amount -= value;
     }
+    public void increaseAmount(int value) {
+        amount += value;
+    }
 }
