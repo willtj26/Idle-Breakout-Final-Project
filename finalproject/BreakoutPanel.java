@@ -14,7 +14,7 @@ class BreakoutPanel extends JPanel{
    public static final int FRAMEy = 850;
    private static final Color BACKGROUND = Color.WHITE.darker();
 
-   private Money money;
+   private Money money = new Money(25);
    private BufferedImage myImage;
    private Graphics myBuffer;
 
@@ -329,7 +329,6 @@ class BreakoutPanel extends JPanel{
       }
       
       if (totalBricks == 0){
-         //System.out.println("here");
          levelNumber++;
          bluewall();
          level.setText("Lvl: "+levelNumber);
@@ -340,16 +339,28 @@ class BreakoutPanel extends JPanel{
          c.drawMe(myBuffer);
       }
       
-      for (Brick r: allBricks){
+      for (Brick r: allBricks) {
          r.drawMe(myBuffer);
       }
+      money = new Money(dollars);
       repaint();      
    }
+   public Money getMoney() {
+      System.out.println(money.getAmount());
+      return money;
+   }
+   public void setMoney(int n) {
+      money = new Money(n);
+   }
+
    public BasicBall[] getAllBasicBalls() {
       BasicBall[] b = new BasicBall[allBasicBalls.size()];
-      for(int i = 0; i < allBasicBalls.size(); i++) {
-         b[i] = allBasicBalls.get(i);
+      int counter = 0;
+      for (BasicBall curball : allBasicBalls) {
+         b[counter] = curball;
+         counter++;
       }
+      System.out.println("Here: "+b.length);
       return b;
    }
    public PlasmaBall[] getAllPlasmaBalls() {

@@ -43,13 +43,14 @@ class UpgradePanel extends JPanel {
     private CannonBall[] allCannonBalls;
     private PoisonBall[] allPoisonBalls;
 
+    private BreakoutPanel bb;
+
     public UpgradePanel(JFrame f, BreakoutPanel b, Money m) {
+        bb = b;
         setPreferredSize(new Dimension(FRAMEx, FRAMEy));
         setLayout(new BorderLayout());
         money = m;
 
-        allBasicBalls = b.getAllBasicBalls();
-        allPlasmaBalls = b.getAllPlasmaBalls();
         allSniperBalls = b.getAllSniperBalls();
         allScatterBalls = b.getAllScatterBalls();
         allCannonBalls = b.getAllCannonBalls();
@@ -259,21 +260,22 @@ class UpgradePanel extends JPanel {
      
     private class Listener_basicSpeed implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            System.out.println("speed pressed");
-            if (allBasicBalls.length >0) {
-                if(money.getAmount() - basicSpeedPrice > 0) {
-                    money.decreaseAmount(basicSpeedPrice);
+            allBasicBalls = bb.getAllBasicBalls();
+            Money amount = bb.getMoney();
+            if (allBasicBalls.length > 0 && money != null) {
+                if(amount.getAmount() - basicSpeedPrice > 0) {
+                    amount.decreaseAmount(basicSpeedPrice);
+                    bb.setMoney(amount.getAmount());
                     basicSpeedPrice += (int)(basicSpeedPrice *2);
                     basicSpeedLabel.setText("$"+basicSpeedPrice);
-                    for(int i = 0; i < allBasicBalls.length ; i++) {
-                        BasicBall curBall = allBasicBalls[i];
+                    for(BasicBall curBall : allBasicBalls) {
                         if(curBall.getDY() > 0) {
-                            allBasicBalls[i].setDY(curBall.getDY() + 1);
-                            allBasicBalls[i].setdX(curBall.getdX() + 1);
+                            curBall.setDY(curBall.getDY() + 1);
+                            curBall.setdX(curBall.getdX() + 1);
                         }
                         else {
-                            allBasicBalls[i].setDY(curBall.getDY() - 1);
-                            allBasicBalls[i].setdX(curBall.getdX() - 1);
+                            curBall.setDY(curBall.getDY() - 1);
+                            curBall.setdX(curBall.getdX() - 1);
                         }
                     }
                 }
@@ -281,41 +283,49 @@ class UpgradePanel extends JPanel {
         }
     }
      
-     private class Listener_plasmaSpeed implements ActionListener {
+    private class Listener_plasmaSpeed implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            if(money.getAmount() - plasmaSpeedPrice > 0) {
-                money.decreaseAmount(plasmaSpeedPrice);
-                plasmaSpeedPrice += (int)(plasmaSpeedPrice *2);
-                plasmaSpeedLabel.setText(""+plasmaSpeedPrice);
-                for(int i = 0; i < allPlasmaBalls.length ; i++) {
-                    PlasmaBall curBall = allPlasmaBalls[i];
-                    if(curBall.getDY() > 0) {
-                        curBall.setDY(curBall.getDY() + 1);
-                        curBall.setdX(curBall.getdX() + 1);
-                    }
-                    else {
-                        curBall.setDY(curBall.getDY() - 1);
-                        curBall.setdX(curBall.getdX() - 1);
+            allPlasmaBalls = bb.getAllPlasmaBalls();
+            Money amount = bb.getMoney();
+            if (allPlasmaBalls.length > 0 && money != null) {
+                if(amount.getAmount() - plasmaSpeedPrice > 0) {
+                    amount.decreaseAmount(plasmaSpeedPrice);
+                    bb.setMoney(amount.getAmount());
+                    plasmaSpeedPrice += (int)(plasmaSpeedPrice *2);
+                    plasmaSpeedLabel.setText("$"+plasmaSpeedPrice);
+                    for(PlasmaBall curBall : allPlasmaBalls) {
+                        if(curBall.getDY() > 0) {
+                            curBall.setDY(curBall.getDY() + 1);
+                            curBall.setdX(curBall.getdX() + 1);
+                        }
+                        else {
+                            curBall.setDY(curBall.getDY() - 1);
+                            curBall.setdX(curBall.getdX() - 1);
+                        }
                     }
                 }
             }
         }
-     }
+    }
      private class Listener_sniperSpeed implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            if(money.getAmount() - sniperSpeedPrice > 0) {
-                money.decreaseAmount(sniperSpeedPrice);
-                sniperSpeedPrice += (int)(sniperSpeedPrice *2);
-                sniperSpeedLabel.setText(""+sniperSpeedPrice);
-                for(int i = 0; i < allBasicBalls.length ; i++) {
-                    BasicBall curBall = allBasicBalls[i];
-                    if(curBall.getDY() > 0) {
-                        curBall.setDY(curBall.getDY() + 1);
-                        curBall.setdX(curBall.getdX() + 1);
-                    }
-                    else {
-                        curBall.setDY(curBall.getDY() - 1);
-                        curBall.setdX(curBall.getdX() - 1);
+            allSniperBalls = bb.getAllSniperBalls();
+            Money amount = bb.getMoney();
+            if (allSniperBalls.length > 0 && money != null) {
+                if(amount.getAmount() - sniperSpeedPrice > 0) {
+                    amount.decreaseAmount(sniperSpeedPrice);
+                    bb.setMoney(amount.getAmount());
+                    sniperSpeedPrice += (int)(sniperSpeedPrice *2);
+                    sniperSpeedLabel.setText("$"+sniperSpeedPrice);
+                    for(SniperBall curBall : allSniperBalls) {
+                        if(curBall.getDY() > 0) {
+                            curBall.setDY(curBall.getDY() + 1);
+                            curBall.setdX(curBall.getdX() + 1);
+                        }
+                        else {
+                            curBall.setDY(curBall.getDY() - 1);
+                            curBall.setdX(curBall.getdX() - 1);
+                        }
                     }
                 }
             }
@@ -323,8 +333,11 @@ class UpgradePanel extends JPanel {
      }
      private class Listener_scatterBaby implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            if(money.getAmount() - scatterBabiesPrice > 0) {
-                money.decreaseAmount(scatterBabiesPrice);
+            allSniperBalls = bb.getAllSniperBalls();
+            Money amount = bb.getMoney();
+            if(amount.getAmount() - scatterBabiesPrice > 0) {
+                amount.decreaseAmount(scatterBabiesPrice);
+                bb.setMoney(amount.getAmount());
                 scatterBabiesPrice += (int)(scatterBabiesPrice *2);
                 scatterBabiesLabel.setText(""+scatterBabiesPrice);
                 for(int i = 0; i < allScatterBalls.length ; i++) {
@@ -336,19 +349,23 @@ class UpgradePanel extends JPanel {
      }
      private class Listener_cannonSpeed implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            if(money.getAmount() - cannonSpeedPrice > 0) {
-                money.decreaseAmount(cannonSpeedPrice);
-                cannonSpeedPrice += (int)(cannonSpeedPrice *2);
-                cannonSpeedLabel.setText(""+cannonSpeedPrice);
-                for(int i = 0; i < allCannonBalls.length ; i++) {
-                    CannonBall curBall = allCannonBalls[i];
-                    if(curBall.getDY() > 0) {
-                        curBall.setDY(curBall.getDY() + 1);
-                        curBall.setdX(curBall.getdX() + 1);
-                    }
-                    else {
-                        curBall.setDY(curBall.getDY() - 1);
-                        curBall.setdX(curBall.getdX() - 1);
+            allCannonBalls = bb.getAllCannonBalls();
+            Money amount = bb.getMoney();
+            if (allCannonBalls.length > 0 && money != null) {
+                if(amount.getAmount() - cannonSpeedPrice > 0) {
+                    amount.decreaseAmount(cannonSpeedPrice);
+                    bb.setMoney(amount.getAmount());
+                    cannonSpeedPrice += (int)(cannonSpeedPrice *2);
+                    cannonSpeedLabel.setText("$"+cannonSpeedPrice);
+                    for(CannonBall curBall : allCannonBalls) {
+                        if(curBall.getDY() > 0) {
+                            curBall.setDY(curBall.getDY() + 1);
+                            curBall.setdX(curBall.getdX() + 1);
+                        }
+                        else {
+                            curBall.setDY(curBall.getDY() - 1);
+                            curBall.setdX(curBall.getdX() - 1);
+                        }
                     }
                 }
             }
@@ -356,19 +373,23 @@ class UpgradePanel extends JPanel {
      }
      private class Listener_poisonSpeed implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            if(money.getAmount() - poisonSpeedPrice > 0) {
-                money.decreaseAmount(poisonSpeedPrice);
-                poisonSpeedPrice += (int)(poisonSpeedPrice *2);
-                poisonSpeedLabel.setText(""+poisonSpeedPrice);
-                for(int i = 0; i < allPoisonBalls.length ; i++) {
-                    PoisonBall curBall = allPoisonBalls[i];
-                    if(curBall.getDY() > 0) {
-                        curBall.setDY(curBall.getDY() + 1);
-                        curBall.setdX(curBall.getdX() + 1);
-                    }
-                    else {
-                        curBall.setDY(curBall.getDY() - 1);
-                        curBall.setdX(curBall.getdX() - 1);
+            allPoisonBalls = bb.getAllPoisonBalls();
+            Money amount = bb.getMoney();
+            if (allPoisonBalls.length > 0 && money != null) {
+                if(amount.getAmount() - poisonSpeedPrice > 0) {
+                    amount.decreaseAmount(plasmaSpeedPrice);
+                    bb.setMoney(amount.getAmount());
+                    plasmaSpeedPrice += (int)(plasmaSpeedPrice *2);
+                    plasmaSpeedLabel.setText("$"+plasmaSpeedPrice);
+                    for(PoisonBall curBall : allPoisonBalls) {
+                        if(curBall.getDY() > 0) {
+                            curBall.setDY(curBall.getDY() + 1);
+                            curBall.setdX(curBall.getdX() + 1);
+                        }
+                        else {
+                            curBall.setDY(curBall.getDY() - 1);
+                            curBall.setdX(curBall.getdX() - 1);
+                        }
                     }
                 }
             }
@@ -378,8 +399,11 @@ class UpgradePanel extends JPanel {
 
      private class Listener_basicDamage implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            if(money.getAmount() - basicDamagePrice > 0) {
-                money.decreaseAmount(basicDamagePrice);
+            allPoisonBalls = bb.getAllPoisonBalls();
+            Money amount = bb.getMoney();
+            if(amount.getAmount() - basicDamagePrice > 0) {
+                amount.decreaseAmount(basicDamagePrice);
+                bb.setMoney(amount.getAmount());
                 basicDamagePrice += (int)(basicDamagePrice *2);
                 basicDamageLabel.setText(""+basicDamagePrice);
                 for(int i = 0; i < allBasicBalls.length ; i++) {
@@ -391,8 +415,11 @@ class UpgradePanel extends JPanel {
      }
      private class Listener_plasmaDamage implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            if(money.getAmount() - plasmaDamagePrice > 0) {
-                money.decreaseAmount(plasmaDamagePrice);
+            allPoisonBalls = bb.getAllPoisonBalls();
+            Money amount = bb.getMoney();
+            if(amount.getAmount() - plasmaDamagePrice > 0) {
+                amount.decreaseAmount(plasmaDamagePrice);
+                bb.setMoney(amount.getAmount());
                 plasmaDamagePrice += (int)(basicDamagePrice *2);
                 plasmaDamageLabel.setText(""+plasmaDamagePrice);
                 for(int i = 0; i < allPlasmaBalls.length ; i++) {
@@ -404,8 +431,11 @@ class UpgradePanel extends JPanel {
      }
      private class Listener_sniperDamage implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            if(money.getAmount() - sniperDamagePrice > 0) {
-                money.decreaseAmount(sniperDamagePrice);
+            allPoisonBalls = bb.getAllPoisonBalls();
+            Money amount = bb.getMoney();
+            if(amount.getAmount() - sniperDamagePrice > 0) {
+                amount.decreaseAmount(sniperDamagePrice);
+                bb.setMoney(amount.getAmount());
                 sniperDamagePrice += (int)(basicDamagePrice *2);
                 sniperDamageLabel.setText(""+sniperDamagePrice);
                 for(int i = 0; i < allSniperBalls.length ; i++) {
@@ -417,8 +447,11 @@ class UpgradePanel extends JPanel {
      }
      private class Listener_scatterDamage implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            if(money.getAmount() - scatterDamagePrice > 0) {
-                money.decreaseAmount(scatterDamagePrice);
+            allPoisonBalls = bb.getAllPoisonBalls();
+            Money amount = bb.getMoney();
+            if(amount.getAmount() - scatterDamagePrice > 0) {
+                amount.decreaseAmount(scatterDamagePrice);
+                bb.setMoney(amount.getAmount());
                 scatterDamagePrice += (int)(basicDamagePrice *2);
                 scatterDamageLabel.setText(""+scatterDamagePrice);
                 for(int i = 0; i < allScatterBalls.length ; i++) {
@@ -430,8 +463,11 @@ class UpgradePanel extends JPanel {
      }
      private class Listener_cannonDamage implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            if(money.getAmount() - cannonDamagePrice > 0) {
-                money.decreaseAmount(cannonDamagePrice);
+            allPoisonBalls = bb.getAllPoisonBalls();
+            Money amount = bb.getMoney();
+            if(amount.getAmount() - cannonDamagePrice > 0) {
+                amount.decreaseAmount(cannonDamagePrice);
+                bb.setMoney(amount.getAmount());
                 cannonDamagePrice += (int)(cannonDamagePrice *2);
                 cannonDamageLabel.setText(""+cannonDamagePrice);
                 for(int i = 0; i < allCannonBalls.length ; i++) {
@@ -443,8 +479,11 @@ class UpgradePanel extends JPanel {
      }
      private class Listener_poisonDamage implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            if(money.getAmount() - poisonDamagePrice > 0) {
-                money.decreaseAmount(poisonDamagePrice);
+            allPoisonBalls = bb.getAllPoisonBalls();
+            Money amount = bb.getMoney();
+            if(amount.getAmount() - poisonDamagePrice > 0) {
+                amount.decreaseAmount(poisonDamagePrice);
+                bb.setMoney(amount.getAmount());
                 poisonDamagePrice += (int)(poisonDamagePrice *2);
                 poisonDamageLabel.setText(""+poisonDamagePrice);
                 for(int i = 0; i < allPoisonBalls.length ; i++) {

@@ -29,13 +29,7 @@ public class BasicBall extends Balls {
          setDY(getDY() * -1);   
       }
       else{
-         System.out.println("here");
-         System.out.println(bX);
-         System.out.println(bY);
-         System.out.println(dBX);
-         System.out.println(dBY);
-         System.out.println(rX);
-         System.out.println(rY);
+
       }
       //Add poison and area of effect
       r.setBrickValue(r.getBrickValue()-damage);
