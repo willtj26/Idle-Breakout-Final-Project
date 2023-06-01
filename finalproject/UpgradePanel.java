@@ -256,14 +256,15 @@ class UpgradePanel extends JPanel {
         }
     }
     
-    
-     private class Listener_basicSpeed implements ActionListener {
+     
+    private class Listener_basicSpeed implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            if(money.getAmount() - basicSpeedPrice > 0) {
-                //System.out.println("here");
-                money.decreaseAmount(basicSpeedPrice);
-                basicSpeedPrice += (int)(basicSpeedPrice *2);
-                basicSpeedLabel.setText(""+basicSpeedPrice);
+            System.out.println("speed pressed");
+            if (allBasicBalls.length >0) {
+                if(money.getAmount() - basicSpeedPrice > 0) {
+                    money.decreaseAmount(basicSpeedPrice);
+                    basicSpeedPrice += (int)(basicSpeedPrice *2);
+                    basicSpeedLabel.setText("$"+basicSpeedPrice);
                     for(int i = 0; i < allBasicBalls.length ; i++) {
                         BasicBall curBall = allBasicBalls[i];
                         if(curBall.getDY() > 0) {
@@ -276,6 +277,7 @@ class UpgradePanel extends JPanel {
                         }
                     }
                 }
+            }
         }
     }
      
