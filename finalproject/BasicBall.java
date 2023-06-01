@@ -12,16 +12,17 @@ public class BasicBall extends Balls {
       int counter = 0;
       int bX = getX();
       int bY = getY();
+      int dBX = getdX();
+      int dBY = getDY();
       int rX = r.getX();
       int rTopSide = r.getTopSide();
       int rLeftSide = r.getLeftSide();
       int rY = r.getY();
       int s = getRadius();
-      if (rX < bX){
+      if (rX < bX+dBX){
          setDY(getDY() * -1);
-         
       }
-      else if (rY < bY){
+      else if (rY < bY+dBY){
          //setDY(getDY() * -1);
          setdX(getdX() * -1);
       }

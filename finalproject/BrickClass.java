@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class BrickClass extends Brick {
+public class BrickClass extends Brick{
    private int bricklevel;
    private int x;
    private int y;

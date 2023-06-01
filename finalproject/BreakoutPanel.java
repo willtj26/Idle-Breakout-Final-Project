@@ -6,7 +6,7 @@ import java.awt.image.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-class BreakoutPanel extends JPanel {
+class BreakoutPanel extends JPanel{
 
    private JFrame myOwner;
 
@@ -39,6 +39,8 @@ class BreakoutPanel extends JPanel {
       
    private ImageIcon basicIcon, plasmaIcon, sniperIcon, scatterIcon, cannonIcon, poisonIcon;
 
+   static JLabel label1, label2, label3;
+
    private int basicNum = 0;
    private int plasmaNum = 0;
    private int sniperNum = 0;
@@ -63,6 +65,11 @@ class BreakoutPanel extends JPanel {
       myOwner = f;
       setPreferredSize(new Dimension(FRAMEx, FRAMEy));
       setLayout(new BorderLayout());
+      
+      label1 = new JLabel("");
+      label2 = new JLabel("");
+      label3 = new JLabel("");
+      
    
       frame = new JFrame("Upgrades");
       frame.setSize(800, 600);
@@ -71,6 +78,7 @@ class BreakoutPanel extends JPanel {
       upgradePanel = new UpgradePanel(frame, this, money);
       frame.setContentPane(upgradePanel);
       frame.pack();
+      //frame.addMouseListener(f);
       frame.setVisible(false);
    
       try {
@@ -174,16 +182,32 @@ class BreakoutPanel extends JPanel {
       myBuffer.setColor(BACKGROUND);
       myBuffer.fillRect(0,0,FRAMEx,FRAMEy);
       bluewall();
-      add(new JLabel(new ImageIcon(myImage)), BorderLayout.CENTER);
+      JLabel ballplayground = new JLabel(new ImageIcon(myImage));
+      ballplayground.addMouseListener(new MouseAdapter() {
+         public void mouseClicked(MouseEvent e) {
+            mouseClickedFunction(e);
+            
+            //System.out.println(e.getPoint().getX());
+            //System.out.println(e.getPoint().getY());
+         }
+     });
+      add(ballplayground, BorderLayout.CENTER);
    
       t = new Timer(5, new AnimationListener());
       t.start();
    }
    
-   
-   //public void redwall(){
-      
-   //}
+   public void mouseClickedFunction(MouseEvent e){
+      double xcoord = e.getPoint().getX();
+      double ycoord = e.getPoint().getY();
+      for (Brick currentBrick: allBricks){
+         if ((int)xcoord > currentBrick.getX() && (int)xcoord < currentBrick.getX()+50 && (int)ycoord+60 > currentBrick.getY() && (int)ycoord+60 < currentBrick.getY()+25){
+         //if ((int)xcoord > currentBrick.getX() && (int)xcoord < currentBrick.getX()+50 && (int)ycoord+50 > currentBrick.getY() && (int)ycoord+50 < currentBrick.getY()+25){
+            currentBrick.setBrickValue(currentBrick.getBrickValue()-1);
+            dollars ++;
+         } 
+      }
+   }
    
    public void bluewall(){
       int xcoord = 200;
@@ -233,7 +257,6 @@ class BreakoutPanel extends JPanel {
       cPrice.setText("$"+cannonPrice);
       poPrice.setText("$"+poisonPrice);
    
-   
       myBuffer.setColor(BACKGROUND);
       myBuffer.fillRect(0,0,FRAMEx,FRAMEy);
       for(int i = 0; i < totalBalls; i++) {
@@ -244,17 +267,10 @@ class BreakoutPanel extends JPanel {
                dollars += Math.abs(currentBall.getDamage());
             }
             else if (currentBall.getDamage() > checkBrick.getBrickValue()){
-               System.out.println("here");
                dollars += Math.abs(checkBrick.getBrickValue());
             }
             currentBall.collide(checkBrick);
          }
-         //try{
-         //   currentBall.setArrayList(allBricks);
-         //}
-         //catch (Exception er){
-         //   System.out.println("Not a sniper ball.");
-         //}
          currentBall.step();
          bank.setText("$"+dollars);
       }
@@ -477,6 +493,7 @@ class BreakoutPanel extends JPanel {
          }
       } 
    }
+
    ////////////  Mouse Input Stuff /////////////
    /*
    private class Mouse extends MouseAdapter
@@ -498,3 +515,4 @@ class BreakoutPanel extends JPanel {
       display.requestFocus();
    } */
 }
+

@@ -88,10 +88,6 @@ public class Rectangle implements Animatable
    {
       
       g.setColor(c);
-      //g.drawLine(x, y, x+40, y);
-      //g.drawLine(x, y, x, y+40);
-      //g.drawLine(x, y+40, x+40, y);
-      //g.drawLine(x+40, y, x, y+40);
       g.fillRect(x, y, topSide, leftSide);
       g.setFont(new Font("Serif", Font.BOLD, 25));
       g.setColor(Color.BLACK);
