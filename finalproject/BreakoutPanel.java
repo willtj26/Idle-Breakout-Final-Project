@@ -201,7 +201,6 @@ class BreakoutPanel extends JPanel{
       double ycoord = e.getPoint().getY();
       for (Brick currentBrick: allBricks){
          if ((int)xcoord > currentBrick.getX() && (int)xcoord < currentBrick.getX()+50 && (int)ycoord+60 > currentBrick.getY() && (int)ycoord+60 < currentBrick.getY()+25){
-         //if ((int)xcoord > currentBrick.getX() && (int)xcoord < currentBrick.getX()+50 && (int)ycoord+50 > currentBrick.getY() && (int)ycoord+50 < currentBrick.getY()+25){
             currentBrick.setBrickValue(currentBrick.getBrickValue()-1);
             dollars ++;
          } 
