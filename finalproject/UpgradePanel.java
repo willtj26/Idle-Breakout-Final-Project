@@ -116,12 +116,12 @@ class UpgradePanel extends JPanel {
 
         exitButton = new JButton("Exit");
         
-        basicSpeedLabel = new JLabel(""+basicSpeedPrice + "\n \n");
-        plasmaSpeedLabel = new JLabel(""+plasmaSpeedPrice + "\n \n");
-        sniperSpeedLabel = new JLabel(""+sniperSpeedPrice + "\n \n");
-        scatterBabiesLabel = new JLabel(""+scatterBabiesPrice + "\n \n");
-        cannonSpeedLabel = new JLabel(""+cannonSpeedPrice + "\n \n");
-        poisonSpeedLabel = new JLabel(""+poisonSpeedPrice + "\n \n");
+        basicSpeedLabel = new JLabel(""+basicSpeedPrice);
+        plasmaSpeedLabel = new JLabel(""+plasmaSpeedPrice);
+        sniperSpeedLabel = new JLabel(""+sniperSpeedPrice);
+        scatterBabiesLabel = new JLabel(""+scatterBabiesPrice);
+        cannonSpeedLabel = new JLabel(""+cannonSpeedPrice);
+        poisonSpeedLabel = new JLabel(""+poisonSpeedPrice);
 
 
   /*
@@ -151,14 +151,7 @@ class UpgradePanel extends JPanel {
         scatterBabiesButton.addActionListener(new Listener_scatterBaby());
         cannonSpeedButton.addActionListener(new Listener_cannonSpeed());
         poisonSpeedButton.addActionListener(new Listener_poisonSpeed());
-/*
-        basicDamageButton.addActionListener(new Listener_basicDamage());
-        plasmaDamageButton.addActionListener(new Listener_plasmaDamage());
-        sniperDamageButton.addActionListener(new Listener_sniperDamage());
-        scatterDamageButton.addActionListener(new Listener_scatterDamage());
-        cannonDamageButton.addActionListener(new Listener_cannonDamage());
-        poisonDamageButton.addActionListener(new Listener_poisonDamage());
-*/
+
         exitButton.addActionListener(new Listener_exit());
 
         JLabel label = new JLabel(basicIcon);
@@ -267,21 +260,22 @@ class UpgradePanel extends JPanel {
      private class Listener_basicSpeed implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             if(money.getAmount() - basicSpeedPrice > 0) {
+                //System.out.println("here");
                 money.decreaseAmount(basicSpeedPrice);
                 basicSpeedPrice += (int)(basicSpeedPrice *2);
                 basicSpeedLabel.setText(""+basicSpeedPrice);
-                for(int i = 0; i < allBasicBalls.length ; i++) {
-                    BasicBall curBall = allBasicBalls[i];
-                    if(curBall.getDY() > 0) {
-                        curBall.setDY(curBall.getDY() + 1);
-                        curBall.setdX(curBall.getdX() + 1);
-                    }
-                    else {
-                        curBall.setDY(curBall.getDY() - 1);
-                        curBall.setdX(curBall.getdX() - 1);
+                    for(int i = 0; i < allBasicBalls.length ; i++) {
+                        BasicBall curBall = allBasicBalls[i];
+                        if(curBall.getDY() > 0) {
+                            allBasicBalls[i].setDY(curBall.getDY() + 1);
+                            allBasicBalls[i].setdX(curBall.getdX() + 1);
+                        }
+                        else {
+                            allBasicBalls[i].setDY(curBall.getDY() - 1);
+                            allBasicBalls[i].setdX(curBall.getdX() - 1);
+                        }
                     }
                 }
-            }
         }
     }
      

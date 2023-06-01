@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class BasicBall extends Balls {
    private int damage;
    public BasicBall() {
-      super(8, 500, 500, Color.YELLOW, 3, 3);
+      super(8, 575, 375, Color.YELLOW, 1, 1);
       damage = 1;
    }
    
@@ -23,7 +23,7 @@ public class BasicBall extends Balls {
       }
       else if (rY < bY){
          //setDY(getDY() * -1);
-         setdX(getdX() * -1);   
+         setdX(getdX() * -1);
       }
       //Add poison and area of effect
       r.setBrickValue(r.getBrickValue()-damage);

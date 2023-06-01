@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class PoisonBall extends Balls {
    private int damage;
    public PoisonBall() {
-      super(12, 400, 400, new Color(255, 36, 0), 3, 3);
+      super(12, 600, 500, new Color(255, 36, 0), 3, 3);
       damage = 20;
    }
    

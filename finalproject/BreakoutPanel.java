@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 class BreakoutPanel extends JPanel {
 
@@ -54,7 +55,7 @@ class BreakoutPanel extends JPanel {
    private int poisonPrice = 75000;
 
    private int levelNumber = 1;
-   private int dollars = 26;
+   private int dollars = 999999;
 
    JFrame frame;
 

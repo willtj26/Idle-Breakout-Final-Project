@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class PlasmaBall extends Balls {
    private int damage;
    public PlasmaBall() {
-      super(10, 400, 400, new Color(160, 50, 200), 3, 3);
+      super(10, 600, 500, new Color(160, 50, 200), 2, 2);
       damage = 5;
    }
    

@@ -5,7 +5,7 @@ public class ScatterBall extends Balls {
    private int damage;
    private int babies;
    public ScatterBall() {
-      super(12, 400, 400, Color.ORANGE, 3, 3);
+      super(12, 600, 500, Color.ORANGE, 3, 3);
       damage = 20;
    }
    
