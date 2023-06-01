@@ -5,7 +5,7 @@ public class SniperBall extends Balls {
    private int damage;
    private ArrayList<Brick> allBricks = new ArrayList<Brick>();
    public SniperBall() {
-      super(10, 600, 500, Color.WHITE, 3, 3);
+      super(10, 500, 375, Color.WHITE, 3, 3);
       damage = 5;
    }
    
