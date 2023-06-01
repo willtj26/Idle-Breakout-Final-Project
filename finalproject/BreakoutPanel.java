@@ -185,6 +185,7 @@ class BreakoutPanel extends JPanel{
       ballplayground.addMouseListener(new MouseAdapter() {
          public void mouseClicked(MouseEvent e) {
             mouseClickedFunction(e);
+            
             //System.out.println(e.getPoint().getX());
             //System.out.println(e.getPoint().getY());
          }
@@ -201,8 +202,10 @@ class BreakoutPanel extends JPanel{
       for (Brick currentBrick: allBricks){
          if ((int)xcoord > currentBrick.getX() && (int)xcoord < currentBrick.getX()+50 && (int)ycoord+50 > currentBrick.getY() && (int)ycoord+50 < currentBrick.getY()+25){
             currentBrick.setBrickValue(currentBrick.getBrickValue()-1);
+            dollars ++;
          }
       }
+      
    }
    
    //public void redwall(){
