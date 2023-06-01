@@ -200,17 +200,13 @@ class BreakoutPanel extends JPanel{
       double xcoord = e.getPoint().getX();
       double ycoord = e.getPoint().getY();
       for (Brick currentBrick: allBricks){
-         if ((int)xcoord > currentBrick.getX() && (int)xcoord < currentBrick.getX()+50 && (int)ycoord+50 > currentBrick.getY() && (int)ycoord+50 < currentBrick.getY()+25){
+         if ((int)xcoord > currentBrick.getX() && (int)xcoord < currentBrick.getX()+50 && (int)ycoord+60 > currentBrick.getY() && (int)ycoord+60 < currentBrick.getY()+25){
+         //if ((int)xcoord > currentBrick.getX() && (int)xcoord < currentBrick.getX()+50 && (int)ycoord+50 > currentBrick.getY() && (int)ycoord+50 < currentBrick.getY()+25){
             currentBrick.setBrickValue(currentBrick.getBrickValue()-1);
             dollars ++;
-         }
+         } 
       }
-      
    }
-   
-   //public void redwall(){
-      
-   //}
    
    public void bluewall(){
       int xcoord = 200;
@@ -221,11 +217,6 @@ class BreakoutPanel extends JPanel{
             for (int x = 0; x < 5; x++){
                BrickClass b1 = new BrickClass(xcoord+50, ycoord+25, Color.BLUE, levelNumber);//Color.BLUE, 80, 30, "1");
                animationObjects.add(b1);
-               //b1.addMouseListener(new MouseAdapter(){
-               //   public void mouseClicked(MouseEvent e) {
-               //      System.out.println("Clicked!");
-               //   }
-               //});
                allBricks.add(b1);
                brickNum++;
                ycoord+=25;
@@ -265,7 +256,6 @@ class BreakoutPanel extends JPanel{
       cPrice.setText("$"+cannonPrice);
       poPrice.setText("$"+poisonPrice);
    
-   
       myBuffer.setColor(BACKGROUND);
       myBuffer.fillRect(0,0,FRAMEx,FRAMEy);
       for(int i = 0; i < totalBalls; i++) {
@@ -276,17 +266,10 @@ class BreakoutPanel extends JPanel{
                dollars += Math.abs(currentBall.getDamage());
             }
             else if (currentBall.getDamage() > checkBrick.getBrickValue()){
-               System.out.println("here");
                dollars += Math.abs(checkBrick.getBrickValue());
             }
             currentBall.collide(checkBrick);
          }
-         //try{
-         //   currentBall.setArrayList(allBricks);
-         //}
-         //catch (Exception er){
-         //   System.out.println("Not a sniper ball.");
-         //}
          currentBall.step();
          bank.setText("$"+dollars);
       }
