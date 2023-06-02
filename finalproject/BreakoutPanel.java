@@ -56,8 +56,8 @@ class BreakoutPanel extends JPanel{
    private int cannonPrice = 75000;
    private int poisonPrice = 75000;
 
-   private int levelNumber = 20;
-   private int dollars = 999999;
+   private int levelNumber = 9999;
+   private int dollars = 999999999;
    private int mouseDamage = 1;
 
    JFrame frame;
@@ -141,8 +141,13 @@ class BreakoutPanel extends JPanel{
       buttonPanel.add(cannonButton);
       buttonPanel.add(poisonButton);
       buttonPanel.add(upgradeMenuButton);
-      
-   
+
+      plasmaButton.setVisible(false);
+      sniperButton.setVisible(false);
+      scatterButton.setVisible(false);
+      cannonButton.setVisible(false);
+      poisonButton.setVisible(false);
+
       // Add Prices
       bPrice = new JLabel("$"+basicPrice);
       pPrice = new JLabel("$"+plasmaPrice);
@@ -162,6 +167,12 @@ class BreakoutPanel extends JPanel{
       buttonPanel.add(poPrice, BorderLayout.CENTER);
       buttonPanel.add(pauseButton);
       
+      pPrice.setVisible(false);
+      sPrice.setVisible(false);
+      scPrice.setVisible(false);
+      cPrice.setVisible(false);
+      poPrice.setVisible(false);
+
       level = new JLabel("Lvl: "+levelNumber);
       buttonPanel.add(level, BorderLayout.PAGE_END);
    
@@ -174,7 +185,7 @@ class BreakoutPanel extends JPanel{
       poisonButton.addActionListener(new Listener_poison());
       upgradeMenuButton.addActionListener(new Listener_upgrade());
       pauseButton.addActionListener(new Listener_pause());
-   
+      
       // Create the ball bouncing area
       animationObjects = new ArrayList<Animatable>();
       allBalls = new ArrayList<Balls>();
@@ -404,8 +415,10 @@ class BreakoutPanel extends JPanel{
    }
    private class Listener_basic implements ActionListener {
       public void actionPerformed(ActionEvent e) {
-         if(dollars - basicPrice > 0) {
+         if(dollars - basicPrice >= 0) {
             plasmaButton.setEnabled(true);
+            plasmaButton.setVisible(true);
+            pPrice.setVisible(true);
             BasicBall ccr = new BasicBall();
             animationObjects.add(ccr);
             allBalls.add(ccr);
@@ -418,8 +431,10 @@ class BreakoutPanel extends JPanel{
    }
    private class Listener_plasma implements ActionListener {
       public void actionPerformed(ActionEvent e) {
-         if(dollars - plasmaPrice > 0) {
+         if(dollars - plasmaPrice >= 0) {
             sniperButton.setEnabled(true);
+            sniperButton.setVisible(true);
+            sPrice.setVisible(true);
             PlasmaBall ccr = new PlasmaBall();
             animationObjects.add(ccr);
             allBalls.add(ccr);
@@ -432,8 +447,10 @@ class BreakoutPanel extends JPanel{
    }
    private class Listener_sniper implements ActionListener {
       public void actionPerformed(ActionEvent e) {
-         if(dollars - sniperPrice > 0) {
+         if(dollars - sniperPrice >= 0) {
             scatterButton.setEnabled(true);
+            scatterButton.setVisible(true);
+            scPrice.setVisible(true);
             SniperBall ccr = new SniperBall();
             animationObjects.add(ccr);
             allBalls.add(ccr);
@@ -446,8 +463,10 @@ class BreakoutPanel extends JPanel{
    }
    private class Listener_scatter implements ActionListener {
       public void actionPerformed(ActionEvent e) {
-         if(dollars - scatterPrice > 0) {
+         if(dollars - scatterPrice >= 0) {
             cannonButton.setEnabled(true);
+            cannonButton.setVisible(true);
+            cPrice.setVisible(true);
             ScatterBall ccr = new ScatterBall();
             animationObjects.add(ccr);
             allBalls.add(ccr);
@@ -460,8 +479,10 @@ class BreakoutPanel extends JPanel{
    }
    private class Listener_cannon implements ActionListener {
       public void actionPerformed(ActionEvent e) {
-         if(dollars - cannonPrice > 0) {
+         if(dollars - cannonPrice >= 0) {
             poisonButton.setEnabled(true);
+            poisonButton.setVisible(true);
+            poPrice.setVisible(true);
             CannonBall ccr = new CannonBall();
             animationObjects.add(ccr);
             allBalls.add(ccr);
@@ -474,7 +495,7 @@ class BreakoutPanel extends JPanel{
    }
    private class Listener_poison implements ActionListener {
       public void actionPerformed(ActionEvent e) {
-         if(dollars - poisonPrice > 0) {
+         if(dollars - poisonPrice >= 0) {
             PoisonBall ccr = new PoisonBall();
             animationObjects.add(ccr);
             allBalls.add(ccr);
@@ -502,26 +523,4 @@ class BreakoutPanel extends JPanel{
          }
       } 
    }
-
-   ////////////  Mouse Input Stuff /////////////
-   /*
-   private class Mouse extends MouseAdapter
-   {
-      public void mouseClicked(MouseEvent e)
-      {
-         update( e.getX() , e.getY() );
-      }
-   }   
-   private void update(int x, int y)
-   {
-
-   //
-      display.update(x,y);
-      scoreboard.update(display.getCol(),display.getRow(),rgb);
-   //
-      display.repaint();
-   //
-      display.requestFocus();
-   } */
 }
-

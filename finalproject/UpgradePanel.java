@@ -502,7 +502,7 @@ class UpgradePanel extends JPanel {
             if(amount.getAmount() - mouseDamagePrice > 0) {
                 amount.decreaseAmount(mouseDamagePrice);
                 bb.setMoney(amount.getAmount());
-                mouseDamagePrice += (int)(mouseDamagePrice +50);
+                mouseDamagePrice += (50);
                 mouseDamageLabel.setText(""+mouseDamagePrice);
                 bb.increaseMouseDamage();
             }

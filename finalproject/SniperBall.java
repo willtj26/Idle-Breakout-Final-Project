@@ -3,19 +3,19 @@ import java.util.ArrayList;
 
 public class SniperBall extends Balls {
    private int damage;
-   private ArrayList<Brick> allBricks = new ArrayList<Brick>();
+   // private ArrayList<Brick> allBricks = new ArrayList<Brick>();
    public SniperBall() {
       super(10, 500, 375, Color.WHITE, 3, 3);
       damage = 5;
    }
    
-   public void setArrayBricks(ArrayList<Brick> allbrick){
-      allBricks = allbrick;
-   }
+   // public void setArrayBricks(ArrayList<Brick> allbrick){
+   //    allBricks = allbrick;
+   // }
    
-   public ArrayList<Brick> getArrayBricks(){
-      return allBricks;
-   }
+   // public ArrayList<Brick> getArrayBricks(){
+   //    return allBricks;
+   // }
    
    public void collide(Brick r) {
       int counter = 0;
@@ -47,7 +47,7 @@ public class SniperBall extends Balls {
    public int getSpeed() {
       return getdX();
    }
-   @Override
+   /*@Override
    public void step()  //Implement Animatable's required step()
    {
       //Check to see if our circle is too small
@@ -98,5 +98,5 @@ public class SniperBall extends Balls {
       }
       setY(getY()+getDY());
       */
-   }
+   //}
 }
