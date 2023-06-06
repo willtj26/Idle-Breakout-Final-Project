@@ -12,6 +12,8 @@ public class CannonBall extends Balls {
       int counter = 0;
       int bX = getX();
       int bY = getY();
+      int dBX = getdX();
+      int dBY = getDY();
       int rX = r.getX();
       int rTopSide = r.getTopSide();
       int rLeftSide = r.getLeftSide();

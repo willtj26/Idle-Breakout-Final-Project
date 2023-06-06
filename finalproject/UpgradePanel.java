@@ -17,10 +17,10 @@ class UpgradePanel extends JPanel {
     private Timer t;
 
     private Money money;
-    private JButton exitButton, basicSpeedButton, basicDamageButton, plasmaSpeedButton, plasmaDamageButton, sniperSpeedButton,  sniperDamageButton, scatterDamageButton, scatterBabiesButton, cannonSpeedButton,  cannonDamageButton, poisonSpeedButton, poisonDamageButton;
+    private JButton exitButton, basicSpeedButton, basicDamageButton, plasmaSpeedButton, plasmaDamageButton, sniperSpeedButton,  sniperDamageButton, scatterDamageButton, scatterBabiesButton, cannonSpeedButton,  cannonDamageButton, poisonSpeedButton, poisonDamageButton, mouseDamageButton;
     private ImageIcon basicIcon, plasmaIcon, sniperIcon, scatterIcon, cannonIcon, poisonIcon;
 
-    private JLabel basicSpeedLabel, plasmaSpeedLabel, sniperSpeedLabel, scatterBabiesLabel, cannonSpeedLabel, poisonSpeedLabel, basicDamageLabel, plasmaDamageLabel, sniperDamageLabel, scatterDamageLabel, cannonDamageLabel, poisonDamageLabel;
+    private JLabel basicSpeedLabel, plasmaSpeedLabel, sniperSpeedLabel, scatterBabiesLabel, cannonSpeedLabel, poisonSpeedLabel, basicDamageLabel, plasmaDamageLabel, sniperDamageLabel, scatterDamageLabel, cannonDamageLabel, poisonDamageLabel, mouseDamageLabel;
 
     private int basicSpeedPrice = 100;
     private int plasmaSpeedPrice = 250;
@@ -34,6 +34,7 @@ class UpgradePanel extends JPanel {
     private int scatterDamagePrice = 50000; 
     private int cannonDamagePrice = 100000;
     private int poisonDamagePrice = 100000;
+    private int mouseDamagePrice = 50;
     public boolean windowIsOpen;
 
     private BasicBall[] allBasicBalls;
@@ -50,11 +51,6 @@ class UpgradePanel extends JPanel {
         setPreferredSize(new Dimension(FRAMEx, FRAMEy));
         setLayout(new BorderLayout());
         money = m;
-
-        allSniperBalls = b.getAllSniperBalls();
-        allScatterBalls = b.getAllScatterBalls();
-        allCannonBalls = b.getAllCannonBalls();
-        allPoisonBalls = b.getAllPoisonBalls();
 
         try {
            basicIcon = new ImageIcon(this.getClass().getResource("imagefiles/basicball.png"));
@@ -93,7 +89,7 @@ class UpgradePanel extends JPanel {
        }
        
         // Create the button panel
-        JPanel buttonPanel = new JPanel(new GridLayout(5, 6));
+        JPanel buttonPanel = new JPanel(new GridLayout(6, 6));
         buttonPanel.setBorder(new EmptyBorder(0, 30, 150, 30));
         //buttonPanel.add(pricePanel, BorderLayout.LINE_END);
   
@@ -189,6 +185,8 @@ class UpgradePanel extends JPanel {
         cannonDamageButton = new JButton("Cannon Damage +25");
         poisonDamageButton = new JButton("Poison Damage +25");
 
+        mouseDamageButton = new JButton("Mouse Damage +1");
+
         basicDamageButton.addActionListener(new Listener_basicDamage());
         plasmaDamageButton.addActionListener(new Listener_plasmaDamage());
         sniperDamageButton.addActionListener(new Listener_sniperDamage());
@@ -196,12 +194,16 @@ class UpgradePanel extends JPanel {
         cannonDamageButton.addActionListener(new Listener_cannonDamage());
         poisonDamageButton.addActionListener(new Listener_poisonDamage());
 
+        mouseDamageButton.addActionListener(new Listener_mouseDamage());
+
         basicDamageLabel = new JLabel("" + basicDamagePrice + "\n \n");
         plasmaDamageLabel = new JLabel("" + plasmaDamagePrice + "\n \n");
         sniperDamageLabel = new JLabel("" + sniperDamagePrice + "\n \n");
         scatterDamageLabel = new JLabel("" + scatterDamagePrice + "\n \n");
         cannonDamageLabel = new JLabel("" + cannonDamagePrice + "\n \n");
         poisonDamageLabel = new JLabel("" + poisonDamagePrice + "\n \n");
+
+       mouseDamageLabel = new JLabel("" + mouseDamagePrice);
 
         buttonPanel.add(basicDamageButton);
         buttonPanel.add(plasmaDamageButton);
@@ -217,7 +219,8 @@ class UpgradePanel extends JPanel {
         buttonPanel.add(cannonDamageLabel, BorderLayout.NORTH);
         buttonPanel.add(poisonDamageLabel, BorderLayout.NORTH);
 
-
+       buttonPanel.add(mouseDamageButton, BorderLayout.WEST);
+       buttonPanel.add(mouseDamageLabel, BorderLayout.WEST);
 
         buttonPanel.setBounds(50, 50, FRAMEx -100, FRAMEy -100);
         add(buttonPanel, BorderLayout.CENTER);
@@ -490,6 +493,18 @@ class UpgradePanel extends JPanel {
                     PoisonBall curBall = allPoisonBalls[i];
                     curBall.increaseDamage();
                 }
+            }
+        }
+     }
+     private class Listener_mouseDamage implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            Money amount = bb.getMoney();
+            if(amount.getAmount() - mouseDamagePrice > 0) {
+                amount.decreaseAmount(mouseDamagePrice);
+                bb.setMoney(amount.getAmount());
+                mouseDamagePrice += (int)(mouseDamagePrice +50);
+                mouseDamageLabel.setText(""+mouseDamagePrice);
+                bb.increaseMouseDamage();
             }
         }
      }

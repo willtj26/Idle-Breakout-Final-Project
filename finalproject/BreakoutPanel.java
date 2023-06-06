@@ -56,8 +56,9 @@ class BreakoutPanel extends JPanel{
    private int cannonPrice = 75000;
    private int poisonPrice = 75000;
 
-   private int levelNumber = 1;
+   private int levelNumber = 20;
    private int dollars = 999999;
+   private int mouseDamage = 1;
 
    JFrame frame;
 
@@ -186,9 +187,7 @@ class BreakoutPanel extends JPanel{
       ballplayground.addMouseListener(new MouseAdapter() {
          public void mouseClicked(MouseEvent e) {
             mouseClickedFunction(e);
-            
-            //System.out.println(e.getPoint().getX());
-            //System.out.println(e.getPoint().getY());
+
          }
      });
       add(ballplayground, BorderLayout.CENTER);
@@ -202,8 +201,8 @@ class BreakoutPanel extends JPanel{
       double ycoord = e.getPoint().getY();
       for (Brick currentBrick: allBricks){
          if ((int)xcoord > currentBrick.getX() && (int)xcoord < currentBrick.getX()+50 && (int)ycoord+60 > currentBrick.getY() && (int)ycoord+60 < currentBrick.getY()+25){
-            currentBrick.setBrickValue(currentBrick.getBrickValue()-1);
-            dollars ++;
+            currentBrick.setBrickValue(currentBrick.getBrickValue() - mouseDamage);
+            dollars += mouseDamage;
          } 
       }
    }
@@ -312,14 +311,9 @@ class BreakoutPanel extends JPanel{
          if (currentBrick.getBrickValue() % 10 == 9) {
             currentBrick.setColor(Color.GREEN.brighter());
          }
-         //System.out.println("counter: "+counter);
          if (currentBrick.getBrickValue() < 1){
             totalBricks--;
             brickNum--;
-            //allBricks.remove(counter);
-            //counter--;
-            //System.out.println("new counter: "+counter);
-            //System.out.println("totalBricks"+totalBricks);
             allBricks.remove(counter);
             counter--;
          }
@@ -347,11 +341,16 @@ class BreakoutPanel extends JPanel{
       repaint();      
    }
    public Money getMoney() {
-      System.out.println(money.getAmount());
       return money;
    }
    public void setMoney(int n) {
       money = new Money(n);
+   }
+   public void increaseMouseDamage() {
+      mouseDamage ++;
+   }
+   public int getMouseDamage() {
+      return mouseDamage;
    }
 
    public BasicBall[] getAllBasicBalls() {
@@ -361,7 +360,6 @@ class BreakoutPanel extends JPanel{
          b[counter] = curball;
          counter++;
       }
-      System.out.println("Here: "+b.length);
       return b;
    }
    public PlasmaBall[] getAllPlasmaBalls() {

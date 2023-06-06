@@ -14,6 +14,8 @@ public class ScatterBall extends Balls {
       int bX = getX();
       int bY = getY();
       int rX = r.getX();
+      int dBX = getdX();
+      int dBY = getDY();
       int rTopSide = r.getTopSide();
       int rLeftSide = r.getLeftSide();
       int rY = r.getY();
