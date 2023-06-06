@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 class BreakoutPanel extends JPanel{
 
@@ -13,7 +14,7 @@ class BreakoutPanel extends JPanel{
    public static final int FRAMEy = 850;
    private static final Color BACKGROUND = Color.WHITE.darker();
 
-   private Money money;
+   private Money money = new Money(25);
    private BufferedImage myImage;
    private Graphics myBuffer;
 
@@ -56,7 +57,7 @@ class BreakoutPanel extends JPanel{
    private int poisonPrice = 75000;
 
    private int levelNumber = 1;
-   private int dollars = 26;
+   private int dollars = 999999;
 
    JFrame frame;
 
@@ -245,6 +246,7 @@ class BreakoutPanel extends JPanel{
    }
 
    public void animate() {
+      
       int totalBalls = basicNum + plasmaNum + sniperNum + scatterNum + cannonNum + poisonNum;
       int totalBricks = brickNum;
       bank.setText("$"+dollars);
@@ -257,8 +259,9 @@ class BreakoutPanel extends JPanel{
    
       myBuffer.setColor(BACKGROUND);
       myBuffer.fillRect(0,0,FRAMEx,FRAMEy);
-      for(int i = 0; i < totalBalls; i++) {
-         Balls currentBall = allBalls.get(i);
+      
+      for(int i = 0; i < totalBalls; i++) { //Iterates through all of the balls within the list
+         Balls currentBall = allBalls.get(i); //Gets the currentball
          Brick checkBrick = currentBall.isColliding(allBricks);
          if(checkBrick.getBrickValue() != -10) {
             if (currentBall.getDamage() <= checkBrick.getBrickValue()){
@@ -327,7 +330,6 @@ class BreakoutPanel extends JPanel{
       }
       
       if (totalBricks == 0){
-         //System.out.println("here");
          levelNumber++;
          bluewall();
          level.setText("Lvl: "+levelNumber);
@@ -338,16 +340,28 @@ class BreakoutPanel extends JPanel{
          c.drawMe(myBuffer);
       }
       
-      for (Brick r: allBricks){
+      for (Brick r: allBricks) {
          r.drawMe(myBuffer);
       }
+      money = new Money(dollars);
       repaint();      
    }
+   public Money getMoney() {
+      System.out.println(money.getAmount());
+      return money;
+   }
+   public void setMoney(int n) {
+      money = new Money(n);
+   }
+
    public BasicBall[] getAllBasicBalls() {
       BasicBall[] b = new BasicBall[allBasicBalls.size()];
-      for(int i = 0; i < allBasicBalls.size(); i++) {
-         b[i] = allBasicBalls.get(i);
+      int counter = 0;
+      for (BasicBall curball : allBasicBalls) {
+         b[counter] = curball;
+         counter++;
       }
+      System.out.println("Here: "+b.length);
       return b;
    }
    public PlasmaBall[] getAllPlasmaBalls() {
@@ -491,4 +505,26 @@ class BreakoutPanel extends JPanel{
          }
       } 
    }
+
+   ////////////  Mouse Input Stuff /////////////
+   /*
+   private class Mouse extends MouseAdapter
+   {
+      public void mouseClicked(MouseEvent e)
+      {
+         update( e.getX() , e.getY() );
+      }
+   }   
+   private void update(int x, int y)
+   {
+
+   //
+      display.update(x,y);
+      scoreboard.update(display.getCol(),display.getRow(),rgb);
+   //
+      display.repaint();
+   //
+      display.requestFocus();
+   } */
 }
+

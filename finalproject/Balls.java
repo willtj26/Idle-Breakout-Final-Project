@@ -21,13 +21,13 @@ public abstract class Balls extends BouncingCircle {
          int rLeftSide = r.getLeftSide();
          int rY = r.getY();
          int s = getRadius();
-         if (rX < bX && rX + rTopSide > bX && rY < bY && rY + rLeftSide > bY) {
+         if (bX >= rX && bX <= rX + rTopSide && bY >= rY && bY <= rY + rLeftSide) {
             return r; // collision detected
          }
-         else if (bX < rX && bX + s >= rX && rY < bY && rY + rLeftSide > bY){
+         else if (bX <= rX && bX + s >= rX && rY <= bY && rY + rLeftSide >= bY){
             return r;
          }
-         else if (rX < bX && rX + rTopSide > bX && bY < rY && bY+s >= rY){
+         else if (rX <= bX && rX + rTopSide >= bX && bY <= rY && bY+s >= rY){
             return r;
          }
       }

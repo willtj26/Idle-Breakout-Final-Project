@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class PlasmaBall extends Balls {
    private int damage;
    public PlasmaBall() {
-      super(10, 400, 400, new Color(160, 50, 200), 3, 3);
+      super(10, 600, 500, new Color(160, 50, 200), 2, 2);
       damage = 5;
    }
    
@@ -17,13 +17,14 @@ public class PlasmaBall extends Balls {
       int rLeftSide = r.getLeftSide();
       int rY = r.getY();
       int s = getRadius();
-      if (rX < bX){
+      if ((bX >= rX && bX <= rX+rTopSide && bX - dBX <= rX+rTopSide) && (bY+s+1 > rY || bY >= rY+rLeftSide)){
+         System.out.println("2");
          setDY(getDY() * -1);
-         
       }
-      else if (rY < bY){
-         //setDY(getDY() * -1);
-         setdX(getdX() * -1);   
+      
+      else if ((bY >= rY && bY <= rY+rLeftSide) && (bX+s+1 > rX || bX >= rX+rTopSide)){
+         System.out.println("1");
+         setdX(getdX() * -1);
       }
       //Add poison and area of effect
       r.setBrickValue(r.getBrickValue()-damage);

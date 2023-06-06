@@ -5,7 +5,7 @@ public class ScatterBall extends Balls {
    private int damage;
    private int babies;
    public ScatterBall() {
-      super(12, 400, 400, Color.ORANGE, 3, 3);
+      super(12, 600, 500, Color.ORANGE, 3, 3);
       damage = 20;
    }
    
@@ -18,13 +18,14 @@ public class ScatterBall extends Balls {
       int rLeftSide = r.getLeftSide();
       int rY = r.getY();
       int s = getRadius();
-      if (rX < bX){
+      if ((bX >= rX && bX <= rX+rTopSide && bX - dBX <= rX+rTopSide) && (bY+s+1 > rY || bY >= rY+rLeftSide)){
+         System.out.println("2");
          setDY(getDY() * -1);
-         
       }
-      else if (rY < bY){
-         //setDY(getDY() * -1);
-         setdX(getdX() * -1);   
+      
+      else if ((bY >= rY && bY <= rY+rLeftSide) && (bX+s+1 > rX || bX >= rX+rTopSide)){
+         System.out.println("1");
+         setdX(getdX() * -1);
       }
       //Add poison and area of effect
       r.setBrickValue(r.getBrickValue()-damage);

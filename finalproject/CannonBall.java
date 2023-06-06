@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class CannonBall extends Balls {
    private int damage;
    public CannonBall() {
-      super(15, 400, 400, Color.BLACK, 3, 3);
+      super(15, 600, 500, Color.BLACK, 3, 3);
       damage = 50;
    }
    
@@ -17,7 +17,12 @@ public class CannonBall extends Balls {
       int rLeftSide = r.getLeftSide();
       int rY = r.getY();
       int s = getRadius();
-      if (rX < bX){
+      if (rX < bX) {
+         if(r.getBrickValue()-damage > 0) {
+            setdX(getdX() * -1);
+         }
+      }
+      if (rY < bY) {
          if(r.getBrickValue()-damage > 0) {
             setDY(getDY() * -1);
          }
