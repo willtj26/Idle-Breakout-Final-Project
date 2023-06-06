@@ -56,9 +56,9 @@ class BreakoutPanel extends JPanel{
    private int cannonPrice = 75000;
    private int poisonPrice = 75000;
 
-   private int levelNumber = 9999;
-   private int dollars = 999999999;
-   private int mouseDamage = 1;
+   private int levelNumber = 1;
+   private int dollars = 99999999;
+   private int mouseDamage = 999;
 
    JFrame frame;
 
@@ -332,7 +332,46 @@ class BreakoutPanel extends JPanel{
          }
          
       }
-      
+
+      //Buttons enabled/disabled based on money
+      if(money.getAmount() < basicPrice && basicButton.isEnabled()) {
+         basicButton.setEnabled(false);
+      }
+      if(money.getAmount() < plasmaPrice && plasmaButton.isEnabled()) {
+         plasmaButton.setEnabled(false);
+      }
+      if(money.getAmount() < sniperPrice && sniperButton.isEnabled()) {
+         sniperButton.setEnabled(false);
+      }
+      if(money.getAmount() < scatterPrice && scatterButton.isEnabled()) {
+         scatterButton.setEnabled(false);
+      }
+      if(money.getAmount() < cannonPrice && cannonButton.isEnabled()) {
+         cannonButton.setEnabled(false);
+      }
+      if(money.getAmount() < poisonPrice && poisonButton.isEnabled()) {
+         poisonButton.setEnabled(false);
+      }
+      if(money.getAmount() >= basicPrice && !basicButton.isEnabled()) {
+         basicButton.setEnabled(true);
+      }
+      if(money.getAmount() >= plasmaPrice && !plasmaButton.isEnabled()) {
+         plasmaButton.setEnabled(true);
+      }
+      if(money.getAmount() >= sniperPrice && !sniperButton.isEnabled()) {
+         sniperButton.setEnabled(true);
+      }
+      if(money.getAmount() >= scatterPrice && !scatterButton.isEnabled()) {
+         scatterButton.setEnabled(true);
+      }
+      if(money.getAmount() >= cannonPrice && !cannonButton.isEnabled()) {
+         cannonButton.setEnabled(true);
+      }
+      if(money.getAmount() >= poisonPrice && !poisonButton.isEnabled()) {
+         poisonButton.setEnabled(true);
+      }
+
+
       if (totalBricks == 0){
          levelNumber++;
          bluewall();

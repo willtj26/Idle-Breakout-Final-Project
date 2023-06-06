@@ -26,7 +26,7 @@ public class BasicBall extends Balls {
          //setDY(getDY() * -1);
          setdX(getdX() * -1);
 
-         setDY(getDY() * -1);   
+         setDY(getDY() * -1);
       }
       else{
 

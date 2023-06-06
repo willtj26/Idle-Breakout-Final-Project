@@ -196,6 +196,19 @@ class UpgradePanel extends JPanel {
 
         mouseDamageButton.addActionListener(new Listener_mouseDamage());
 
+        /*basicDamageButton.setEnabled(false);
+        basicSpeedButton.setEnabled(false);
+        plasmaDamageButton.setEnabled(false);
+        plasmaSpeedButton.setEnabled(false);
+        sniperDamageButton.setEnabled(false);
+        sniperSpeedButton.setEnabled(false);
+        scatterBabiesButton.setEnabled(false);
+        scatterDamageButton.setEnabled(false);
+        cannonDamageButton.setEnabled(false);
+        cannonSpeedButton.setEnabled(false);
+        poisonDamageButton.setEnabled(false);
+        poisonSpeedButton.setEnabled(false);*/
+
         basicDamageLabel = new JLabel("" + basicDamagePrice + "\n \n");
         plasmaDamageLabel = new JLabel("" + plasmaDamagePrice + "\n \n");
         sniperDamageLabel = new JLabel("" + sniperDamagePrice + "\n \n");
@@ -242,8 +255,83 @@ class UpgradePanel extends JPanel {
      }
      
      public void animate() {
+        /*if(money.getAmount() < basicSpeedPrice && basicSpeedButton.isEnabled()) {
+            basicSpeedButton.setEnabled(false);
+         }
+         if(money.getAmount() < plasmaSpeedPrice && plasmaSpeedButton.isEnabled()) {
+            plasmaSpeedButton.setEnabled(false);
+         }
+         if(money.getAmount() < sniperSpeedPrice && sniperSpeedButton.isEnabled()) {
+            sniperSpeedButton.setEnabled(false);
+         }
+         if(money.getAmount() < scatterBabiesPrice && scatterBabiesButton.isEnabled()) {
+            scatterBabiesButton.setEnabled(false);
+         }
+         if(money.getAmount() < cannonSpeedPrice && cannonSpeedButton.isEnabled()) {
+            cannonSpeedButton.setEnabled(false);
+         }
+         if(money.getAmount() < poisonSpeedPrice && poisonSpeedButton.isEnabled()) {
+            poisonSpeedButton.setEnabled(false);
+        }
+        if(money.getAmount() < basicDamagePrice && basicDamageButton.isEnabled()) {
+            basicDamageButton.setEnabled(false);
+         }
+         if(money.getAmount() < plasmaDamagePrice && plasmaDamageButton.isEnabled()) {
+            plasmaDamageButton.setEnabled(false);
+         }
+         if(money.getAmount() < sniperDamagePrice && sniperDamageButton.isEnabled()) {
+            sniperDamageButton.setEnabled(false);
+         }
+         if(money.getAmount() < scatterDamagePrice && scatterDamageButton.isEnabled()) {
+            scatterDamageButton.setEnabled(false);
+         }
+         if(money.getAmount() < cannonDamagePrice && cannonDamageButton.isEnabled()) {
+            cannonDamageButton.setEnabled(false);
+         }
+         if(money.getAmount() < poisonDamagePrice && poisonDamageButton.isEnabled()) {
+            poisonDamageButton.setEnabled(false);
+        }
+
+         
+        if(money.getAmount() >= basicSpeedPrice && !basicSpeedButton.isEnabled()) {
+            basicSpeedButton.setEnabled(true);
+        }
+        if(money.getAmount() >= plasmaSpeedPrice && !plasmaSpeedButton.isEnabled()) {
+            plasmaSpeedButton.setEnabled(true);
+        }
+        if(money.getAmount() >= sniperSpeedPrice && !sniperSpeedButton.isEnabled()) {
+            sniperSpeedButton.setEnabled(true);
+        }
+        if(money.getAmount() >= scatterBabiesPrice && !scatterBabiesButton.isEnabled()) {
+            scatterBabiesButton.setEnabled(true);
+        }
+        if(money.getAmount() >= cannonSpeedPrice && !cannonSpeedButton.isEnabled()) {
+            cannonSpeedButton.setEnabled(true);
+        }
+        if(money.getAmount() >= poisonSpeedPrice && !poisonSpeedButton.isEnabled()) {
+            poisonSpeedButton.setEnabled(true);
+        }
+
+        if(money.getAmount() >= basicDamagePrice && !basicDamageButton.isEnabled()) {
+            basicDamageButton.setEnabled(true);
+        }
+        if(money.getAmount() >= plasmaDamagePrice && !plasmaDamageButton.isEnabled()) {
+            plasmaDamageButton.setEnabled(true);
+        }
+        if(money.getAmount() >= sniperDamagePrice && !sniperDamageButton.isEnabled()) {
+            sniperDamageButton.setEnabled(true);
+        }
+        if(money.getAmount() >= scatterDamagePrice && !scatterDamageButton.isEnabled()) {
+            scatterDamageButton.setEnabled(true);
+        }
+        if(money.getAmount() >= cannonDamagePrice && !cannonDamageButton.isEnabled()) {
+            cannonDamageButton.setEnabled(true);
+        }
+        if(money.getAmount() >= poisonDamagePrice && !poisonDamageButton.isEnabled()) {
+            poisonDamageButton.setEnabled(true);
+        } */
+
         repaint();
-        
      }     
      private class AnimationListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
