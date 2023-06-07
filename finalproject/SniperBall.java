@@ -3,19 +3,24 @@ import java.util.ArrayList;
 
 public class SniperBall extends Balls {
    private int damage;
-   // private ArrayList<Brick> allBricks = new ArrayList<Brick>();
+   private ArrayList<Brick> allBricks = new ArrayList<Brick>();
    public SniperBall() {
       super(10, 500, 375, Color.WHITE, 3, 3);
       damage = 5;
    }
    
-   // public void setArrayBricks(ArrayList<Brick> allbrick){
-   //    allBricks = allbrick;
-   // }
+   public void setArrayBricks(ArrayList<Brick> allbrick){
+      allBricks = allbrick;
+   }
+   public Brick getBrick(int row) {
+      Brick t = getArrayBricks()[row];
+      return t;
+   }
    
-   // public ArrayList<Brick> getArrayBricks(){
-   //    return allBricks;
-   // }
+   public Brick[] getArrayBricks(){
+      Brick[] a = new Brick[allBricks.size()];
+      return a;
+   }
    
    public void collide(Brick r) {
       int counter = 0;
@@ -47,56 +52,29 @@ public class SniperBall extends Balls {
    public int getSpeed() {
       return getdX();
    }
-   /*@Override
-   public void step()  //Implement Animatable's required step()
-   {
-      //Check to see if our circle is too small
-      //If so, make sure dX is positive (radius is increasing)
-      int currentX = getdX();
-      int currentY = getDY();
-      double smallest = 10000000;
-      Brick smallestBrick = allBricks.get(0);
-      
-      for (Brick currentBrick: allBricks){
-         double distance = ((currentX-currentBrick.getX())*(currentX-currentBrick.getX()))+((currentY-currentBrick.getY())*(currentY-currentBrick.getY()));
-         if (distance < smallest){
-            smallest = distance;
-            smallestBrick = currentBrick;
+   @Override
+   public void step() {
+      double smallestDistance = Double.MAX_VALUE;
+      Brick targetBrick = null;
+
+      int currentX = getX();
+      int currentY = getY();
+
+      for (Brick currentBrick : allBricks) {
+         double distance = Math.sqrt(Math.pow(currentBrick.getX() - currentX, 2) + Math.pow(currentBrick.getY() - currentY, 2));
+         if (distance < smallestDistance) {
+            smallestDistance = distance;
+            targetBrick = currentBrick;
          }
       }
-      
-      setdX(smallestBrick.getX()-currentX);
-      setDY(smallestBrick.getY()-currentY);
-      
-      /*
-      if(getX() <= 0) {
-         if(getdX() < 0) {
-            // Targeting Feature
-            setdX(getdX()*-1);
-         }
+
+      if (targetBrick != null) {
+         double angle = Math.atan2(targetBrick.getY() - currentY, targetBrick.getX() - currentX);
+         setdX((int) (Math.cos(angle) * getX()));
+         setDY((int) (Math.sin(angle) * getY()));
       }
-      
-      if(getX() >= 1200 - getRadius()) {
-         if(getdX() > 0) {
-            // Targeting Feature
-            setdX(getdX()*-1);
-         }
-      }
-      setX(getX() + getdX());  //Change the radius a bit - either out or in - for each animation step
-   
-      if(getY() < 80) {
-         if(getDY() < 0) {
-         // Targeting Feature
-            setDY(getDY()*-1);
-         }
-      }
-      if (getY() >= 800-getRadius()*2) {
-         if(getDY() > 0) {
-         // Targeting Feature
-            setDY(getDY()*-1);
-         }
-      }
-      setY(getY()+getDY());
-      */
-   //}
+
+      super.step();
+   }
+
 }

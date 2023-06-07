@@ -19,7 +19,19 @@ public class BasicBall extends Balls {
       int rLeftSide = r.getLeftSide();
       int rY = r.getY();
       int s = getRadius();
-      if (bX+dBX < bX && bY < rY + rLeftSide && bY > rY){
+      
+      
+      if ((bX >= rX && bX <= rX+rTopSide && bX - dBX <= rX+rTopSide) && (bY+s+1 > rY || bY >= rY+rLeftSide)){
+         setDY(getDY() * -1);
+      }
+      
+      else if ((bY >= rY && bY <= rY+rLeftSide) && (bX+s+1 > rX || bX >= rX+rTopSide)){
+         setdX(getdX() * -1);
+      }
+      
+      /* 
+      else if (dBX > 0 && bY >= rY && bY <= rY+rLeftSide){
+         System.out.println("2");
          setdX(getdX() * -1);
       }
       else if (bY+dBY < bY && bX < rX+rTopSide && bX > rX){
@@ -28,9 +40,8 @@ public class BasicBall extends Balls {
 
          setDY(getDY() * -1);
       }
-      else{
-
-      }
+      */
+      
       //Add poison and area of effect
       r.setBrickValue(r.getBrickValue()-damage);
       //System.out.println(r.getBrickValue());

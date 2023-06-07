@@ -56,9 +56,9 @@ class BreakoutPanel extends JPanel{
    private int cannonPrice = 75000;
    private int poisonPrice = 75000;
 
-   private int levelNumber = 1;
-   private int dollars = 99999999;
-   private int mouseDamage = 999;
+   private int levelNumber = 100;
+   private int dollars = 999999;
+   private int mouseDamage = 1000;
 
    JFrame frame;
 
@@ -212,7 +212,6 @@ class BreakoutPanel extends JPanel{
       double ycoord = e.getPoint().getY();
       for (Brick currentBrick: allBricks){
          if ((int)xcoord > currentBrick.getX() && (int)xcoord < currentBrick.getX()+50 && (int)ycoord+60 > currentBrick.getY() && (int)ycoord+60 < currentBrick.getY()+25){
-         //if ((int)xcoord > currentBrick.getX() && (int)xcoord < currentBrick.getX()+50 && (int)ycoord+50 > currentBrick.getY() && (int)ycoord+50 < currentBrick.getY()+25){
             currentBrick.setBrickValue(currentBrick.getBrickValue() - mouseDamage);
             dollars += mouseDamage;
          } 
@@ -257,6 +256,7 @@ class BreakoutPanel extends JPanel{
    }
 
    public void animate() {
+      
       int totalBalls = basicNum + plasmaNum + sniperNum + scatterNum + cannonNum + poisonNum;
       int totalBricks = brickNum;
       bank.setText("$"+dollars);
@@ -269,8 +269,9 @@ class BreakoutPanel extends JPanel{
    
       myBuffer.setColor(BACKGROUND);
       myBuffer.fillRect(0,0,FRAMEx,FRAMEy);
-      for(int i = 0; i < totalBalls; i++) {
-         Balls currentBall = allBalls.get(i);
+      
+      for(int i = 0; i < totalBalls; i++) { //Iterates through all of the balls within the list
+         Balls currentBall = allBalls.get(i); //Gets the currentball
          Brick checkBrick = currentBall.isColliding(allBricks);
          if(checkBrick.getBrickValue() != -10) {
             if (currentBall.getDamage() <= checkBrick.getBrickValue()){
@@ -547,7 +548,6 @@ class BreakoutPanel extends JPanel{
    }
    private class Listener_upgrade implements ActionListener {
       public void actionPerformed(ActionEvent e) {
-         System.out.println("Upgrade Menu Open");
          frame.setVisible(true);
       }
    }
