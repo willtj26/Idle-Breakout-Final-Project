@@ -56,9 +56,9 @@ class BreakoutPanel extends JPanel{
    private int cannonPrice = 75000;
    private int poisonPrice = 75000;
 
-   private int levelNumber = 100;
-   private int dollars = 999999;
-   private int mouseDamage = 1000;
+   private int levelNumber = 1;
+   private int dollars = 0;
+   private int mouseDamage = 1;
 
    JFrame frame;
 
